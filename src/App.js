@@ -24,39 +24,54 @@ const Header = styled.h1`
   color: #1a8cff;
 `;
 
-const Line = styled.input`
+const Input = styled.input`
   font-family: "Raleway";
   font-style: normal;
   font-weight: 300;
   width: 75%;
-  // height: 5%;
   min-height: 0.1em;
-  margin: 0.5em;
+  margin-bottom: 0.7em;
   background: transparent;
   border: none;
   border-bottom: 1px solid #d9d9d9;
   outline: none;
   color: #d9d9d9;
+  text-align: center;
   ::placeholder {
     text-align: center;
     color: #d9d9d9;
   }
 `;
 
-const Inputs = styled.div`
-  min-height: 20%;
-  line-height: 25px;
+const Button = styled.button`
+  font-family: "Raleway";
+  font-style: normal;
+  font-weight: 300;
+  width: 70%;
+  height: 10%;
+  border-radius: 10px;
+  margin-top: 0.5em;
+  background: #1a8cff;
+  box-shadow: 0px 2px 7px #1a8cff;
+  border: none;
+  :not(:disabled) {
+    cursor: pointer;
+  }
 `;
-
 function App() {
   return (
     <div className="App">
       <Box>
         <Header>chatr</Header>
-        <Inputs>
-          <Line placeholder="Username"></Line>
-          <Line placeholder="Password"></Line>
-        </Inputs>
+        <Input placeholder="Username"></Input>
+        <Input placeholder="Password"></Input>
+        <Button
+          onClick={() => {
+            alert("douchebag");
+          }}
+        >
+          login
+        </Button>
       </Box>
     </div>
   );
