@@ -1,12 +1,14 @@
-import "./App.css";
-import Login  from "./pages/login";
+import './App.css'
+import Login from './pages/login'
+import Dashboard from './pages/Dashboard'
 
 function Root() {
   return (
     <div className="App">
-      <Login/>
+      <Login />
+      <Dashboard />
     </div>
-  );
+  )
 }
 
-export default Root;
+export default Root
