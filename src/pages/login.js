@@ -38,12 +38,14 @@ const Wrapper = styled.div`
   flex-grow: 0;
 `
 
-const Header = styled.header`
+const Header = styled.h1`
   text-align: center;
   font-family: 'Raleway';
   font-style: normal;
   font-weight: 700;
   font-size: 15vw;
+  margin-bottom: 0;
+  margin-top: 0;
   // @media only screen and ${device.xs} {
   //   font-size: 20vw;
   // }
@@ -173,7 +175,6 @@ export default function Login() {
         </Button>
         <br />
         <Links>Forgot Password?</Links>
-        {/* <br /> */}
         <Links>Need an Account?</Links>
       </Wrapper>
     </div>

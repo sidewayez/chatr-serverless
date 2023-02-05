@@ -2,6 +2,7 @@ import React, { createContext, useState } from 'react'
 const UserContext = createContext({
   username: '',
   createUser: () => {},
+  setUsername: () => {},
 })
 
 export function UserProvider({ children }) {
@@ -18,6 +19,7 @@ export function UserProvider({ children }) {
   const contextvalue = {
     username: username,
     createUser,
+    setUsername,
   }
 
   return (
