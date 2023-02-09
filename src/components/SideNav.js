@@ -14,16 +14,19 @@ const Navbar = styled.nav`
 
 const UserMenu = styled.div`
   display: flex;
-  position: sticky;
+  position: fixed;
+  bottom: 0;
+  width: 10em;
   flex-direction: row;
   margin-top: 91.5vh;
   justify-content: space-between;
   border: solid 1px #505050;
+  border-bottom: none;
 `
 const User = styled.p``
 
 const Logout = styled.button`
-//   height: '90vh';
+  //   height: '90vh';
   height: 4em;
   width: 3em;
   background: #1a8cff;
@@ -47,7 +50,7 @@ const SideNav = () => {
           <HiOutlineLogout
             onClick={() => {
               setUsername('')
-              navigate('/login')
+              navigate('/')
             }}
           />
         </Logout>
