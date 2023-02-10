@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { HiOutlineLogout } from 'react-icons/hi'
 import { UserContext } from '../context/UserContext'
 const Navbar = styled.nav`
@@ -10,6 +10,7 @@ const Navbar = styled.nav`
   background: #404040;
   border-right: solid 1px #505050;
   overflow: hidden;
+  display: flex;
 `
 
 const UserMenu = styled.div`
@@ -25,8 +26,21 @@ const UserMenu = styled.div`
 `
 const User = styled.p``
 
+const NavString = styled.p`
+  color: #ffffff;
+  font-size: large;
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 700;
+  margin-bottom: 0;
+  margin-left: 1em;
+  margin-top: .3em;
+  &:hover {
+    cursor: context-menu;
+  }
+`
+
 const Logout = styled.button`
-  //   height: '90vh';
   height: 4em;
   width: 3em;
   background: #1a8cff;
@@ -39,11 +53,29 @@ const Logout = styled.button`
     box-shadow: 0px 2px 7px #1a8cff;
   }
 `
+
+const NavbarLinkContainer = styled.div`
+  margin-top: 1em;
+  display: flex;
+  flex-direction: column;
+`
+
+const NavbarLink = styled(Link)`
+  color: #ffffff;
+  font-size: medium;
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 500;
+`
 const SideNav = () => {
   const navigate = useNavigate()
   const { username, setUsername } = useContext(UserContext)
   return (
     <Navbar>
+      <NavbarLinkContainer>
+        <NavString>Chatterbox</NavString>
+        <NavString>Friends</NavString>
+      </NavbarLinkContainer>
       <UserMenu>
         <User>{username}</User>
         <Logout>

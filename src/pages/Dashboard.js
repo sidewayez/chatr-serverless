@@ -3,22 +3,35 @@ import styled from 'styled-components'
 import DashLayoutComponent from '../components/DashLayoutComponent'
 import '../App.css'
 import { UserContext } from '../context/UserContext'
-import { useNavigate } from 'react-router-dom'
 
 const User = styled.h1`
   font-family: 'Raleway';
   font-style: normal;
   font-weight: 700;
   font-size: 200%;
-  margin-left: 10em;
+  margin-left: 5.5em;
+`
+
+{
+  /* <User>{username}</User> */
+}
+
+const Messages = styled.h1`
+  position: absolute;
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 200%;
+  margin-left: 5.5em;
+  margin-top: 3.5em;
+  color: #ffffff;
 `
 
 const Dashboard = () => {
-  const navigate = useNavigate()
   const { username } = useContext(UserContext)
   return (
     <DashLayoutComponent>
-      <User>{username}</User>
+      <Messages>Messages</Messages>
     </DashLayoutComponent>
   )
 }
