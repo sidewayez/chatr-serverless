@@ -9,6 +9,7 @@ const Wrapper = styled.div`
   display: flex;
 `
 const Chatr = styled.p`
+    display: flex;
   color: #1a8cff;
   background:  #282828;
   width: 8.9em;

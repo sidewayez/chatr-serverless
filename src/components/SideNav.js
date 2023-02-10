@@ -1,9 +1,9 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { useNavigate, Link } from 'react-router-dom'
 import { HiOutlineLogout } from 'react-icons/hi'
 import { UserContext } from '../context/UserContext'
-
+// import useHover from '../worker/useHover'
 import { Friends } from '../worker/FakeData'
 const Navbar = styled.nav`
   position: absolute;
@@ -33,7 +33,7 @@ const User = styled.p`
   font-family: 'Raleway';
   font-style: normal;
   font-weight: 600;
-  margin-left: .5em;
+  margin-left: 0.5em;
 `
 
 const NavString = styled.p`
@@ -68,6 +68,7 @@ const NavbarLinkContainer = styled.div`
   margin-top: 1em;
   display: flex;
   flex-direction: column;
+  width: 3em;
 `
 
 const NavbarLink = styled(Link)`
@@ -90,9 +91,9 @@ const NavbarLink = styled(Link)`
 `
 
 const SideNav = () => {
+  // const [hoverRef, isHovered] = useHover()
   const navigate = useNavigate()
   const { username, setUsername } = useContext(UserContext)
-  console.log(Friends)
   return (
     <Navbar>
       <NavbarLinkContainer>
@@ -101,8 +102,17 @@ const SideNav = () => {
       </NavbarLinkContainer>
       <NavbarLinkContainer>
         <NavString>Online</NavString>
-        {Friends.map((friend) => (
-          <NavbarLink key={friend}>{friend}</NavbarLink>
+        {Friends.map(({ name, id }) => (
+          <NavbarLink
+            key={id}
+            // ref={hoverRef}
+            onMouseOver={() => {
+              console.log(id);
+            }}
+            // onBlur={alert('this works')}
+          >
+            {name}
+          </NavbarLink>
         ))}
       </NavbarLinkContainer>
       <UserMenu>
