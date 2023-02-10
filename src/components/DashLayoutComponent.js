@@ -10,6 +10,8 @@ const Wrapper = styled.div`
 `
 const Chatr = styled.p`
   color: #1a8cff;
+  background:  #282828;
+  width: 8.9em;
   font-family: 'Raleway';
   font-style: normal;
   font-weight: 700;
