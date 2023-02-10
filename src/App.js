@@ -24,11 +24,7 @@ const router = createBrowserRouter(
 )
 
 function Root() {
-  return (
-    // <div className="App">
-    <RouterProvider router={router} />
-    // </div>
-  )
+  return <RouterProvider router={router} />
 }
 
 export default Root

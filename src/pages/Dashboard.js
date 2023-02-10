@@ -12,10 +12,6 @@ const User = styled.h1`
   margin-left: 5.5em;
 `
 
-{
-  /* <User>{username}</User> */
-}
-
 const Messages = styled.h1`
   position: absolute;
   font-family: 'Raleway';

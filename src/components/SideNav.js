@@ -3,7 +3,6 @@ import styled from 'styled-components'
 import { useNavigate, Link } from 'react-router-dom'
 import { HiOutlineLogout } from 'react-icons/hi'
 import { UserContext } from '../context/UserContext'
-// import useHover from '../worker/useHover'
 import { Friends } from '../worker/FakeData'
 const Navbar = styled.nav`
   position: absolute;
@@ -91,7 +90,6 @@ const NavbarLink = styled(Link)`
 `
 
 const SideNav = () => {
-  // const [hoverRef, isHovered] = useHover()
   const navigate = useNavigate()
   const { username, setUsername } = useContext(UserContext)
   return (
@@ -105,11 +103,9 @@ const SideNav = () => {
         {Friends.map(({ name, id }) => (
           <NavbarLink
             key={id}
-            // ref={hoverRef}
             onMouseOver={() => {
-              console.log(id);
+              // console.log(id);
             }}
-            // onBlur={alert('this works')}
           >
             {name}
           </NavbarLink>

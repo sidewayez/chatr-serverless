@@ -56,7 +56,7 @@ const Header = styled.h1`
     font-size: 15vw;
   }
   @media only screen and ${device.lg} {
-    font-size: 13vw;
+    font-size: 15vw;
   }
   // line-height: 125%;
   letter-spacing: -0.02em;
