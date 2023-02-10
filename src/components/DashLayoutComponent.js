@@ -9,11 +9,14 @@ const Wrapper = styled.div`
   display: flex;
 `
 const Chatr = styled.p`
-  color: #346dc2;
+    display: flex;
+  color: #1a8cff;
+  background:  #282828;
+  width: 8.9em;
   font-family: 'Raleway';
   font-style: normal;
   font-weight: 700;
-  font-size: 200%;
+  font-size: large;
   margin-top: 0;
   &:hover {
     cursor: pointer;
