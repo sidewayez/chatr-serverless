@@ -8,24 +8,25 @@ import {
 } from 'react-router-dom'
 import ErrorPage from './pages/ErrorPage'
 import Dashboard from './pages/Dashboard'
+
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route>
-      <Route path="/" element={<Login />}errorElement={<ErrorPage />} />
-        <Route
-          index
-          path="/dashboard"
-          element={<Dashboard />}
-          errorElement={<ErrorPage />}
-        />
+    <Route path="/">
+      <Route index element={<Login />} errorElement={<ErrorPage />} />
+      <Route
+        path="/dashboard"
+        element={<Dashboard />}
+        errorElement={<ErrorPage />}
+      />
       {/* </Route> */}
     </Route>
   )
 )
+
 function Root() {
   return (
     // <div className="App">
-      <RouterProvider router={router} />
+    <RouterProvider router={router} />
     // </div>
   )
 }
