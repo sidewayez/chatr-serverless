@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import SideNav from './SideNav'
 import styled from 'styled-components'
-import { useNavigate } from 'react-router-dom'
 import FriendModal from './FriendModal'
 
 const Wrapper = styled.div`
@@ -28,20 +27,8 @@ const Chatr = styled.p`
   border-radius: 2px;
 `
 
-// const FriendModal = styled.div`
-//   backdrop-filter: grayscale(100%);
-//   padding: 3em;
-//   margin: 7em;
-//   max-height: 2em;
-//   background-color: gray;
-//   background: transparent;
-//   border-radius: 5px;
-//   border: solid 1px #505050;
-// `
-
 const DashLayoutComponent = ({ children }) => {
   const [open, setOpen] = useState(false)
-  const navigate = useNavigate()
   return (
     <>
       <Wrapper>
