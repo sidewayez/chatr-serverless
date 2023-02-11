@@ -25,6 +25,7 @@ const UserMenu = styled.div`
   justify-content: space-between;
   border: solid 1px #505050;
   border-bottom: none;
+  border-radius: 2px;
 `
 const User = styled.p`
   color: #ffffff;
@@ -55,6 +56,7 @@ const Logout = styled.button`
   background: #1a8cff;
   border: none;
   color: white;
+  border-radius: 5px;
   :not(:disabled) {
     cursor: pointer;
   }
@@ -89,7 +91,7 @@ const NavbarLink = styled(Link)`
   }
 `
 
-const SideNav = () => {
+const SideNav = ({ setOpen }) => {
   const navigate = useNavigate()
   const { username, setUsername } = useContext(UserContext)
   return (
@@ -104,7 +106,10 @@ const SideNav = () => {
           <NavbarLink
             key={id}
             onMouseOver={() => {
-              // console.log(id);
+              setOpen(true)
+            }}
+            onMouseOut={() => {
+              setOpen(false)
             }}
           >
             {name}
