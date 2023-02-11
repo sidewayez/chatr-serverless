@@ -93,7 +93,7 @@ const NavbarLink = styled(Link)`
 
 const SideNav = ({ setOpen }) => {
   const navigate = useNavigate()
-  const { username, setUsername } = useContext(UserContext)
+  const { username, setUsername, setFriendName, setAvatar } = useContext(UserContext)
   return (
     <Navbar>
       <NavbarLinkContainer>
@@ -102,14 +102,18 @@ const SideNav = ({ setOpen }) => {
       </NavbarLinkContainer>
       <NavbarLinkContainer>
         <NavString>Online</NavString>
-        {Friends.map(({ name, id }) => (
+        {Friends.map(({ name, id, avatar }) => (
           <NavbarLink
             key={id}
             onMouseOver={() => {
               setOpen(true)
+              setFriendName(name)
+              setAvatar(avatar)
             }}
             onMouseOut={() => {
               setOpen(false)
+              setFriendName('')
+              setAvatar('');
             }}
           >
             {name}

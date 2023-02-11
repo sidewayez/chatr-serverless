@@ -19,7 +19,7 @@ const Messages = styled.h1`
   font-weight: 700;
   font-size: 200%;
   margin-left: 5.5em;
-  margin-top: 3.5em;
+  margin-top: 2em;
   color: #ffffff;
 `
 

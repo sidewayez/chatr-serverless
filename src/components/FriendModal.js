@@ -14,11 +14,28 @@ const Modal = styled.div`
 const Username = styled.p`
   color: #ffffff;
 `
+
+const Avatar = styled.img`
+  display: block;
+  border-radius: 50%;
+  position: fixed;
+  top: 5%;
+  left: 5%;
+  width: 2em;
+  height: 2em;
+`
 export default function FriendModal() {
-  const { username } = useContext(UserContext)
+  const { friendName, avatar } = useContext(UserContext)
   return (
     <Modal>
-      <Username>{username}</Username>
+      <Avatar
+        src={
+          avatar?.length
+            ? avatar
+            : 'https://static.tvtropes.org/pmwiki/pub/images/abcb6534_7913_4eb1_a7a5_62b081ebc628.png'
+        }
+      />
+      <Username>{friendName}</Username>
     </Modal>
   )
 }

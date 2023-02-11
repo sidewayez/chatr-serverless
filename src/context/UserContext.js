@@ -3,10 +3,16 @@ const UserContext = createContext({
   username: '',
   createUser: () => {},
   setUsername: () => {},
+  friendName: '',
+  setFriendName: () => {},
+  avatar: '',
+  setAvatar: () => {},
 })
 
 export function UserProvider({ children }) {
   const [username, setUsername] = useState('')
+  const [friendName, setFriendName] = useState('')
+  const [avatar, setAvatar] = useState('');
 
   const createUser = (userName) => {
     if (username === userName) {
@@ -20,6 +26,10 @@ export function UserProvider({ children }) {
     username: username,
     createUser,
     setUsername,
+    friendName: friendName,
+    setFriendName,
+    avatar: avatar,
+    setAvatar,
   }
 
   return (
