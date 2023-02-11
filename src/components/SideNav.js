@@ -1,9 +1,10 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
-import { useNavigate, Link } from 'react-router-dom'
-import { HiOutlineLogout } from 'react-icons/hi'
+import { Link } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 import { Friends } from '../worker/FakeData'
+import UserMenu from './UserMenu'
+
 const Navbar = styled.nav`
   position: absolute;
   width: 10em;
@@ -13,27 +14,6 @@ const Navbar = styled.nav`
   overflow: hidden;
   display: flex;
   flex-direction: column;
-`
-
-const UserMenu = styled.div`
-  display: flex;
-  position: fixed;
-  bottom: 0;
-  width: 10em;
-  flex-direction: row;
-  margin-top: 91.5vh;
-  justify-content: space-between;
-  border: solid 1px #505050;
-  border-bottom: none;
-  border-radius: 2px;
-`
-const User = styled.p`
-  color: #ffffff;
-  font-size: large;
-  font-family: 'Raleway';
-  font-style: normal;
-  font-weight: 600;
-  margin-left: 0.5em;
 `
 
 const NavString = styled.p`
@@ -47,21 +27,6 @@ const NavString = styled.p`
   margin-top: 0.3em;
   &:hover {
     cursor: context-menu;
-  }
-`
-
-const Logout = styled.button`
-  height: 4.3em;
-  width: 3em;
-  background: #1a8cff;
-  border: none;
-  color: white;
-  border-radius: 5px;
-  :not(:disabled) {
-    cursor: pointer;
-  }
-  &:hover {
-    box-shadow: 0px 2px 7px #1a8cff;
   }
 `
 
@@ -85,15 +50,26 @@ const NavbarLink = styled(Link)`
     // transform: scale(1.1);
     // translate(1em, -10%);
     // transform: translate(3em, -50%);
-    // transition: all 1s ease-out;
+    transition: all 1s ease-out;
     // text-decoration: underline;
     text-shadow: #ffffff 0.5px 0 2.5px;
   }
 `
 
 const SideNav = ({ setOpen }) => {
-  const navigate = useNavigate()
   const { username, setUsername, setFriendName, setAvatar } = useContext(UserContext)
+
+  const handleMouseOver = (name, avatar) => {
+    setOpen(true)
+    setFriendName(name)
+    setAvatar(avatar)
+  }
+
+  const handleMouseOut = () => {
+    setOpen(false)
+    setFriendName('')
+    setAvatar('')
+  }
   return (
     <Navbar>
       <NavbarLinkContainer>
@@ -105,32 +81,14 @@ const SideNav = ({ setOpen }) => {
         {Friends.map(({ name, id, avatar }) => (
           <NavbarLink
             key={id}
-            onMouseOver={() => {
-              setOpen(true)
-              setFriendName(name)
-              setAvatar(avatar)
-            }}
-            onMouseOut={() => {
-              setOpen(false)
-              setFriendName('')
-              setAvatar('');
-            }}
+            onMouseOver={() => handleMouseOver(name, avatar)}
+            onMouseOut={handleMouseOut}
           >
             {name}
           </NavbarLink>
         ))}
       </NavbarLinkContainer>
-      <UserMenu>
-        <User>{username}</User>
-        <Logout>
-          <HiOutlineLogout
-            onClick={() => {
-              setUsername('')
-              navigate('/')
-            }}
-          />
-        </Logout>
-      </UserMenu>
+      <UserMenu username={username} setUsername={setUsername}/>
     </Navbar>
   )
 }

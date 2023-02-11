@@ -1,18 +1,23 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { UserContext } from '../context/UserContext'
+
 const Modal = styled.div`
   backdrop-filter: grayscale(100%);
   padding: 3em;
   margin: 7em;
   max-height: 2em;
+  min-width: 3em;
   background-color: gray;
   background: transparent;
   border-radius: 5px;
   border: solid 1px #505050;
+  font-family: 'Raleway';
 `
 const Username = styled.p`
   color: #ffffff;
+  position: fixed;
+  top: 0%;
 `
 
 const Avatar = styled.img`
