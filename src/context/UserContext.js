@@ -7,12 +7,15 @@ const UserContext = createContext({
   setFriendName: () => {},
   avatar: '',
   setAvatar: () => {},
+  unreadMessages: [],
+  setUnreadMessages: () => {},
 })
 
 export function UserProvider({ children }) {
   const [username, setUsername] = useState('')
   const [friendName, setFriendName] = useState('')
   const [avatar, setAvatar] = useState('');
+  const [unreadMessages, setUnreadMessages] = useState([])
 
   const createUser = (userName) => {
     if (username === userName) {
@@ -30,6 +33,8 @@ export function UserProvider({ children }) {
     setFriendName,
     avatar: avatar,
     setAvatar,
+    unreadMessages: unreadMessages,
+    setUnreadMessages,
   }
 
   return (

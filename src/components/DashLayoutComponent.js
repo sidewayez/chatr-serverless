@@ -32,7 +32,7 @@ const DashLayoutComponent = ({ children }) => {
   return (
     <>
       <Wrapper>
-        <SideNav setOpen={setOpen} />
+        <SideNav open={open} setOpen={setOpen} />
         <Chatr>chatr</Chatr>
         {open && <FriendModal />}
         {children}

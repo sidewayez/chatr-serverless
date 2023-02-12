@@ -1,4 +1,4 @@
-export const Friends = [
+const friends = [
   {
     id: 'XUIASGASD99091',
     name: 'Gerald',
@@ -62,6 +62,7 @@ export const Friends = [
         status: 'unread',
       },
     ],
+    unread: '0',
   },
   {
     id: 'XUIASGASD99092',
@@ -117,14 +118,15 @@ export const Friends = [
       {
         id: 'holyhklhj',
         message: 'Lorem ipsum pueoa potreop nutromger retom yerid.',
-        status: 'unread',
+        status: 'read',
       },
       {
         id: 'mfmfhnfgif',
         message: 'Lorem ipsum pueoa potreop nutromger retom yerid.',
-        status: 'unread',
+        status: 'read',
       },
     ],
+    unread: '0',
   },
   {
     id: 'XUIASGASD99094',
@@ -181,14 +183,15 @@ export const Friends = [
       {
         id: 'holyhklhj',
         message: 'Lorem ipsum pueoa potreop nutromger retom yerid.',
-        status: 'unread',
+        status: 'read',
       },
       {
         id: 'mfmfhnfgif',
         message: 'Lorem ipsum pueoa potreop nutromger retom yerid.',
-        status: 'unread',
+        status: 'read',
       },
     ],
+    unread: '0',
   },
   {
     id: 'XUIASGASD99093',
@@ -245,7 +248,7 @@ export const Friends = [
       {
         id: 'holyhklhj',
         message: 'Lorem ipsum pueoa potreop nutromger retom yerid.',
-        status: 'unread',
+        status: 'read',
       },
       {
         id: 'mfmfhnfgif',
@@ -253,6 +256,7 @@ export const Friends = [
         status: 'unread',
       },
     ],
+    unread: '0',
   },
   {
     id: 'XUIASGASD99095',
@@ -294,7 +298,7 @@ export const Friends = [
       {
         id: 'asdacda',
         message: 'Lorem ipsum pueoa potreop nutromger retom yerid.',
-        status: 'read',
+        status: 'unread',
       },
       {
         id: 'afbdgnjadsfg',
@@ -317,6 +321,7 @@ export const Friends = [
         status: 'unread',
       },
     ],
+    unread: '0',
   },
   {
     id: 'XUIASGASD99096',
@@ -362,13 +367,13 @@ export const Friends = [
       },
       {
         id: 'afbdgnjadsfg',
-        message: 'Lorem ipsum pueoa potreop nutromger retom yerid.',
-        status: 'read',
+        message: 'Chiefs will win the super bowl.',
+        status: 'unread',
       },
       {
         id: 'asdfasvd',
         message: 'Lorem ipsum pueoa potreop nutromger retom yerid.',
-        status: 'read',
+        status: 'unread',
       },
       {
         id: 'holyhklhj',
@@ -381,6 +386,7 @@ export const Friends = [
         status: 'unread',
       },
     ],
+    unread: '0',
   },
   {
     id: 'XUIASGASD99097',
@@ -392,47 +398,47 @@ export const Friends = [
       {
         id: 'ieruasdf',
         message: 'Lorem ipsum pueoa potreop nutromger retom yerid.',
-        status: 'read',
+        status: 'unread',
       },
       {
         id: 'aosdiugaos',
         message: 'Lorem ipsum pueoa potreop nutromger retom yerid.',
-        status: 'read',
+        status: 'unread',
       },
       {
         id: 'oauofauosdf',
         message: 'Lorem ipsum pueoa potreop nutromger retom yerid.',
-        status: 'read',
+        status: 'unread',
       },
       {
         id: 'ppasfabsd',
         message: 'Lorem ipsum pueoa potreop nutromger retom yerid.',
-        status: 'read',
+        status: 'unread',
       },
       {
         id: 'oisuais',
         message: 'Lorem ipsum pueoa potreop nutromger retom yerid.',
-        status: 'read',
+        status: 'unread',
       },
       {
         id: 'pasldjkahyis',
         message: 'Lorem ipsum pueoa potreop nutromger retom yerid.',
-        status: 'read',
+        status: 'unread',
       },
       {
         id: 'asdacda',
         message: 'Lorem ipsum pueoa potreop nutromger retom yerid.',
-        status: 'read',
+        status: 'unread',
       },
       {
         id: 'afbdgnjadsfg',
         message: 'Lorem ipsum pueoa potreop nutromger retom yerid.',
-        status: 'read',
+        status: 'unread',
       },
       {
         id: 'asdfasvd',
         message: 'Lorem ipsum pueoa potreop nutromger retom yerid.',
-        status: 'read',
+        status: 'unread',
       },
       {
         id: 'holyhklhj',
@@ -442,8 +448,23 @@ export const Friends = [
       {
         id: 'mfmfhnfgif',
         message: 'Lorem ipsum pueoa potreop nutromger retom yerid.',
-        status: 'unread',
+        status: 'read',
       },
     ],
+    unread: '0',
   },
 ]
+
+export const updatedFriendsList = (friends) => {
+  friends.forEach((friend) => {
+    friend.messages.forEach((message) => {
+      if (message.status !== 'read') {
+        friend.unread++
+      }
+    })
+    friend.online = '1'
+  })
+  return friends
+}
+
+export const Friends = updatedFriendsList(friends)

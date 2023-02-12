@@ -1,8 +1,7 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { HiOutlineLogout } from 'react-icons/hi'
-import { UserContext } from '../context/UserContext'
 
 const UserMenuContainer = styled.div`
   display: flex;
@@ -34,7 +33,7 @@ const Logout = styled.button`
   background: #1a8cff;
   border: none;
   color: white;
-  border-radius: 5px;
+  border-radius: 2px;
   :not(:disabled) {
     cursor: pointer;
   }
@@ -45,17 +44,18 @@ const Logout = styled.button`
 
 const UserMenu = ({ username, setUsername }) => {
   const navigate = useNavigate()
+
+  const handleLogout = () => {
+    setUsername('')
+    navigate('/')
+  }
+
   return (
     <>
       <UserMenuContainer>
         <User>{username}</User>
         <Logout>
-          <HiOutlineLogout
-            onClick={() => {
-              setUsername('')
-              navigate('/')
-            }}
-          />
+          <HiOutlineLogout onClick={handleLogout} />
         </Logout>
       </UserMenuContainer>
     </>
