@@ -79,15 +79,9 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 2em;
-  // margin: auto;
   margin-top: 6%;
 `
 
-const Line = styled.hr`
-  width: 80vw;
-  color: gray;
-  // height: 1vh;
-`
 const HeaderLine = styled.hr`
   width: 80vw;
   color: #808080;
@@ -95,8 +89,6 @@ const HeaderLine = styled.hr`
   display: flex;
   margin-top: 5em;
   left: 11.6em;
-  // margin-bottom: 2em;
-  // position: flex;
   overflow: hidden;
 `
 const FriendCell = styled.div`
@@ -130,8 +122,6 @@ const Dashboard = () => {
       <Header>Messages</Header>
       <HeaderLine />
       <Wrapper>
-        {/* <hr /> */}
-        {/* </HeaderLine> */}
         {Friends.map(({ avatar, name, messages, unread }) => (
           <>
             <FriendCell>
