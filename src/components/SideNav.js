@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState, useRef } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
@@ -8,9 +8,9 @@ import { TbMessageCircle2 } from 'react-icons/tb'
 import FriendModal from './FriendModal'
 
 const Navbar = styled.nav`
-  position: absolute;
-  width: 10em;
-  height: 100%;
+  position: sticky;
+  width: 12%;
+  height: auto;
   background: #404040;
   border-right: solid 1px #505050;
   overflow: hidden;
@@ -19,6 +19,7 @@ const Navbar = styled.nav`
 `
 
 const NavString = styled.p`
+  position: sticky;
   color: #ffffff;
   font-size: large;
   font-family: 'Raleway';
@@ -32,11 +33,19 @@ const NavString = styled.p`
   }
 `
 
-const NavbarLinkContainer = styled.div`
+const ChatterboxContainer = styled.div`
   margin-top: 1em;
   display: flex;
   flex-direction: column;
   width: 3em;
+  position: fixed;
+`
+const NavbarLinkContainer = styled.div`
+  margin-top: 5em;
+  display: flex;
+  flex-direction: column;
+  width: 3em;
+  position: fixed;
 `
 
 const NavbarLink = styled(Link)`
@@ -77,8 +86,16 @@ const BadgeNumber = styled.p`
   text-shadow: #ffffff 0.5px 0 2.5px;
 `
 const SideNav = ({ open, setOpen }) => {
-  const { username, setUsername, setFriendName, setAvatar, setUnreadMessages } =
-    useContext(UserContext)
+  const myRefs = useRef([])
+  const {
+    username,
+    setUsername,
+    setFriendName,
+    setAvatar,
+    setUnreadMessages,
+    setOffsetLeft,
+    setOffsetTop,
+  } = useContext(UserContext)
   const getUnread = (id) => {
     let count = 0
     const messages = []
@@ -92,17 +109,24 @@ const SideNav = ({ open, setOpen }) => {
     setUnreadMessages(messages)
   }
 
-  function handleMouseOver(id, name, avatar) {
+  function handleMouseOver(id, name, avatar, i) {
     getUnread(id)
     setOpen(true)
     setFriendName(name)
     setAvatar(avatar)
+    // console.log(Friends.find((friend) => friend.id === id))
+    console.log(myRefs.current[i].offsetLeft)
+    console.log(myRefs.current[i].offsetTop)
+    setOffsetLeft(myRefs.current[i].offsetLeft)
+    setOffsetTop(myRefs.current[i].offsetTop)
   }
 
   const handleMouseOut = () => {
     setOpen(false)
     setFriendName('')
     setAvatar('')
+    setOffsetLeft(0)
+    setOffsetTop(0)
   }
 
   const handleNotifCount = (unread) => {
@@ -114,32 +138,29 @@ const SideNav = ({ open, setOpen }) => {
     onMouseOver and onMouseOut handle the dom events for us.  
     Friends[] is dummy data from worker/FakeData.js.
 */
-
-  useEffect(() => {
-    console.log(Friends)
-  }, [])
-
   return (
     <Navbar>
-      <NavbarLinkContainer>
+      <ChatterboxContainer>
         <NavString>Chatterbox</NavString>
         <NavString>Friends</NavString>
-      </NavbarLinkContainer>
+      </ChatterboxContainer>
       <NavbarLinkContainer>
         <NavString>Online</NavString>
         {Friends.map(
-          ({ name, id, avatar, unread, online }) =>
+          ({ name, id, avatar, unread, online }, i) =>
             online === '1' &&
             unread > 0 && (
               <>
                 <NavbarLink
+                  ref={(ref) => {
+                    myRefs.current[i] = ref
+                  }}
                   key={id}
-                  onMouseOver={() => handleMouseOver(id, name, avatar)}
+                  onMouseOver={() => handleMouseOver(id, name, avatar, i)}
                   onMouseOut={handleMouseOut}
                 >
                   {name}
                 </NavbarLink>
-                {/* {open && <FriendModal id={id} />} */}
                 {unread > 0 && <Badge />}
                 {unread > 0 && (
                   <BadgeNumber>{handleNotifCount(unread)}</BadgeNumber>

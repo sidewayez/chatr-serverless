@@ -7,9 +7,9 @@ const UserMenuContainer = styled.div`
   display: flex;
   position: fixed;
   bottom: 0;
-  width: 10em;
+  width: 12%;
   flex-direction: row;
-  margin-top: 91.5vh;
+  // margin-top: 91.5vh;
   justify-content: space-between;
   border: solid 1px #505050;
   border-bottom: none;

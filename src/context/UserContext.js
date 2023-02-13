@@ -9,13 +9,19 @@ const UserContext = createContext({
   setAvatar: () => {},
   unreadMessages: [],
   setUnreadMessages: () => {},
+  offsetLeft: 0,
+  setOffsetLeft: () => {},
+  offsetTop: 0,
+  setOffsetTop: () => {},
 })
 
 export function UserProvider({ children }) {
   const [username, setUsername] = useState('')
   const [friendName, setFriendName] = useState('')
-  const [avatar, setAvatar] = useState('');
+  const [avatar, setAvatar] = useState('')
   const [unreadMessages, setUnreadMessages] = useState([])
+  const [offsetLeft, setOffsetLeft] = useState(0)
+  const [offsetTop, setOffsetTop] = useState(0)
 
   const createUser = (userName) => {
     if (username === userName) {
@@ -35,6 +41,10 @@ export function UserProvider({ children }) {
     setAvatar,
     unreadMessages: unreadMessages,
     setUnreadMessages,
+    offsetLeft: offsetLeft,
+    setOffsetLeft,
+    offsetTop: offsetTop,
+    setOffsetTop,
   }
 
   return (

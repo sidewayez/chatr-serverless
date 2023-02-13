@@ -8,12 +8,14 @@ const Wrapper = styled.div`
   background-color: #474747;
   min-height: 100vh;
   display: flex;
+  // margin: auto;
+  overflowX: hidden;
 `
 const Chatr = styled.p`
   display: flex;
   color: #1a8cff;
   background: #282828;
-  width: 8.9em;
+  width: 12%;
   font-family: 'Raleway';
   font-style: normal;
   font-weight: 700;

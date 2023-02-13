@@ -4,19 +4,23 @@ import { UserContext } from '../context/UserContext'
 
 const Modal = styled.div`
   display: flex;
+  position: absolute;
+  left: ${(props) => props.left + 10}px;
+  top: ${(props) => props.top + 65}px;
   flex-direction: column;
   flex-grow: 1;
   backdrop-filter: grayscale(100%);
   padding: 2em;
-  margin: 7em;
-  height: 2em;
-  height: auto;
+  margin: auto;
+  margin-left: ${(props) => props.left + 15}px;
+  // height: ${(props) => props.left};
   min-height: 2em;
-  max-height: 3em;
-  max-width: 5em;
+  max-height: 5em;
+  height: auto;
+  max-width: 3em;
   text-overflow: ellipsis;
-  background-color: gray;
-  background: transparent;
+  background-color: #909090;
+  // background: #203030;
   border-radius: 5px;
   border: solid 1px #505050;
   font-family: 'Raleway';
@@ -29,10 +33,10 @@ const Username = styled.p`
   color: #ffffff;
   position: absolute;
   top: 10%;
-  left: 30%;
+  left: 35%;
   padding: 0;
   margin: 0;
-  font-size: x-large;
+  font-size: large;
 `
 
 const Messages = styled.p`
@@ -48,18 +52,18 @@ const Avatar = styled.img`
   border-radius: 50%;
   position: fixed;
   top: 5%;
-  left: 2%;
+  left: 5%;
   width: 2em;
   height: 2em;
 `
 export default function FriendModal() {
-  const myRef = useRef()
   const [defaultMessage, setDefault] = useState(
     "That's alot of messages! Might want to reach out..."
   )
-  const { friendName, avatar, unreadMessages } = useContext(UserContext)
+  const { friendName, avatar, unreadMessages, offsetLeft, offsetTop } =
+    useContext(UserContext)
   return (
-    <Modal>
+    <Modal draggable left={offsetLeft} top={offsetTop}>
       <Avatar
         src={
           avatar?.length
@@ -69,7 +73,7 @@ export default function FriendModal() {
       />
       <Username>{friendName}</Username>
       {unreadMessages.length < 10 ? (
-        <Messages>{unreadMessages[0]}</Messages>
+        <Messages>{unreadMessages[unreadMessages.length - 1]}</Messages>
       ) : (
         <Messages>{defaultMessage}</Messages>
       )}
