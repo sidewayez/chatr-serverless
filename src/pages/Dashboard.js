@@ -44,10 +44,21 @@ const Avatar = styled.img`
   border-radius: 50%;
   position: relative;
   left: 2em;
-  top: 4em;
+  top: 2.5em;
   width: 2em;
   height: 2em;
   margin-top: 0;
+`
+const UnreadAvatar = styled.img`
+  display: block;
+  border-radius: 50%;
+  position: relative;
+  left: 2em;
+  top: 2.5em;
+  width: 2em;
+  height: 2em;
+  margin-top: 0;
+  border: 2px solid #1a8cff;
 `
 
 const Messages = styled.p`
@@ -69,28 +80,34 @@ const Wrapper = styled.div`
   flex-direction: column;
   margin-left: 2em;
   // margin: auto;
-  margin-top: 3%;
+  margin-top: 6%;
 `
 
-const Line = styled.line`
+const Line = styled.hr`
   width: 80vw;
   color: gray;
   // height: 1vh;
 `
-const HeaderLine = styled.line`
+const HeaderLine = styled.hr`
   width: 80vw;
-  color: gray;
+  color: #808080;
   position: absolute;
-  margin-top: 2em;
-  margin-bottom: 1em;
+  display: flex;
+  margin-top: 5em;
+  left: 11.6em;
+  // margin-bottom: 2em;
   // position: flex;
   overflow: hidden;
 `
 const FriendCell = styled.div`
-  display: inline-block;
-  border: solid 1px #505050;
+  border-bottom: solid 1px #505050;
+  border-right: solid 1px #505050;
+  border-left: solid 1px #505050;
   width: 80vw;
-  height: 20%;
+  height: 100%;
+  margin: auto;
+  padding: auto;
+  top: 3%;
 `
 
 const Unread = styled.p`
@@ -102,7 +119,7 @@ const Unread = styled.p`
   margin-top: -1.2em;
   font-size: small;
   // top: 10%;
-  // top: 
+  // top:
   // margin-top: ;
   color: #1a8cff;
 `
@@ -111,21 +128,22 @@ const Dashboard = () => {
   return (
     <DashLayoutComponent>
       <Header>Messages</Header>
+      <HeaderLine />
       <Wrapper>
-        <HeaderLine>
-          <hr />
-        </HeaderLine>
+        {/* <hr /> */}
+        {/* </HeaderLine> */}
         {Friends.map(({ avatar, name, messages, unread }) => (
           <>
             <FriendCell>
-              <Avatar src={avatar} />
+              {unread > 0 ? (
+                <UnreadAvatar src={avatar} />
+              ) : (
+                <Avatar src={avatar} />
+              )}
               <User>{name}</User>
-              {unread > 0 && <Unread>{unread} unread messages</Unread>}
               <Messages>{messages[0].message}</Messages>
+              <Messages>Today 5:12pm</Messages>
             </FriendCell>
-            {/* <Line>
-              <hr />
-            </Line> */}
           </>
         ))}
       </Wrapper>

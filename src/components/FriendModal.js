@@ -3,29 +3,26 @@ import styled from 'styled-components'
 import { UserContext } from '../context/UserContext'
 
 const Modal = styled.div`
-  display: flex;
-  position: absolute;
+  display: grid;
+  position: fixed;
   left: ${(props) => props.left + 10}px;
   top: ${(props) => props.top + 65}px;
-  flex-direction: column;
+  flex-direction: row;
   flex-grow: 1;
   backdrop-filter: grayscale(100%);
   padding: 2em;
   margin: auto;
   margin-left: ${(props) => props.left + 15}px;
-  // height: ${(props) => props.left};
   min-height: 2em;
   max-height: 5em;
   height: auto;
   max-width: 3em;
   text-overflow: ellipsis;
   background-color: #909090;
-  // background: #203030;
   border-radius: 5px;
   border: solid 1px #505050;
   font-family: 'Raleway';
   text-overflow: ellipsis;
-  // white-space: nowrap;
   overflow: hidden;
 `
 const Username = styled.p`
@@ -33,18 +30,15 @@ const Username = styled.p`
   color: #ffffff;
   position: absolute;
   top: 10%;
-  left: 35%;
+  left: 40%;
   padding: 0;
   margin: 0;
   font-size: large;
 `
 
 const Messages = styled.p`
-  display: flex;
   color: #ffffff;
-  top: 10%;
-  text-overflow: ellipsis;
-  font-size: small;
+  font-size: x-small;
 `
 
 const Avatar = styled.img`
@@ -52,9 +46,10 @@ const Avatar = styled.img`
   border-radius: 50%;
   position: fixed;
   top: 5%;
-  left: 5%;
+  left: 4%;
   width: 2em;
   height: 2em;
+  padding-bottom: 0;
 `
 export default function FriendModal() {
   const [defaultMessage, setDefault] = useState(
