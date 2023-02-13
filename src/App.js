@@ -18,7 +18,6 @@ const router = createBrowserRouter(
         element={<Dashboard />}
         errorElement={<ErrorPage />}
       />
-      {/* </Route> */}
     </Route>
   )
 )
