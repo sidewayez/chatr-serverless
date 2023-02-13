@@ -6,10 +6,12 @@ import FriendModal from './FriendModal'
 const Wrapper = styled.div`
   width: 100%;
   background-color: #474747;
+  font-family: 'Raleway';
   min-height: 100vh;
   display: flex;
+  flex-grow: 0;
   // margin: auto;
-  overflowX: hidden;
+  overflowx: hidden;
 `
 const Chatr = styled.p`
   display: flex;
