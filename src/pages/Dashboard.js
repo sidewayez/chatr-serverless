@@ -24,7 +24,6 @@ const User = styled.h1`
 
 const Header = styled.h1`
   position: absolute;
-  // display: flex;
   font-style: normal;
   font-weight: 700;
   font-size: 300%;
@@ -64,7 +63,6 @@ const Messages = styled.p`
   position: relative;
   top: -1vh;
   margin-left: 1em;
-  text-overflow: ellipsis;
   font-size: x-large;
   &:hover {
     cursor: context-menu;
@@ -75,9 +73,6 @@ const Timestamp = styled.p`
   position: absolute;
   margin-left: 2em;
   margin-top: -3vh;
-  // top: -11vh;
-  // min-height: -11vh;
-  text-overflow: ellipsis;
   font-size: small;
   &:hover {
     cursor: context-menu;
@@ -94,14 +89,11 @@ const Wrapper = styled.div`
 
 const FriendCell = styled.div`
   border: solid 3px #505050;
-  background: darkgray;
+  background: DimGrey;
   width: 80vw;
-  // margin: auto;
   margin-left: auto;
   margin-right: auto;
-  // max-height: 8em;
   min-height: 7em;
-  // padding: auto;
   top: 3%;
   border-radius: 8px;
 `
