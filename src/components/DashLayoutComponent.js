@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import SideNav from './SideNav'
 import styled from 'styled-components'
 import FriendModal from './FriendModal'
-
+import { device } from '../worker/breakpoints'
 const Wrapper = styled.div`
   width: 100%;
   background-color: #474747;
@@ -31,6 +31,21 @@ const Chatr = styled.p`
   }
   position: fixed;
   border-radius: 2px;
+  @media only screen and ${device.xs}{
+    display: none;
+  }
+  @media only screen and ${device.sm}{
+    display: none;
+  }
+  @media only screen and ${device.md}{
+    display: flex;
+  }
+  @media only screen and ${device.lg}{
+    display: flex;
+  }
+  @media only screen and ${device.xlg}{
+    display: flex;
+  }
 `
 
 const DashLayoutComponent = ({ children }) => {

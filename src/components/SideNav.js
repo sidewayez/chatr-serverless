@@ -5,7 +5,6 @@ import { UserContext } from '../context/UserContext'
 import { Friends } from '../worker/FakeData'
 import UserMenu from './UserMenu'
 import { TbMessageCircle2 } from 'react-icons/tb'
-import FriendModal from './FriendModal'
 import { device } from '../worker/breakpoints'
 
 const Navbar = styled.nav`
