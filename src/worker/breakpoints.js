@@ -6,7 +6,7 @@ const size = {
   xlg: '1200px',
 }
 export const device = {
-  xs: `(max-width: ${size.xs})`,
+  xs: `(min-width: ${size.xs})`,
   sm: `(min-width: ${size.sm})`,
   md: `(min-width: ${size.md})`,
   lg: `(min-width: ${size.lg})`,

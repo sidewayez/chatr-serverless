@@ -17,7 +17,7 @@ const Chatr = styled.p`
   display: flex;
   color: #1a8cff;
   background: #282828;
-  width: 12%;
+  width: 10vw;
   font-family: 'Raleway';
   font-style: normal;
   font-weight: 700;

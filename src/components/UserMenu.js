@@ -7,7 +7,7 @@ const UserMenuContainer = styled.div`
   display: flex;
   position: fixed;
   bottom: 0;
-  width: 12%;
+  width: 10vw;
   flex-direction: row;
   justify-content: space-between;
   border: solid 1px #505050;

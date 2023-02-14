@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import styled from 'styled-components'
 import DashLayoutComponent from '../components/DashLayoutComponent'
 import '../App.css'
@@ -12,7 +12,7 @@ const User = styled.h1`
   font-size: 200%;
   margin-left: 2.5em;
   display: flex;
-  top: 0.2em;
+  top: -2.5%;
   margin-top: 0;
   padding: 0;
   right: 0;
@@ -24,12 +24,12 @@ const User = styled.h1`
 
 const Header = styled.h1`
   position: absolute;
-  display: flex;
+  // display: flex;
   font-style: normal;
   font-weight: 700;
   font-size: 300%;
-  margin-left: 5em;
-  margin-top: 1%;
+  margin-left: 15vw;
+  margin-top: 5vh;
   color: #ff6b00;
   &:hover {
     cursor: context-menu;
@@ -41,7 +41,7 @@ const Avatar = styled.img`
   border-radius: 50%;
   position: relative;
   left: 2em;
-  top: 2.5em;
+  top: 2em;
   width: 2em;
   height: 2em;
   margin-top: 0;
@@ -51,7 +51,7 @@ const UnreadAvatar = styled.img`
   border-radius: 50%;
   position: relative;
   left: 2em;
-  top: 2.5em;
+  top: 2em;
   width: 2em;
   height: 2em;
   margin-top: 0;
@@ -62,7 +62,7 @@ const Messages = styled.p`
   display: flex;
   color: #ffffff;
   position: relative;
-  margin-top: 0;
+  top: -1vh;
   margin-left: 1em;
   text-overflow: ellipsis;
   font-size: x-large;
@@ -71,12 +71,12 @@ const Messages = styled.p`
   }
 `
 const Timestamp = styled.p`
-  display: flex;
   color: #ffffff;
-  position: relative;
-  left: 1%;
-  bottom: 40%;
-  margin-left: 1em;
+  position: absolute;
+  margin-left: 2em;
+  margin-top: -3vh;
+  // top: -11vh;
+  // min-height: -11vh;
   text-overflow: ellipsis;
   font-size: small;
   &:hover {
@@ -86,22 +86,28 @@ const Timestamp = styled.p`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 2em;
-  margin-top: 6%;
+  flex-grow: 1;
+  margin-left: auto;
+  margin-top: 12vh;
+  margin-right: auto;
 `
 
 const FriendCell = styled.div`
   border: solid 3px #505050;
   background: darkgray;
   width: 80vw;
-  height: 100%;
-  margin: auto;
-  padding: auto;
+  // margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+  // max-height: 8em;
+  min-height: 7em;
+  // padding: auto;
   top: 3%;
   border-radius: 8px;
 `
 
 const Dashboard = () => {
+  const [open, setOpen] = useState(false)
   const { username } = useContext(UserContext)
   return (
     <DashLayoutComponent>
@@ -116,8 +122,8 @@ const Dashboard = () => {
                 <Avatar src={avatar} />
               )}
               <User>{name}</User>
-              <Messages>{messages[0].message}</Messages>
               <Timestamp>Today 5:12pm</Timestamp>
+              <Messages>{messages[0].message}</Messages>
             </FriendCell>
           </>
         ))}

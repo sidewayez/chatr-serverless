@@ -6,10 +6,11 @@ import { Friends } from '../worker/FakeData'
 import UserMenu from './UserMenu'
 import { TbMessageCircle2 } from 'react-icons/tb'
 import FriendModal from './FriendModal'
+import { device } from '../worker/breakpoints'
 
 const Navbar = styled.nav`
   position: sticky;
-  width: 12%;
+  width: 10vw;
   height: auto;
   background: #404040;
   border-right: solid 1px #505050;
@@ -21,7 +22,7 @@ const Navbar = styled.nav`
 const NavString = styled.p`
   position: sticky;
   color: #ffffff;
-  font-size: large;
+  // font-size: large;
   font-family: 'Raleway';
   font-style: normal;
   font-weight: 700;
@@ -31,26 +32,58 @@ const NavString = styled.p`
   &:hover {
     cursor: context-menu;
   }
+  @media only screen and ${device.xs} {
+    font-size: x-small;
+  }
+  @media only screen and ${device.sm} {
+    font-size: small;
+  }
+  @media only screen and ${device.md} {
+    margin-left: 0.5em;
+    font-size: medium;
+  }
+  @media only screen and ${device.lg} {
+    margin-left: 0.5em;
+    font-sze: medium;
+  }
+  @media only screen and ${device.xlg} {
+    font-size: large;
+  }
 `
 
 const ChatterboxContainer = styled.div`
-  margin-top: 1em;
+  margin-top: 1.5em;
   display: flex;
   flex-direction: column;
   width: 3em;
   position: fixed;
 `
 const NavbarLinkContainer = styled.div`
-  margin-top: 5em;
+  margin-top: 4em;
   display: flex;
   flex-direction: column;
   width: 3em;
   position: fixed;
 `
+// @media only screen and ${device.xs} {
+//   font-size: x-small;
+// }
+// @media only screen and ${device.sm} {
+//   font-size: x-small;
+// }
+// @media only screen and ${device.md} {
+//   font-size: medium;
+// }
+// @media only screen and ${device.lg} {
+//   font-sze: large;
+// }
+// @media only screen and ${device.xlg} {
+//   font-size: large;
+// }
 
 const NavbarLink = styled(Link)`
   color: #ffffff;
-  font-size: large;
+  // font-size: large;
   font-family: 'Raleway';
   font-style: normal;
   font-weight: 700;
@@ -66,6 +99,24 @@ const NavbarLink = styled(Link)`
     // text-decoration: underline;
     text-shadow: #ffffff 0.5px 0 2.5px;
   }
+  @media only screen and ${device.xs} {
+    font-size: x-small;
+  }
+  @media only screen and ${device.sm} {
+    font-size: small;
+  }
+  @media only screen and ${device.md} {
+    margin-left: 1.5em;
+    font-size: medium;
+  }
+  @media only screen and ${device.lg} {
+    margin-left: 1.5em;
+    font-sze: medium;
+  }
+  @media only screen and ${device.xlg} {
+    font-size: large;
+    margin-left: 2em;
+  }
 `
 
 const Badge = styled(TbMessageCircle2)`
@@ -75,6 +126,25 @@ const Badge = styled(TbMessageCircle2)`
   // margin-bottom: auto;
   font-size: 1rem;
   transform: rotateZ(90deg) rotate(0.5turn);
+  @media only screen and ${device.xs} {
+    // font-size: x-small;
+  }
+  @media only screen and ${device.sm} {
+    // font-size: x-small;
+  }
+  @media only screen and ${device.md} {
+    margin-left: 0.2em;
+    // font-size: medium;
+  }
+  @media only screen and ${device.lg} {
+    margin-left: 0.2em;
+    // font-sze: medium;
+  }
+  @media only screen and ${device.xlg} {
+    font-size: 1rem;
+    // font-size: large;
+    margin-left: 1em;
+  }
 `
 
 const BadgeNumber = styled.p`
@@ -84,6 +154,26 @@ const BadgeNumber = styled.p`
   width: 25%;
   color: #ffffff;
   text-shadow: #ffffff 0.5px 0 2.5px;
+  @media only screen and ${device.xs} {
+    // font-size: x-small;
+  }
+  @media only screen and ${device.sm} {
+    // font-size: x-small;
+  }
+  @media only screen and ${device.md} {
+    margin-left: 0.9em;
+    font-sze: 2em;
+    // font-size: medium;
+  }
+  @media only screen and ${device.lg} {
+    margin-left: 0.9em;
+    font-sze: 2em;
+  }
+  @media only screen and ${device.xlg} {
+    margin-left: 2.2em;
+    font-size: 0.6em;
+    // font-size: large;
+  }
 `
 const SideNav = ({ open, setOpen }) => {
   const myRefs = useRef([])
@@ -141,7 +231,6 @@ const SideNav = ({ open, setOpen }) => {
   return (
     <Navbar>
       <ChatterboxContainer>
-        <NavString>Chatterbox</NavString>
         <NavString>Friends</NavString>
       </ChatterboxContainer>
       <NavbarLinkContainer>
