@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
 import { HiOutlineLogout } from 'react-icons/hi'
+import { device } from '../worker/breakpoints'
 
 const UserMenuContainer = styled.div`
   display: flex;
@@ -25,6 +26,25 @@ const User = styled.p`
   &:hover {
     cursor: context-menu;
   }
+  @media only screen and ${device.xs} {
+    font-size: x-small;
+    margin: auto;
+  }
+  @media only screen and ${device.sm} {
+    font-size: small;
+    margin-left: 0;
+    margin: auto;
+  }
+  @media only screen and ${device.md} {
+    font-size: medium;
+    // margin-left: 0;
+    margin: auto;
+  }
+
+  @media only screen and ${device.xlg} {
+    font-size: large;
+    margin-left: 0.5em;
+  }
 `
 
 const Logout = styled.button`
@@ -40,7 +60,18 @@ const Logout = styled.button`
   &:hover {
     box-shadow: 0px 2px 7px #1a8cff;
   }
-`
+  @media only screen and ${device.md} {
+    width: 2.5em;
+    // width: 2.2em;
+  }
+  @media only screen and ${device.lg} {
+    width: 3em;
+  }
+
+  @media only screen and ${device.xlg} {
+    width: 3em;
+  }
+// `
 
 const UserMenu = ({ username, setUsername }) => {
   const navigate = useNavigate()

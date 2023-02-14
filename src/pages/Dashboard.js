@@ -1,9 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import DashLayoutComponent from '../components/DashLayoutComponent'
 import '../App.css'
 import { UserContext } from '../context/UserContext'
 import { Friends } from '../worker/FakeData'
+import Floating from '../components/Floating'
 
 const User = styled.h1`
   position: relative;
@@ -67,6 +68,7 @@ const Messages = styled.p`
   &:hover {
     cursor: context-menu;
   }
+  padding-right: .5em;
 `
 const Timestamp = styled.p`
   color: #ffffff;
@@ -85,21 +87,35 @@ const Wrapper = styled.div`
   margin-left: auto;
   margin-top: 12vh;
   margin-right: auto;
+  overflowx: hidden;
+  overflowy: hidden;
 `
 
 const FriendCell = styled.div`
   border: solid 3px #505050;
   background: DimGrey;
-  width: 80vw;
-  margin-left: auto;
-  margin-right: auto;
+  width: 50vw;
+  margin-left: 4vw;
+  max-width: 50vw;
+  // margin-right: auto;
   min-height: 7em;
   top: 3%;
   border-radius: 8px;
 `
-
+const Floater = styled.div`
+  border: solid 3px #505050;
+  background: SlateGray;
+  position: fixed;
+  right: 5vw;
+  top: 15%;
+  margin-left: auto;
+  margin-right: auto;
+  width: 5vw;
+  height: 10vh;
+  padding: 5em;
+  border-radius: 8px;
+`
 const Dashboard = () => {
-  const [open, setOpen] = useState(false)
   const { username } = useContext(UserContext)
   return (
     <DashLayoutComponent>
@@ -120,6 +136,7 @@ const Dashboard = () => {
           </>
         ))}
       </Wrapper>
+      <Floating username={username} />
     </DashLayoutComponent>
   )
 }

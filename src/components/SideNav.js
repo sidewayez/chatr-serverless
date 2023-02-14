@@ -17,6 +17,21 @@ const Navbar = styled.nav`
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  @media only screen and ${device.xs}{
+    display: none;
+  }
+  @media only screen and ${device.sm}{
+    display: none;
+  }
+  @media only screen and ${device.md}{
+    display: flex;
+  }
+  @media only screen and ${device.lg}{
+    display: flex;
+  }
+  @media only screen and ${device.xlg}{
+    display: flex;
+  }
 `
 
 const NavString = styled.p`
@@ -106,11 +121,11 @@ const NavbarLink = styled(Link)`
     font-size: small;
   }
   @media only screen and ${device.md} {
-    margin-left: 1.5em;
+    margin-left: 1.2em;
     font-size: medium;
   }
   @media only screen and ${device.lg} {
-    margin-left: 1.5em;
+    margin-left: 1.2em;
     font-sze: medium;
   }
   @media only screen and ${device.xlg} {
@@ -130,14 +145,15 @@ const Badge = styled(TbMessageCircle2)`
     // font-size: x-small;
   }
   @media only screen and ${device.sm} {
+    // margin-left: 0.1em;
     // font-size: x-small;
   }
   @media only screen and ${device.md} {
-    margin-left: 0.2em;
+    margin-left: 0.1em;
     // font-size: medium;
   }
   @media only screen and ${device.lg} {
-    margin-left: 0.2em;
+    margin-left: 0.1em;
     // font-sze: medium;
   }
   @media only screen and ${device.xlg} {
@@ -155,24 +171,20 @@ const BadgeNumber = styled.p`
   color: #ffffff;
   text-shadow: #ffffff 0.5px 0 2.5px;
   @media only screen and ${device.xs} {
-    // font-size: x-small;
   }
   @media only screen and ${device.sm} {
-    // font-size: x-small;
   }
   @media only screen and ${device.md} {
-    margin-left: 0.9em;
+    margin-left: 0.8em;
     font-sze: 2em;
-    // font-size: medium;
   }
   @media only screen and ${device.lg} {
-    margin-left: 0.9em;
+    margin-left: 0.8em;
     font-sze: 2em;
   }
   @media only screen and ${device.xlg} {
     margin-left: 2.2em;
     font-size: 0.6em;
-    // font-size: large;
   }
 `
 const SideNav = ({ open, setOpen }) => {
@@ -209,6 +221,7 @@ const SideNav = ({ open, setOpen }) => {
     console.log(myRefs.current[i].offsetTop)
     setOffsetLeft(myRefs.current[i].offsetLeft)
     setOffsetTop(myRefs.current[i].offsetTop)
+    console.log(myRefs)
   }
 
   const handleMouseOut = () => {
