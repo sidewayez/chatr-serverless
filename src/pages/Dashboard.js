@@ -132,7 +132,7 @@ const Floater = styled.div`
   }
 `
 const Dashboard = () => {
-  const { username } = useContext(UserContext)
+  const { username, setUsername } = useContext(UserContext)
   return (
     <DashLayoutComponent>
       <Header>Messages</Header>
@@ -152,7 +152,7 @@ const Dashboard = () => {
           </>
         ))}
       </Wrapper>
-      <Floating username={username} />
+      <Floating username={username} setUsername={setUsername}/>
       <Floater></Floater>
     </DashLayoutComponent>
   )

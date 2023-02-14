@@ -36,13 +36,13 @@ const User = styled.p`
     margin: auto;
   }
   @media only screen and ${device.md} {
-    font-size: medium;
+    font-size: small;
     // margin-left: 0;
     margin: auto;
   }
 
   @media only screen and ${device.xlg} {
-    font-size: large;
+    font-size: medium;
     margin-left: 0.5em;
   }
 `
@@ -71,7 +71,7 @@ const Logout = styled.button`
   @media only screen and ${device.xlg} {
     width: 3em;
   }
-// `
+ `
 
 const UserMenu = ({ username, setUsername }) => {
   const navigate = useNavigate()

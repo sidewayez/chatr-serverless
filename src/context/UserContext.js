@@ -16,7 +16,7 @@ const UserContext = createContext({
 })
 
 export function UserProvider({ children }) {
-  const [username, setUsername] = useState('')
+  const [username, setUsername] = useState('Michael')
   const [friendName, setFriendName] = useState('')
   const [avatar, setAvatar] = useState('')
   const [unreadMessages, setUnreadMessages] = useState([])
