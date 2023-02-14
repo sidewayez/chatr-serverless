@@ -1,9 +1,11 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import DashLayoutComponent from '../components/DashLayoutComponent'
 import '../App.css'
 import { UserContext } from '../context/UserContext'
 import { Friends } from '../worker/FakeData'
+import Floating from '../components/Floating'
+import { device } from '../worker/breakpoints'
 
 const User = styled.h1`
   position: relative;
@@ -12,7 +14,7 @@ const User = styled.h1`
   font-size: 200%;
   margin-left: 2.5em;
   display: flex;
-  top: 0.2em;
+  top: -2.5%;
   margin-top: 0;
   padding: 0;
   right: 0;
@@ -24,12 +26,11 @@ const User = styled.h1`
 
 const Header = styled.h1`
   position: absolute;
-  display: flex;
   font-style: normal;
   font-weight: 700;
   font-size: 300%;
-  margin-left: 5em;
-  margin-top: 1%;
+  margin-left: 15vw;
+  margin-top: 5vh;
   color: #ff6b00;
   &:hover {
     cursor: context-menu;
@@ -41,7 +42,7 @@ const Avatar = styled.img`
   border-radius: 50%;
   position: relative;
   left: 2em;
-  top: 2.5em;
+  top: 2em;
   width: 2em;
   height: 2em;
   margin-top: 0;
@@ -51,7 +52,7 @@ const UnreadAvatar = styled.img`
   border-radius: 50%;
   position: relative;
   left: 2em;
-  top: 2.5em;
+  top: 2em;
   width: 2em;
   height: 2em;
   margin-top: 0;
@@ -62,22 +63,19 @@ const Messages = styled.p`
   display: flex;
   color: #ffffff;
   position: relative;
-  margin-top: 0;
+  top: -1vh;
   margin-left: 1em;
-  text-overflow: ellipsis;
   font-size: x-large;
   &:hover {
     cursor: context-menu;
   }
+  padding-right: 0.5em;
 `
 const Timestamp = styled.p`
-  display: flex;
   color: #ffffff;
-  position: relative;
-  left: 1%;
-  bottom: 40%;
-  margin-left: 1em;
-  text-overflow: ellipsis;
+  position: absolute;
+  margin-left: 2em;
+  margin-top: -3vh;
   font-size: small;
   &:hover {
     cursor: context-menu;
@@ -86,21 +84,53 @@ const Timestamp = styled.p`
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  margin-left: 2em;
-  margin-top: 6%;
+  flex-grow: 1;
+  margin-left: auto;
+  margin-top: 12vh;
+  margin-right: auto;
+  overflowx: hidden;
+  overflowy: hidden;
 `
 
 const FriendCell = styled.div`
   border: solid 3px #505050;
-  background: darkgray;
-  width: 80vw;
-  height: 100%;
-  margin: auto;
-  padding: auto;
+  background: DimGrey;
+  width: 50vw;
+  margin-left: 4vw;
+  max-width: 50vw;
+  // margin-right: auto;
+  min-height: 7em;
   top: 3%;
   border-radius: 8px;
 `
-
+const Floater = styled.div`
+  border: solid 3px #505050;
+  background: SlateGray;
+  position: fixed;
+  right: 7vw;
+  top: 60vh;
+  margin-left: auto;
+  margin-right: auto;
+  width: 5vw;
+  height: 10vh;
+  padding: 5em;
+  border-radius: 8px;
+  @media only screen and ${device.xs} {
+    display: flex;
+  }
+  @media only screen and ${device.sm} {
+    display: flex;
+  }
+  @media only screen and ${device.md} {
+    display: none;
+  }
+  @media only screen and ${device.lg} {
+    // display: flex;
+  }
+  @media only screen and ${device.xlg} {
+    // display: flex;
+  }
+`
 const Dashboard = () => {
   const { username } = useContext(UserContext)
   return (
@@ -116,12 +146,14 @@ const Dashboard = () => {
                 <Avatar src={avatar} />
               )}
               <User>{name}</User>
-              <Messages>{messages[0].message}</Messages>
               <Timestamp>Today 5:12pm</Timestamp>
+              <Messages>{messages[0].message}</Messages>
             </FriendCell>
           </>
         ))}
       </Wrapper>
+      <Floating username={username} />
+      <Floater></Floater>
     </DashLayoutComponent>
   )
 }
