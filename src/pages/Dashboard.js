@@ -5,6 +5,7 @@ import '../App.css'
 import { UserContext } from '../context/UserContext'
 import { Friends } from '../worker/FakeData'
 import Floating from '../components/Floating'
+import { device } from '../worker/breakpoints'
 
 const User = styled.h1`
   position: relative;
@@ -68,7 +69,7 @@ const Messages = styled.p`
   &:hover {
     cursor: context-menu;
   }
-  padding-right: .5em;
+  padding-right: 0.5em;
 `
 const Timestamp = styled.p`
   color: #ffffff;
@@ -106,14 +107,29 @@ const Floater = styled.div`
   border: solid 3px #505050;
   background: SlateGray;
   position: fixed;
-  right: 5vw;
-  top: 15%;
+  right: 7vw;
+  top: 60vh;
   margin-left: auto;
   margin-right: auto;
   width: 5vw;
   height: 10vh;
   padding: 5em;
   border-radius: 8px;
+  @media only screen and ${device.xs} {
+    display: flex;
+  }
+  @media only screen and ${device.sm} {
+    display: flex;
+  }
+  @media only screen and ${device.md} {
+    display: none;
+  }
+  @media only screen and ${device.lg} {
+    // display: flex;
+  }
+  @media only screen and ${device.xlg} {
+    // display: flex;
+  }
 `
 const Dashboard = () => {
   const { username } = useContext(UserContext)
@@ -137,6 +153,7 @@ const Dashboard = () => {
         ))}
       </Wrapper>
       <Floating username={username} />
+      <Floater></Floater>
     </DashLayoutComponent>
   )
 }

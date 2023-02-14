@@ -10,8 +10,6 @@ const Wrapper = styled.div`
   min-height: 100vh;
   display: flex;
   flex-grow: 0;
-  // margin: auto;
-  overflowx: hidden;
 `
 const Chatr = styled.p`
   display: flex;
