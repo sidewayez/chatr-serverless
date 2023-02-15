@@ -6,6 +6,8 @@ import { UserContext } from '../context/UserContext'
 import { Friends } from '../worker/FakeData'
 import Floating from '../components/Floating'
 import { device } from '../worker/breakpoints'
+import { HiOutlineLogout } from 'react-icons/hi'
+import UserMenu from '../components/UserMenu'
 
 const User = styled.h1`
   position: relative;
@@ -21,6 +23,30 @@ const User = styled.h1`
   color: #ffffff;
   &:hover {
     cursor: context-menu;
+  }
+  @media only screen and ${device.xs} {
+    // margin-left: 5vw;
+    // margin-top: 6.5vh;
+    // font-size: 250%;
+    font-size 150%;
+  }
+  @media only screen and ${device.sm} {
+    // font-size: 300%;
+    // margin-left: 5vw;
+    // margin-top: 5vh;
+    font-size: 200%;
+  }
+  @media only screen and ${device.md} {
+    // font-size: 300%;
+    // margin-left: 15vw;
+    // margin-top: 5vh;
+    font-size: 200%;
+  }
+  @media only screen and ${device.lg} {
+    // font-size: 300%;
+    // margin-left: 15vw;
+    // margin-top: 5vh;
+    font-size: 200%;
   }
 `
 
@@ -90,6 +116,25 @@ const Messages = styled.p`
     cursor: context-menu;
   }
   padding-right: 0.5em;
+  @media only screen and ${device.xs} {
+    // margin-left: 5vw;
+    // margin-top: 6.5vh;
+    font-size: small;
+  }
+  @media only screen and ${device.sm} {
+    font-size: large;
+    // margin-left: 5vw;
+    // margin-top: 5vh;
+  }
+  @media only screen and ${device.md} {
+    // font-size: 300%;
+    // margin-left: 15vw;
+    // margin-top: 5vh;
+    font-size: x-large;
+  }
+  @media only screen and ${device.lg} {
+    font-size: x-large;
+  }
 `
 const Timestamp = styled.p`
   color: #ffffff;
@@ -151,6 +196,7 @@ const Floater = styled.div`
     // display: flex;
   }
 `
+
 const Dashboard = () => {
   const { username, setUsername } = useContext(UserContext)
   return (
@@ -172,8 +218,10 @@ const Dashboard = () => {
           </>
         ))}
       </Wrapper>
-      <Floating username={username} setUsername={setUsername} />
-      <Floater></Floater>
+      <Floating  username={username} setUsername={setUsername}/>
+      <Floater>
+        <UserMenu username={username} setUsername={setUsername}/>
+      </Floater>
     </DashLayoutComponent>
   )
 }

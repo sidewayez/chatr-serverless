@@ -16,8 +16,8 @@ const Avatar = styled.img`
   height: 5em;
   margin-top: 0;
   @media only screen and ${device.xs} {
-    width: 2.5em;
-    height: 2.5em;
+    width: 3em;
+    height: 3em;
   }
   @media only screen and ${device.sm} {
     width: 4em;
@@ -46,6 +46,27 @@ const User = styled.h1`
   &:hover {
     cursor: context-menu;
   }
+  @media only screen and ${device.xs} {
+    // margin-left: 5vw;
+    // margin-top: 6.5vh;
+    right: 10px;
+    font-size: 200%;
+    top: 1.5vh;
+  }
+  @media only screen and ${device.sm} {
+    // margin-left: 5vw;
+    // margin-top: 5vh;
+    font-size: 200%;
+  }
+  @media only screen and ${device.md} {
+    // font-size: 300%;
+    // margin-left: 15vw;
+    // margin-top: 5vh;
+    font-size: 200%;
+  }
+  @media only screen and ${device.lg} {
+    font-size: 200%;
+  }
 `
 const Floater = styled.div`
   border: solid 3px #505050;
@@ -64,12 +85,14 @@ const Floater = styled.div`
   @media only screen and ${device.xs} {
     // width: .1em;
     // height: .1em;
+    // padding: 5em;
+    right: 6vw;
   }
   @media only screen and ${device.sm} {
-    // width: .1em;
-    // height: .1em;
-    max-height: 0vh;
-    padding: 7em;
+    width: 4em;
+    height: 4em;
+    // max-height: 0vh;
+    padding: 5em;
     padding-bottom: 0;
   }
   @media only screen and ${device.md} {
@@ -77,14 +100,21 @@ const Floater = styled.div`
     height: 4em;
     padding: 5em;
     padding-bottom: 0;
-    right: 3vw;
+    right: 4vw;
   }
   @media only screen and ${device.lg} {
     width: 4em;
     height: 4em;
     padding: 5em;
     padding-bottom: 0;
-    right: 4vw;
+    right: 5vw;
+  }
+  @media only screen and ${device.xlg} {
+    width: 4em;
+    height: 4em;
+    padding: 5em;
+    padding-bottom: 0;
+    right: 5vw;
   }
 `
 
@@ -104,14 +134,24 @@ const Logout = styled.button`
   &:hover {
     box-shadow: 0px 2px 7px #1a8cff;
   }
+  @media only screen and ${device.xs} {
+    height: 1em;
+    width: 5em;
+    right: 1vw;
+    top: 6vh;
+  }
   @media only screen and ${device.sm} {
     height: 2em;
     width: 8em;
+    top: 10vh;
   }
   @media only screen and ${device.md} {
     display: none;
   }
   @media only screen and ${device.lg} {
+    display: none;
+  }
+  @media only screen and ${device.xlg} {
     display: none;
   }
 `
@@ -129,9 +169,9 @@ const Floating = ({ username, setUsername }) => {
       <Floater draggable={true}>
         <Avatar src="https://static.tvtropes.org/pmwiki/pub/images/abcb6534_7913_4eb1_a7a5_62b081ebc628.png" />
         <User>{username}</User>
-        <Logout>
+        {/* <Logout>
           <HiOutlineLogout onClick={handleLogout} />
-        </Logout>
+        </Logout> */}
       </Floater>
     </>
   )

@@ -15,6 +15,38 @@ const UserMenuContainer = styled.div`
   border-bottom: none;
   border-radius: 2px;
   background: #474747;
+  @media only screen and ${device.xs} {
+    font-size: x-small;
+    margin: auto;
+    position: relative;
+  }
+  @media only screen and ${device.sm} {
+    font-size: small;
+    margin-left: 0;
+    margin: auto;
+    position: relative;
+  }
+  @media only screen and ${device.md} {
+    font-size: small;
+    margin: auto;
+    // position: relative;
+    // margin-top: 1vh;
+    display: flex;
+    position: fixed;
+    bottom: 0;
+  }
+
+  @media only screen and ${device.lg} {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+  }
+  @media only screen and ${device.xlg} {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+
+  }
 `
 const User = styled.p`
   color: #ffffff;
