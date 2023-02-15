@@ -81,6 +81,7 @@ const Nametag = styled.div`
     height: 4em;
     padding: 5em;
     padding-bottom: 0;
+    right: 4vw;
   }
   @media only screen and ${device.md} {
     width: 4em;
