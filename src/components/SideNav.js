@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState, useRef } from 'react'
+import React, { useContext, useRef } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
@@ -6,6 +6,7 @@ import { Friends } from '../worker/FakeData'
 import UserMenu from './UserMenu'
 import { TbMessageCircle2 } from 'react-icons/tb'
 import { device } from '../worker/breakpoints'
+import NavMapper from './NavMapper'
 
 const Navbar = styled.nav`
   position: sticky;
@@ -16,19 +17,19 @@ const Navbar = styled.nav`
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  @media only screen and ${device.xs}{
+  @media only screen and ${device.xs} {
     display: none;
   }
-  @media only screen and ${device.sm}{
+  @media only screen and ${device.sm} {
     display: none;
   }
-  @media only screen and ${device.md}{
+  @media only screen and ${device.md} {
     display: flex;
   }
-  @media only screen and ${device.lg}{
+  @media only screen and ${device.lg} {
     display: flex;
   }
-  @media only screen and ${device.xlg}{
+  @media only screen and ${device.xlg} {
     display: flex;
   }
 `
@@ -36,8 +37,6 @@ const Navbar = styled.nav`
 const NavString = styled.p`
   position: sticky;
   color: #ffffff;
-  // font-size: large;
-  font-family: 'Raleway';
   font-style: normal;
   font-weight: 700;
   margin-bottom: 0;
@@ -65,7 +64,7 @@ const NavString = styled.p`
   }
 `
 
-const ChatterboxContainer = styled.div`
+const ChatterContainer = styled.div`
   margin-top: 1.5em;
   display: flex;
   flex-direction: column;
@@ -79,26 +78,9 @@ const NavbarLinkContainer = styled.div`
   width: 3em;
   position: fixed;
 `
-// @media only screen and ${device.xs} {
-//   font-size: x-small;
-// }
-// @media only screen and ${device.sm} {
-//   font-size: x-small;
-// }
-// @media only screen and ${device.md} {
-//   font-size: medium;
-// }
-// @media only screen and ${device.lg} {
-//   font-sze: large;
-// }
-// @media only screen and ${device.xlg} {
-//   font-size: large;
-// }
 
 const NavbarLink = styled(Link)`
   color: #ffffff;
-  // font-size: large;
-  font-family: 'Raleway';
   font-style: normal;
   font-weight: 700;
   margin-left: 2em;
@@ -106,11 +88,6 @@ const NavbarLink = styled(Link)`
   margin-top: 0.5em;
   margin-bottom: auto;
   &:hover {
-    // transform: scale(1.1);
-    // translate(1em, -10%);
-    // transform: translate(3em, -50%);
-    // transition: all 1s ease-out;
-    // text-decoration: underline;
     text-shadow: #ffffff 0.5px 0 2.5px;
   }
   @media only screen and ${device.xs} {
@@ -137,27 +114,20 @@ const Badge = styled(TbMessageCircle2)`
   margin-left: 1em;
   color: #ffffff;
   margin-top: -1.5em;
-  // margin-bottom: auto;
   font-size: 1rem;
   transform: rotateZ(90deg) rotate(0.5turn);
   @media only screen and ${device.xs} {
-    // font-size: x-small;
   }
   @media only screen and ${device.sm} {
-    // margin-left: 0.1em;
-    // font-size: x-small;
   }
   @media only screen and ${device.md} {
     margin-left: 0.1em;
-    // font-size: medium;
   }
   @media only screen and ${device.lg} {
     margin-left: 0.1em;
-    // font-sze: medium;
   }
   @media only screen and ${device.xlg} {
     font-size: 1rem;
-    // font-size: large;
     margin-left: 1em;
   }
 `
@@ -187,7 +157,14 @@ const BadgeNumber = styled.p`
   }
 `
 const SideNav = ({ open, setOpen }) => {
-  const myRefs = useRef([])
+  /*
+    friendRefs is an array holding refs to elements in the side navbar.
+    I use the setOffsetLeft and setOffsetTop context functions to 
+    obtain the location of the "friend" in the side navbar to 
+    dynamically set the top and left positioning of a modal.
+    This modal displays when you hover over said "friend".
+  */
+  const friendRefs = useRef([])
   const {
     username,
     setUsername,
@@ -197,6 +174,7 @@ const SideNav = ({ open, setOpen }) => {
     setOffsetLeft,
     setOffsetTop,
   } = useContext(UserContext)
+
   const getUnread = (id) => {
     let count = 0
     const messages = []
@@ -210,17 +188,19 @@ const SideNav = ({ open, setOpen }) => {
     setUnreadMessages(messages)
   }
 
+  /*
+    handleMouseOver and handleMouseOut funtsions handle the
+    hover events for displaying the modal and 
+    setting required data for modal.
+   */
+
   function handleMouseOver(id, name, avatar, i) {
     getUnread(id)
     setOpen(true)
     setFriendName(name)
     setAvatar(avatar)
-    // console.log(Friends.find((friend) => friend.id === id))
-    console.log(myRefs.current[i].offsetLeft)
-    console.log(myRefs.current[i].offsetTop)
-    setOffsetLeft(myRefs.current[i].offsetLeft)
-    setOffsetTop(myRefs.current[i].offsetTop)
-    console.log(myRefs)
+    setOffsetLeft(friendRefs.current[i].offsetLeft)
+    setOffsetTop(friendRefs.current[i].offsetTop)
   }
 
   const handleMouseOut = () => {
@@ -239,12 +219,19 @@ const SideNav = ({ open, setOpen }) => {
     NavbarLink components have hoverable capabalities.
     onMouseOver and onMouseOut handle the dom events for us.  
     Friends[] is dummy data from worker/FakeData.js.
+
+    Refs are set when Friends array is mapped into the nav.
+    The elements displayed are friends with unread messages
+    BadgeNumber displays number of unread messages up to 9.
+    After, default message displays and a '+' replaces the number.
+
+    Will be using NavMapper in the future to reduce length of this file.
 */
   return (
     <Navbar>
-      <ChatterboxContainer>
+      <ChatterContainer>
         <NavString>Friends</NavString>
-      </ChatterboxContainer>
+      </ChatterContainer>
       <NavbarLinkContainer>
         <NavString>Online</NavString>
         {Friends.map(
@@ -254,7 +241,7 @@ const SideNav = ({ open, setOpen }) => {
               <>
                 <NavbarLink
                   ref={(ref) => {
-                    myRefs.current[i] = ref
+                    friendRefs.current[i] = ref
                   }}
                   key={id}
                   onMouseOver={() => handleMouseOver(id, name, avatar, i)}
@@ -269,6 +256,11 @@ const SideNav = ({ open, setOpen }) => {
               </>
             )
         )}
+        {/* <NavMapper
+          handleMouseOver={handleMouseOver}
+          handleMouseOut={handleMouseOut}
+          handleNotifCount={handleNotifCount}
+        /> */}
       </NavbarLinkContainer>
       <UserMenu username={username} setUsername={setUsername} />
     </Navbar>
