@@ -77,12 +77,14 @@ const Floater = styled.div`
     height: 4em;
     padding: 5em;
     padding-bottom: 0;
+    right: 3vw;
   }
   @media only screen and ${device.lg} {
     width: 4em;
     height: 4em;
     padding: 5em;
     padding-bottom: 0;
+    right: 4vw;
   }
 `
 
@@ -124,7 +126,7 @@ const Floating = ({ username, setUsername }) => {
 
   return (
     <>
-      <Floater>
+      <Floater draggable={true}>
         <Avatar src="https://static.tvtropes.org/pmwiki/pub/images/abcb6534_7913_4eb1_a7a5_62b081ebc628.png" />
         <User>{username}</User>
         <Logout>

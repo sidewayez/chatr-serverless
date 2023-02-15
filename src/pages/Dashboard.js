@@ -35,6 +35,26 @@ const Header = styled.h1`
   &:hover {
     cursor: context-menu;
   }
+  @media only screen and ${device.xs} {
+    margin-left: 5vw;
+    margin-top: 6.5vh;
+    font-size: 250%;
+  }
+  @media only screen and ${device.sm} {
+    font-size: 300%;
+    margin-left: 5vw;
+    margin-top: 5vh;
+  }
+  @media only screen and ${device.md} {
+    font-size: 300%;
+    margin-left: 15vw;
+    margin-top: 5vh;
+  }
+  @media only screen and ${device.lg} {
+    font-size: 300%;
+    margin-left: 15vw;
+    margin-top: 5vh;
+  }
 `
 
 const Avatar = styled.img`
@@ -152,7 +172,7 @@ const Dashboard = () => {
           </>
         ))}
       </Wrapper>
-      <Floating username={username} setUsername={setUsername}/>
+      <Floating username={username} setUsername={setUsername} />
       <Floater></Floater>
     </DashLayoutComponent>
   )
