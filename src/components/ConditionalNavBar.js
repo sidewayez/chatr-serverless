@@ -17,10 +17,7 @@ const ConditionalNav = styled.div`
   padding: 5em;
   border-radius: 8px;
   @media only screen and ${device.xs} {
-    display: flex;
-    right: 6vw;
-    width: 0.3em;
-    top: 32vh;
+    display: none;
   }
   @media only screen and ${device.sm} {
     display: flex;

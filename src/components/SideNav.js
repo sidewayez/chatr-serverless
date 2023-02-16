@@ -112,7 +112,6 @@ const NavbarLink = styled(Link)`
 `
 
 const Badge = styled(TbMessageCircle2)`
-  margin-left: 1em;
   color: #ffffff;
   margin-top: -1.5em;
   font-size: 1rem;
