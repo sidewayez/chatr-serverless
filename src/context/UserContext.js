@@ -33,16 +33,15 @@ export function UserProvider({ children }) {
   }
 
   const getUnread = (id, friends) => {
-    let count = 0
-    const messages = []
     const friend = friends.find((friend) => friend.id === id)
-    friend.messages.forEach((message) => {
-      if (message.status !== 'read') {
-        count += 1
-        messages.push(message.message)
-      }
-    })
-    setUnreadMessages(messages)
+    setUnreadMessages(
+      friend.messages.reduce((acc, message) => {
+        if (message.status !== 'read') {
+          acc.push(message.message)
+        }
+        return acc
+      }, [])
+    )
   }
 
   const contextvalue = {

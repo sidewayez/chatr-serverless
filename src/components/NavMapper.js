@@ -1,9 +1,8 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import styled from 'styled-components'
-import { Friends } from '../worker/FakeData'
+import { Link } from 'react-router-dom'
 import { device } from '../worker/breakpoints'
 import { TbMessageCircle2 } from 'react-icons/tb'
-import { Link } from 'react-router-dom'
 
 const NavbarLink = styled(Link)`
   color: #ffffff;
@@ -83,34 +82,32 @@ const BadgeNumber = styled.p`
   }
 `
 
-const NavMapper = ({ handleMouseOver, handleMouseOut, handleNotifCount }) => {
-  const friendRefs = useRef([])
-
-  return (
-    <>
-      {Friends.map(
-        ({ name, id, avatar, unread, online }, i) =>
-          online === '1' &&
-          unread > 0 && (
-            <>
-              <NavbarLink
-                ref={(ref) => {
-                  friendRefs.current[i] = ref
-                }}
-                key={id}
-                onMouseOver={() => handleMouseOver(id, name, avatar, i)}
-                onMouseOut={handleMouseOut}
-              >
-                {name}
-              </NavbarLink>
-              {unread > 0 && <Badge />}
-              {unread > 0 && (
-                <BadgeNumber>{handleNotifCount(unread)}</BadgeNumber>
-              )}
-            </>
-          )
-      )}
-    </>
+const NavMapper = ({
+  friends,
+  friendRefs,
+  handleMouseOver,
+  handleMouseOut,
+  handleNotifCount,
+}) => {
+  return friends.map(
+    ({ name, id, avatar, unread, online }, i) =>
+      online === '1' &&
+      unread > 0 && (
+        <>
+          <NavbarLink
+            ref={(ref) => {
+              friendRefs.current[i] = ref
+            }}
+            key={id}
+            onMouseOver={() => handleMouseOver(id, name, avatar, i)}
+            onMouseOut={handleMouseOut}
+          >
+            {name}
+          </NavbarLink>
+          {unread > 0 && <Badge />}
+          {unread > 0 && <BadgeNumber>{handleNotifCount(unread)}</BadgeNumber>}
+        </>
+      )
   )
 }
 

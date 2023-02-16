@@ -170,24 +170,10 @@ const SideNav = ({ open, setOpen }) => {
     setUsername,
     setFriendName,
     setAvatar,
-    // setUnreadMessages,
     setOffsetLeft,
     setOffsetTop,
-    getUnread
+    getUnread,
   } = useContext(UserContext)
-
-  // const getUnread = (id) => {
-  //   let count = 0
-  //   const messages = []
-  //   const friend = Friends.find((friend) => friend.id === id)
-  //   friend.messages.forEach((message) => {
-  //     if (message.status !== 'read') {
-  //       count += 1
-  //       messages.push(message.message)
-  //     }
-  //   })
-  //   setUnreadMessages(messages)
-  // }
 
   /*
     handleMouseOver and handleMouseOut funtsions handle the
@@ -258,6 +244,8 @@ const SideNav = ({ open, setOpen }) => {
             )
         )}
         {/* <NavMapper
+          friends={Friends}
+          friendRefs={friendRefs}
           handleMouseOver={handleMouseOver}
           handleMouseOut={handleMouseOut}
           handleNotifCount={handleNotifCount}

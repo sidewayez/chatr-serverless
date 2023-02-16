@@ -467,4 +467,35 @@ export const updatedFriendsList = (friends) => {
   return friends
 }
 
+// export const FriendMapper = ({
+//   NavbarLink,
+//   friendRefs,
+//   handleMouseOver,
+//   handleMouseOut,
+//   handleNotifCount,
+//   Badge,
+//   BadgeNumber,
+// }) => {
+//   return Friends.map(
+//     ({ name, id, avatar, unread, online }, i) =>
+//       online === '1' &&
+//       unread > 0 && (
+//         <>
+//           <NavbarLink
+//             ref={(ref) => {
+//               friendRefs.current[i] = ref
+//             }}
+//             key={id}
+//             onMouseOver={() => handleMouseOver(id, name, avatar, i)}
+//             onMouseOut={handleMouseOut}
+//           >
+//             {name}
+//           </NavbarLink>
+//           {unread > 0 && <Badge />}
+//           {unread > 0 && <BadgeNumber>{handleNotifCount(unread)}</BadgeNumber>}
+//         </>
+//       )
+//   )
+// }
+
 export const Friends = updatedFriendsList(friends)
