@@ -2,6 +2,7 @@ import React, { useContext, useRef } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
+import { FriendContext } from '../context/FriendContext'
 import { Friends } from '../worker/FakeData'
 import UserMenu from './UserMenu'
 import { TbMessageCircle2 } from 'react-icons/tb'
@@ -165,16 +166,10 @@ const SideNav = ({ open, setOpen }) => {
     This modal displays when you hover over said "friend".
   */
   const friendRefs = useRef([])
-  const {
-    username,
-    setUsername,
-    setFriendName,
-    setAvatar,
-    setOffsetLeft,
-    setOffsetTop,
-    getUnread,
-  } = useContext(UserContext)
+  const { username, setUsername } = useContext(UserContext)
 
+  const { setFriendName, setAvatar, setOffsetLeft, setOffsetTop, getUnread } =
+    useContext(FriendContext)
   /*
     handleMouseOver and handleMouseOut funtsions handle the
     hover events for displaying the modal and 

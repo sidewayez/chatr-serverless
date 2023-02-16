@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { device } from '../worker/breakpoints'
+import { Friends } from '../worker/FakeData'
 import UserMenu from './UserMenu'
 
 const ConditionalNav = styled.div`

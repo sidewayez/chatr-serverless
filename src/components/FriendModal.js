@@ -1,6 +1,6 @@
-import React, { useContext, useState, useRef } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
-import { UserContext } from '../context/UserContext'
+import { FriendContext } from '../context/FriendContext'
 
 const Modal = styled.div`
   display: grid;
@@ -56,7 +56,7 @@ export default function FriendModal() {
     "That's alot of messages! Might want to reach out..."
   )
   const { friendName, avatar, unreadMessages, offsetLeft, offsetTop } =
-    useContext(UserContext)
+    useContext(FriendContext)
   return (
     <Modal draggable left={offsetLeft} top={offsetTop}>
       <Avatar
