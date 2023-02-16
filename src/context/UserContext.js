@@ -13,6 +13,7 @@ const UserContext = createContext({
   setOffsetLeft: () => {},
   offsetTop: 0,
   setOffsetTop: () => {},
+  getUnread: () => {},
 })
 
 export function UserProvider({ children }) {
@@ -31,6 +32,19 @@ export function UserProvider({ children }) {
     }
   }
 
+  const getUnread = (id, friends) => {
+    let count = 0
+    const messages = []
+    const friend = friends.find((friend) => friend.id === id)
+    friend.messages.forEach((message) => {
+      if (message.status !== 'read') {
+        count += 1
+        messages.push(message.message)
+      }
+    })
+    setUnreadMessages(messages)
+  }
+
   const contextvalue = {
     username: username,
     createUser,
@@ -45,6 +59,7 @@ export function UserProvider({ children }) {
     setOffsetLeft,
     offsetTop: offsetTop,
     setOffsetTop,
+    getUnread,
   }
 
   return (

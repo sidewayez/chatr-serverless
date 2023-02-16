@@ -170,23 +170,24 @@ const SideNav = ({ open, setOpen }) => {
     setUsername,
     setFriendName,
     setAvatar,
-    setUnreadMessages,
+    // setUnreadMessages,
     setOffsetLeft,
     setOffsetTop,
+    getUnread
   } = useContext(UserContext)
 
-  const getUnread = (id) => {
-    let count = 0
-    const messages = []
-    const friend = Friends.find((friend) => friend.id === id)
-    friend.messages.forEach((message) => {
-      if (message.status !== 'read') {
-        count += 1
-        messages.push(message.message)
-      }
-    })
-    setUnreadMessages(messages)
-  }
+  // const getUnread = (id) => {
+  //   let count = 0
+  //   const messages = []
+  //   const friend = Friends.find((friend) => friend.id === id)
+  //   friend.messages.forEach((message) => {
+  //     if (message.status !== 'read') {
+  //       count += 1
+  //       messages.push(message.message)
+  //     }
+  //   })
+  //   setUnreadMessages(messages)
+  // }
 
   /*
     handleMouseOver and handleMouseOut funtsions handle the
@@ -195,7 +196,7 @@ const SideNav = ({ open, setOpen }) => {
    */
 
   function handleMouseOver(id, name, avatar, i) {
-    getUnread(id)
+    getUnread(id, Friends)
     setOpen(true)
     setFriendName(name)
     setAvatar(avatar)
