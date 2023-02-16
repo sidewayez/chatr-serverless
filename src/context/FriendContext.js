@@ -12,6 +12,7 @@ const FriendContext = createContext({
   offsetTop: 0,
   setOffsetTop: () => {},
   getUnread: () => {},
+  handleNotifCount: () => {},
 })
 
 export function FriendProvider({ children }) {
@@ -33,6 +34,10 @@ export function FriendProvider({ children }) {
     )
   }
 
+  const handleNotifCount = (unread) => {
+    return unread < 10 ? unread : '+'
+  }
+
   const contextValue = {
     friendName: friendName,
     setFriendName,
@@ -45,6 +50,7 @@ export function FriendProvider({ children }) {
     offsetTop: offsetTop,
     setOffsetTop,
     getUnread,
+    handleNotifCount
   }
   return (
     <FriendContext.Provider value={contextValue}>

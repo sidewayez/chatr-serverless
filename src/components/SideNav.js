@@ -222,9 +222,7 @@ const SideNav = ({ open, setOpen }) => {
                   key={id}
                   onMouseOver={() => handleMouseOver(id, name, avatar, i)}
                   onMouseOut={handleMouseOut}
-                  onClick={() => {
-                    handleChatStateChange()
-                  }} //open ConditionaNavBar function
+                  onClick={handleChatStateChange}
                 >
                   {name}
                 </NavbarLink>

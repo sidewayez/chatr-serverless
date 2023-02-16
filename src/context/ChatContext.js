@@ -1,5 +1,4 @@
 import { createContext, useState } from 'react'
-
 const ChatContext = createContext({
   openChat: false,
   setOpenChat: () => {},
@@ -9,7 +8,7 @@ const ChatContext = createContext({
 export function ChatProvider({ children }) {
   const [openChat, setOpenChat] = useState(false)
 
-  function handleChatStateChange() {
+  function handleChatStateChange(id, friends) {
     setOpenChat(!openChat)
   }
 
