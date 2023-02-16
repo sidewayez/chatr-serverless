@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { UserContext } from '../context/UserContext'
 import { FriendContext } from '../context/FriendContext'
+import { ChatContext } from '../context/ChatContext'
 import { Friends } from '../worker/FakeData'
 import UserMenu from './UserMenu'
 import { TbMessageCircle2 } from 'react-icons/tb'
@@ -25,12 +26,6 @@ const Navbar = styled.nav`
     display: none;
   }
   @media only screen and ${device.md} {
-    display: flex;
-  }
-  @media only screen and ${device.lg} {
-    display: flex;
-  }
-  @media only screen and ${device.xlg} {
     display: flex;
   }
 `
@@ -166,7 +161,7 @@ const SideNav = ({ open, setOpen }) => {
   */
   const friendRefs = useRef([])
   const { username, setUsername } = useContext(UserContext)
-
+  const { handleChatStateChange, openChat } = useContext(ChatContext)
   const { setFriendName, setAvatar, setOffsetLeft, setOffsetTop, getUnread } =
     useContext(FriendContext)
   /*
@@ -227,6 +222,9 @@ const SideNav = ({ open, setOpen }) => {
                   key={id}
                   onMouseOver={() => handleMouseOver(id, name, avatar, i)}
                   onMouseOut={handleMouseOut}
+                  onClick={() => {
+                    handleChatStateChange()
+                  }} //open ConditionaNavBar function
                 >
                   {name}
                 </NavbarLink>

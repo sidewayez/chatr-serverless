@@ -21,12 +21,10 @@ const Modal = styled.div`
   background-color: #909090;
   border-radius: 5px;
   border: solid 1px #505050;
-  font-family: 'Raleway';
   text-overflow: ellipsis;
   overflow: hidden;
 `
 const Username = styled.p`
-  display: flex;
   color: #ffffff;
   position: absolute;
   top: 10%;
@@ -42,7 +40,6 @@ const Messages = styled.p`
 `
 
 const Avatar = styled.img`
-  display: block;
   border-radius: 50%;
   position: fixed;
   top: 5%;
