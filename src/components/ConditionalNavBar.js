@@ -25,7 +25,7 @@ const ConditionalNav = styled.div`
     right: 4vw;
   }
   @media only screen and ${device.md} {
-    display: flex;
+    display: ${(props) => handleProps(props)};
     width: 4em;
     top: 37vh;
     right: 4vw;
