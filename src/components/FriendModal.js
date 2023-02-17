@@ -1,6 +1,6 @@
-import React, { useContext, useState, useRef } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
-import { UserContext } from '../context/UserContext'
+import { FriendContext } from '../context/FriendContext'
 
 const Modal = styled.div`
   display: grid;
@@ -21,12 +21,10 @@ const Modal = styled.div`
   background-color: #909090;
   border-radius: 5px;
   border: solid 1px #505050;
-  font-family: 'Raleway';
   text-overflow: ellipsis;
   overflow: hidden;
 `
 const Username = styled.p`
-  display: flex;
   color: #ffffff;
   position: absolute;
   top: 10%;
@@ -42,7 +40,6 @@ const Messages = styled.p`
 `
 
 const Avatar = styled.img`
-  display: block;
   border-radius: 50%;
   position: fixed;
   top: 5%;
@@ -56,7 +53,7 @@ export default function FriendModal() {
     "That's alot of messages! Might want to reach out..."
   )
   const { friendName, avatar, unreadMessages, offsetLeft, offsetTop } =
-    useContext(UserContext)
+    useContext(FriendContext)
   return (
     <Modal draggable left={offsetLeft} top={offsetTop}>
       <Avatar

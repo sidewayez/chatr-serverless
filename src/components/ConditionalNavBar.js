@@ -1,78 +1,52 @@
-import React, { useContext, useRef } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import styled from 'styled-components'
-import { Link } from 'react-router-dom'
-import { UserContext } from '../context/UserContext'
-import { FriendContext } from '../context/FriendContext'
 import { ChatContext } from '../context/ChatContext'
-import { Friends } from '../worker/FakeData'
-import UserMenu from './UserMenu'
-import { TbMessageCircle2 } from 'react-icons/tb'
+import { FriendContext } from '../context/FriendContext'
 import { device } from '../worker/breakpoints'
-import NavMapper from './NavMapper'
+import { Friends } from '../worker/FakeData'
+import { TbMessageCircle2 } from 'react-icons/tb'
+import { Link } from 'react-router-dom'
+import UserMenu from './UserMenu'
+import FriendModal from './FriendModal'
 
-const Navbar = styled.nav`
-  position: sticky;
-  width: 10vw;
-  height: auto;
+const ConditionalNav = styled.div`
+  border: solid 3px #505050;
   background: #404040;
-  border-right: solid 1px #505050;
-  overflow: hidden;
-  display: flex;
+  position: fixed;
   flex-direction: column;
+  right: 7vw;
+  top: 32vh;
+  width: 5vw;
+  height: 25vh;
+  padding: 5em;
+  border-radius: 8px;
   @media only screen and ${device.xs} {
     display: none;
   }
   @media only screen and ${device.sm} {
-    display: none;
-  }
-  @media only screen and ${device.md} {
     display: flex;
-  }
-`
-
-const NavString = styled.p`
-  position: sticky;
-  color: #ffffff;
-  font-style: normal;
-  font-weight: 700;
-  margin-bottom: 0;
-  margin-left: 1em;
-  margin-top: 0.3em;
-  &:hover {
-    cursor: context-menu;
-  }
-  @media only screen and ${device.xs} {
-    font-size: x-small;
-  }
-  @media only screen and ${device.sm} {
-    font-size: small;
+    width: 4em;
+    top: 37vh;
+    right: 4vw;
   }
   @media only screen and ${device.md} {
-    margin-left: 0.5em;
-    font-size: medium;
+    display: ${(props) => handleProps(props)};
+    width: 4em;
+    top: 37vh;
+    right: 4vw;
   }
   @media only screen and ${device.lg} {
-    margin-left: 0.5em;
-    font-sze: medium;
+    display: ${(props) => handleProps(props)};
+    width: 4em;
+    top: 37vh;
+    right: 5vw;
   }
   @media only screen and ${device.xlg} {
-    font-size: large;
+    display: ${(props) => handleProps(props)};
+    width: 4em;
+    top: 37vh;
+    right: 5vw;
   }
-`
-
-const ChatterContainer = styled.div`
-  margin-top: 1.5em;
-  display: flex;
-  flex-direction: column;
-  width: 3em;
-  position: fixed;
-`
-const NavbarLinkContainer = styled.div`
-  margin-top: 4em;
-  display: flex;
-  flex-direction: column;
-  width: 3em;
-  position: fixed;
 `
 
 const NavbarLink = styled(Link)`
@@ -151,16 +125,14 @@ const BadgeNumber = styled.p`
     font-size: 0.6em;
   }
 `
-const SideNav = ({ open, setOpen }) => {
-  /*
-    friendRefs is an array holding refs to elements in the side navbar.
-    I use the setOffsetLeft and setOffsetTop context functions to 
-    obtain the location of the "friend" in the side navbar to 
-    dynamically set the top and left positioning of a modal.
-    This modal displays when you hover over said "friend".
-  */
-  const friendRefs = useRef([])
-  const { username, setUsername } = useContext(UserContext)
+
+function handleProps(props) {
+  return props.open === true ? `flex` : `none`
+}
+
+const ConditionalNavBar = ({}) => {
+  const [open, setOpen] = useState(false)
+  const { handleNotifCount } = useContext(FriendContext)
   const { handleChatStateChange, openChat } = useContext(ChatContext)
   const { setFriendName, setAvatar, setOffsetLeft, setOffsetTop, getUnread } =
     useContext(FriendContext)
@@ -187,29 +159,11 @@ const SideNav = ({ open, setOpen }) => {
     setOffsetTop(0)
   }
 
-  const handleNotifCount = (unread) => {
-    return unread < 10 ? unread : '+'
-  }
+  const friendRefs = useRef([])
 
-  /*
-    NavbarLink components have hoverable capabalities.
-    onMouseOver and onMouseOut handle the dom events for us.  
-    Friends[] is dummy data from worker/FakeData.js.
-
-    Refs are set when Friends array is mapped into the nav.
-    The elements displayed are friends with unread messages
-    BadgeNumber displays number of unread messages up to 9.
-    After, default message displays and a '+' replaces the number.
-
-    Will be using NavMapper in the future to reduce length of this file.
-*/
   return (
-    <Navbar>
-      <ChatterContainer>
-        <NavString>Friends</NavString>
-      </ChatterContainer>
-      <NavbarLinkContainer>
-        <NavString>Online</NavString>
+    <>
+      <ConditionalNav open={openChat}>
         {Friends.map(
           ({ name, id, avatar, unread, online }, i) =>
             online === '1' &&
@@ -233,17 +187,11 @@ const SideNav = ({ open, setOpen }) => {
               </>
             )
         )}
-        {/* <NavMapper
-          friends={Friends}
-          friendRefs={friendRefs}
-          handleMouseOver={handleMouseOver}
-          handleMouseOut={handleMouseOut}
-          handleNotifCount={handleNotifCount}
-        /> */}
-      </NavbarLinkContainer>
-      <UserMenu username={username} setUsername={setUsername} />
-    </Navbar>
+        {open && <FriendModal />}
+        {/* <UserMenu username={username} setUsername={setUsername} /> */}
+      </ConditionalNav>
+    </>
   )
 }
 
-export default SideNav
+export default ConditionalNavBar

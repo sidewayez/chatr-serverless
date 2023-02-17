@@ -6,36 +6,49 @@ import { device } from '../worker/breakpoints'
 
 const Wrapper = styled.div`
   position: absolute;
+  font-family: 'Raleway';
   display: flex;
   flex-direction: column;
-  left: 25%;
-  right: 25%;
-  top: 10.67%;
-  bottom: 10.67%;
-  @media only screen and ${device.xs} {
-    left: 20%;
-    right: 20%;
-    top: 13%;
-    bottom: 13%;
-  }
-  @media only screen and ${device.sm} {
-    top: 12%;
-    bottom: 12%;
-  }
-  @media only screen and ${device.md} {
-    top: 10.67%;
-    bottom: 10.67%;
-  }
-  @media only screen and ${device.lg} {
-    top: 10.67%;
-    bottom: 10.67%;
-  }
   justify-content: center;
   background: #3d3d3d;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.5);
-  border-radius: 102px;
   margin: auto;
   flex-grow: 0;
+  @media only screen and ${device.xs} {
+    top: 21%;
+    bottom: 21%;
+    left: 12%;
+    right: 12%;
+    border-radius: 9%;
+  }
+  @media only screen and ${device.sm} {
+    top: 21%;
+    bottom: 21%;
+    left: 22%;
+    right: 22%;
+    border-radius: 22%;
+  }
+  @media only screen and ${device.md} {
+    top: 18%;
+    bottom: 18%;
+    left: 25%;
+    right: 25%;
+    border-radius: 22%;
+  }
+  @media only screen and ${device.lg} {
+    top: 15%;
+    bottom: 15%;
+    left: 25%;
+    right: 25%;
+    border-radius: 22%;
+  }
+  @media only screen and ${device.xlg} {
+    top: 15%;
+    bottom: 15%;
+    left: 25%;
+    right: 25%;
+    border-radius: 18%;
+  }
 `
 
 const Header = styled.h1`
@@ -43,31 +56,38 @@ const Header = styled.h1`
   font-family: 'Raleway';
   font-style: normal;
   font-weight: 700;
-  font-size: 15vw;
   margin-bottom: 0;
   margin-top: 0;
-  // @media only screen and ${device.xs} {
-  //   font-size: 20vw;
-  // }
-  @media only screen and ${device.sm} {
+  font-size: 13vw;
+  @media only screen and ${device.xs} {
     font-size: 15vw;
+  }
+  @media only screen and ${device.sm} {
+    font-size: 10vw;
   }
   @media only screen and ${device.md} {
-    font-size: 15vw;
+    font-size: 10vw;
   }
   @media only screen and ${device.lg} {
-    font-size: 15vw;
+    font-size: 10vw;
+  }
+  @media only screen and ${device.xlg} {
+    font-size: 10vw;
   }
   // line-height: 125%;
   letter-spacing: -0.02em;
   color: #1a8cff;
+  text-shadow: #346dc2 1px 0 8px;
+  &:hover {
+    cursor: context-menu;
+  }
 `
 
 const UsernameInput = styled.input`
   font-family: 'Raleway';
   font-style: normal;
   font-weight: 300;
-  width: 75%;
+  width: 69%;
   min-height: 0.1em;
   margin-left: auto;
   margin-right: auto;
@@ -92,7 +112,7 @@ const PasswordInput = styled.input`
   margin-right: auto;
   font-style: normal;
   font-weight: 300;
-  width: 75%;
+  width: 69%;
   min-height: 0.1em;
   margin-bottom: 1em;
   background: transparent;
@@ -119,8 +139,10 @@ const Button = styled.button`
   border-radius: 10px;
   margin-top: 0.5em;
   background: #1a8cff;
-  box-shadow: 0px 2px 7px #1a8cff;
   border: none;
+  &:hover {
+    box-shadow: 0px 2px 7px #1a8cff;
+  }
   :not(:disabled) {
     cursor: pointer;
   }
@@ -140,6 +162,9 @@ const Links = styled.a`
   color: #1a8cff;
   margin-left: auto;
   margin-right: auto;
+  @media only screen and ${device.xs} {
+    width: 30%
+  }
 `
 
 export default function Login() {

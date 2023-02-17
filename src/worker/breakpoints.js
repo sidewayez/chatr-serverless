@@ -37,3 +37,19 @@ export const device = {
 //   @media only screen and (min-width: 1200px) {
 //     .example {background: pink;}
 //   }
+
+// @media only screen and ${device.xs} {
+//   font-size: x-small;
+// }
+// @media only screen and ${device.sm} {
+//   font-size: x-small;
+// }
+// @media only screen and ${device.md} {
+//   font-size: medium;
+// }
+// @media only screen and ${device.lg} {
+//   font-sze: large;
+// }
+// @media only screen and ${device.xlg} {
+//   font-size: large;
+// }
