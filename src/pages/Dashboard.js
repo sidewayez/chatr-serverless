@@ -21,7 +21,7 @@ const Header = styled.h1`
     cursor: context-menu;
   }
   @media only screen and ${device.xs} {
-    margin-left: 5vw;
+    margin-left: 11vw;
     margin-top: 6.5vh;
     font-size: 250%;
   }
@@ -71,7 +71,10 @@ const ConditionalNav = styled.div`
   @media only screen and ${device.xlg} {
   }
 `
-
+// const DashboardContainer = styled.div`
+//   display: flex;
+//   flex-direction: row;
+// `
 const Dashboard = () => {
   const { username, setUsername } = useContext(UserContext)
   return (

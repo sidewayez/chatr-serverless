@@ -8,7 +8,7 @@ const User = styled.h1`
   font-style: normal;
   font-weight: 600;
   font-size: 200%;
-  margin-left: 2.5em;
+  margin-left: 2.1em;
   display: flex;
   top: -2.5%;
   margin-top: 0;
@@ -18,25 +18,14 @@ const User = styled.h1`
   &:hover {
     cursor: context-menu;
   }
-  @media only screen and ${device.xs} {
-    font-size 150%;
-  }
-  @media only screen and ${device.sm} {
-    font-size: 200%;
-  }
-  @media only screen and ${device.md} {
-    font-size: 200%;
-  }
-  @media only screen and ${device.lg} {
-    font-size: 200%;
-  }
+  font-size: 180%;
 `
 
 const Avatar = styled.img`
   display: block;
   border-radius: 50%;
   position: relative;
-  left: 2em;
+  left: 1.3em;
   top: 2em;
   width: 2em;
   height: 2em;
@@ -46,7 +35,7 @@ const UnreadAvatar = styled.img`
   display: block;
   border-radius: 50%;
   position: relative;
-  left: 2em;
+  left: 1.3em;
   top: 2em;
   width: 2em;
   height: 2em;
@@ -60,32 +49,44 @@ const Messages = styled.p`
   position: relative;
   top: -1vh;
   margin-left: 1em;
-  font-size: x-large;
+  font-size: 100%;
   &:hover {
     cursor: context-menu;
   }
-  padding-right: 0.5em;
+  margin-right: 1em;
   @media only screen and ${device.xs} {
-    font-size: small;
+    font-size: 100%;
   }
   @media only screen and ${device.sm} {
-    font-size: large;
+    font-size: 100%;
   }
   @media only screen and ${device.md} {
-    font-size: x-large;
+    font-size: 100%;
   }
   @media only screen and ${device.lg} {
-    font-size: x-large;
+    font-size: 100%;
   }
 `
 const Timestamp = styled.p`
   color: #ffffff;
   position: absolute;
-  margin-left: 2em;
+  margin-left: 2.3em;
   margin-top: -3vh;
   font-size: small;
   &:hover {
     cursor: context-menu;
+  }
+  @media only screen and ${device.xs} {
+    margin-left: 1.5em;
+  }
+  @media only screen and ${device.sm} {
+    margin-left: 1.5em;
+  }
+  @media only screen and ${device.md} {
+    margin-left: 2.3em;
+  }
+  @media only screen and ${device.lg} {
+    margin-left: 2.3em;
   }
 `
 const Wrapper = styled.div`
@@ -100,12 +101,43 @@ const Wrapper = styled.div`
 const FriendCell = styled.div`
   border: solid 3px #505050;
   background: DimGrey;
-  width: 50vw;
-  margin-left: 4vw;
-  max-width: 50vw;
   min-height: 7em;
   top: 3%;
   border-radius: 8px;
+  @media only screen and ${device.xs} {
+    max-width: 80vw;
+    width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  @media only screen and ${device.sm} {
+    font-size: large;
+    width: 50vw;
+    margin-left: 4vw;
+    max-width: 50vw;
+    margin-right: none;
+  }
+  @media only screen and ${device.md} {
+    font-size: x-large;
+    width: 50vw;
+    margin-left: 4vw;
+    max-width: 50vw;
+    margin-right: none;
+  }
+  @media only screen and ${device.lg} {
+    font-size: x-large;
+    width: 50vw;
+    margin-left: 4vw;
+    max-width: 50vw;
+    margin-right: none;
+  }
+  @media only screen and ${device.xlg} {
+    // font-size: x-large;
+    width: 50vw;
+    margin-left: 4vw;
+    max-width: 50vw;
+    margin-right: none;
+  }
 `
 const MainFeed = () => {
   return (
