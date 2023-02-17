@@ -18,6 +18,11 @@ const router = createBrowserRouter(
         element={<Dashboard />}
         errorElement={<ErrorPage />}
       />
+      {/* <Route
+        path="/friends"
+        element={<Friends />}
+        errorElement={<ErrorPage />}
+      /> */}
     </Route>
   )
 )
