@@ -2,17 +2,43 @@ import React, { useContext, useState } from 'react'
 import styled from 'styled-components'
 import { FriendContext } from '../context/FriendContext'
 
+function handleOffsetLeftProps(props) {
+  if (props.nav === 'conditional') {
+    return (props) => props.left + 350
+  }
+  if (props.nav === 'side') {
+    return (props) => props.left + 10
+  }
+}
+
+function handleOffsetTopProps(props) {
+  if (props.nav === 'conditional') {
+    return (props) => props.top + 300
+  }
+  if (props.nav === 'side') {
+    return (props) => props.top + 65
+  }
+}
+function handleMarginLeftProps(props) {
+  if (props.nav === 'conditional') {
+    return (props) => props.left + 350
+  }
+  if (props.nav === 'side') {
+    return (props) => props.left + 15
+  }
+}
+
 const Modal = styled.div`
   display: grid;
   position: fixed;
-  left: ${(props) => props.left + 10}px;
-  top: ${(props) => props.top + 65}px;
+  left: ${handleOffsetLeftProps}px;
+  top: ${handleOffsetTopProps}px;
   flex-direction: row;
   flex-grow: 1;
   backdrop-filter: grayscale(100%);
   padding: 2em;
   margin: auto;
-  margin-left: ${(props) => props.left + 15}px;
+  margin-left: ${handleMarginLeftProps}px;
   min-height: 2em;
   max-height: 5em;
   height: auto;
@@ -48,14 +74,14 @@ const Avatar = styled.img`
   height: 2em;
   padding-bottom: 0;
 `
-export default function FriendModal() {
+export default function FriendModal({ nav }) {
   const [defaultMessage, setDefault] = useState(
     "That's alot of messages! Might want to reach out..."
   )
   const { friendName, avatar, unreadMessages, offsetLeft, offsetTop } =
     useContext(FriendContext)
   return (
-    <Modal draggable left={offsetLeft} top={offsetTop}>
+    <Modal draggable left={offsetLeft} top={offsetTop} nav={nav}>
       <Avatar
         src={
           avatar?.length

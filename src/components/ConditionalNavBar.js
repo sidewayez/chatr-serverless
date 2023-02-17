@@ -51,9 +51,10 @@ const ConditionalNav = styled.div`
 
 const NavbarLink = styled(Link)`
   color: #ffffff;
+  display: flex;
   font-style: normal;
   font-weight: 700;
-  margin-left: 2em;
+  margin-left: 0.5em;
   text-decoration: none;
   margin-top: 0.5em;
   margin-bottom: auto;
@@ -130,10 +131,16 @@ function handleProps(props) {
   return props.open === true ? `flex` : `none`
 }
 
-const ConditionalNavBar = ({}) => {
-  const [open, setOpen] = useState(false)
+const ConditionalNavBar = () => {
   const { handleNotifCount } = useContext(FriendContext)
-  const { handleChatStateChange, openChat } = useContext(ChatContext)
+  const {
+    handleChatStateChange,
+    openChat,
+    openMiniModal,
+    setOpenMini,
+    setNav,
+    nav
+  } = useContext(ChatContext)
   const { setFriendName, setAvatar, setOffsetLeft, setOffsetTop, getUnread } =
     useContext(FriendContext)
   /*
@@ -143,8 +150,9 @@ const ConditionalNavBar = ({}) => {
    */
 
   function handleMouseOver(id, name, avatar, i) {
+    setNav('conditional')
     getUnread(id, Friends)
-    setOpen(true)
+    setOpenMini(true)
     setFriendName(name)
     setAvatar(avatar)
     setOffsetLeft(friendRefs.current[i].offsetLeft)
@@ -152,7 +160,8 @@ const ConditionalNavBar = ({}) => {
   }
 
   const handleMouseOut = () => {
-    setOpen(false)
+    setOpenMini(false)
+    setOpenMini(false)
     setFriendName('')
     setAvatar('')
     setOffsetLeft(0)
@@ -163,6 +172,7 @@ const ConditionalNavBar = ({}) => {
 
   return (
     <>
+      {openMiniModal && <FriendModal nav={nav} />}
       <ConditionalNav open={openChat}>
         {Friends.map(
           ({ name, id, avatar, unread, online }, i) =>
@@ -187,7 +197,6 @@ const ConditionalNavBar = ({}) => {
               </>
             )
         )}
-        {open && <FriendModal />}
         {/* <UserMenu username={username} setUsername={setUsername} /> */}
       </ConditionalNav>
     </>

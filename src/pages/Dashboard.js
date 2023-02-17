@@ -8,6 +8,8 @@ import { device } from '../worker/breakpoints'
 import UserMenu from '../components/UserMenu'
 import MainFeed from '../components/MainFeed'
 import ConditionalNavBar from '../components/ConditionalNavBar'
+import { ChatContext } from '../context/ChatContext'
+import FriendModal from '../components/FriendModal'
 
 const Header = styled.h1`
   position: absolute;
@@ -77,6 +79,7 @@ const ConditionalNav = styled.div`
 // `
 const Dashboard = () => {
   const { username, setUsername } = useContext(UserContext)
+  const { openMiniModal } = useContext(ChatContext)
   return (
     <DashLayoutComponent>
       <Header>Messages</Header>

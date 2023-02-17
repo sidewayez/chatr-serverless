@@ -151,7 +151,7 @@ const BadgeNumber = styled.p`
     font-size: 0.6em;
   }
 `
-const SideNav = ({ open, setOpen }) => {
+const SideNav = () => {
   /*
     friendRefs is an array holding refs to elements in the side navbar.
     I use the setOffsetLeft and setOffsetTop context functions to 
@@ -161,7 +161,7 @@ const SideNav = ({ open, setOpen }) => {
   */
   const friendRefs = useRef([])
   const { username, setUsername } = useContext(UserContext)
-  const { handleChatStateChange, openChat } = useContext(ChatContext)
+  const { handleChatStateChange, setOpenMini, setNav } = useContext(ChatContext)
   const { setFriendName, setAvatar, setOffsetLeft, setOffsetTop, getUnread } =
     useContext(FriendContext)
   /*
@@ -171,8 +171,9 @@ const SideNav = ({ open, setOpen }) => {
    */
 
   function handleMouseOver(id, name, avatar, i) {
+    setNav('side');
     getUnread(id, Friends)
-    setOpen(true)
+    setOpenMini(true)
     setFriendName(name)
     setAvatar(avatar)
     setOffsetLeft(friendRefs.current[i].offsetLeft)
@@ -180,7 +181,8 @@ const SideNav = ({ open, setOpen }) => {
   }
 
   const handleMouseOut = () => {
-    setOpen(false)
+    setNav('');
+    setOpenMini(false)
     setFriendName('')
     setAvatar('')
     setOffsetLeft(0)
