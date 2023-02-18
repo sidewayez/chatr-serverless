@@ -19,6 +19,7 @@ function handleOffsetTopProps(props) {
     return (props) => props.top + 65
   }
 }
+
 function handleMarginLeftProps(props) {
   if (props.nav === 'conditional') {
     return (props) => props.left + 350

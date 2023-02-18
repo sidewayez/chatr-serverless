@@ -9,15 +9,16 @@ import { Link } from 'react-router-dom'
 import UserMenu from './UserMenu'
 import FriendModal from './FriendModal'
 
-const ConditionalNav = styled.div`
+const ConditionalNav = styled.section`
+  margin: 0;
   border: solid 3px #505050;
   background: #404040;
   position: fixed;
   flex-direction: column;
   right: 7vw;
   top: 32vh;
-  width: 5vw;
-  height: 25vh;
+  height: 30vh;
+  // width: 500%;
   padding: 5em;
   border-radius: 8px;
   @media only screen and ${device.xs} {
@@ -82,6 +83,7 @@ const NavbarLink = styled(Link)`
 `
 
 const Badge = styled(TbMessageCircle2)`
+  display: flex;
   color: #ffffff;
   margin-top: -1.5em;
   font-size: 1rem;
@@ -103,6 +105,7 @@ const Badge = styled(TbMessageCircle2)`
 `
 
 const BadgeNumber = styled.p`
+  dislay: flex;
   margin-left: 2.2em;
   margin-top: -1.6em;
   font-size: 0.6em;
@@ -127,6 +130,59 @@ const BadgeNumber = styled.p`
   }
 `
 
+const Inbox = styled.h1`
+  display: flex;
+  position: absolute;
+  margin-top: 0;
+  padding: 0;
+  margin: 0;
+  top: 5%;
+  left: 5%;
+  font-size: 200%;
+  width: 100%;
+  padding-bottom: 0px;
+  padding-top: 0px;
+  margin-top: 0;
+  margin-bottom: 0;
+  // border-bottom: solid 1px dimgrey;
+  color: #ffffff;
+  cursor: context-menu;
+`
+const HeaderDiv = styled.div`
+  display: flex;
+  // position: relative;
+  margin-left: -125%;
+  margin-top: -125%; 
+  width: 500%;
+  // border: outset 1px dimgrey;
+  border-bottom: groove 1px dimgrey;
+  background-color: DimGrey;
+  padding-top: 0vh;
+  padding 5em;
+  padding-bottom: 0vh;
+  height: auto;
+  max-width: 4em;
+  max-height: 1em;
+  border-radius: 5px;
+`
+
+const FriendContainer = styled.div`
+  // margin-top: 4em;
+  display: flex;
+  flex-direction: column;
+  width: 500%;
+  // position: fixed;
+  // background: #696969;
+  padding: 4em;
+  max-width: 10em;
+  padding-bottom: 4.4em;
+  // max-width: 4em;
+  padding-right: 0;
+  margin-left: -125%;
+  // padding-right: 0;
+  border-radius: 5px;
+  // border-top: groove 1px dimgrey;
+`
 function handleProps(props) {
   return props.open === true ? `flex` : `none`
 }
@@ -139,15 +195,10 @@ const ConditionalNavBar = () => {
     openMiniModal,
     setOpenMini,
     setNav,
-    nav
+    nav,
   } = useContext(ChatContext)
   const { setFriendName, setAvatar, setOffsetLeft, setOffsetTop, getUnread } =
     useContext(FriendContext)
-  /*
-    handleMouseOver and handleMouseOut funtsions handle the
-    hover events for displaying the modal and 
-    setting required data for modal.
-   */
 
   function handleMouseOver(id, name, avatar, i) {
     setNav('conditional')
@@ -174,29 +225,34 @@ const ConditionalNavBar = () => {
     <>
       {openMiniModal && <FriendModal nav={nav} />}
       <ConditionalNav open={openChat}>
-        {Friends.map(
-          ({ name, id, avatar, unread, online }, i) =>
-            online === '1' &&
-            unread > 0 && (
-              <>
-                <NavbarLink
-                  ref={(ref) => {
-                    friendRefs.current[i] = ref
-                  }}
-                  key={id}
-                  onMouseOver={() => handleMouseOver(id, name, avatar, i)}
-                  onMouseOut={handleMouseOut}
-                  onClick={handleChatStateChange}
-                >
-                  {name}
-                </NavbarLink>
-                {unread > 0 && <Badge />}
-                {unread > 0 && (
-                  <BadgeNumber>{handleNotifCount(unread)}</BadgeNumber>
-                )}
-              </>
-            )
-        )}
+        <HeaderDiv>
+          <Inbox>Inbox</Inbox>
+        </HeaderDiv>
+        <FriendContainer>
+          {Friends.map(
+            ({ name, id, avatar, unread, online }, i) =>
+              online === '1' &&
+              unread > 0 && (
+                <>
+                  <NavbarLink
+                    ref={(ref) => {
+                      friendRefs.current[i] = ref
+                    }}
+                    key={id}
+                    onMouseOver={() => handleMouseOver(id, name, avatar, i)}
+                    onMouseOut={handleMouseOut}
+                    onClick={handleChatStateChange}
+                  >
+                    {name}
+                  </NavbarLink>
+                  {unread > 0 && <Badge />}
+                  {unread > 0 && (
+                    <BadgeNumber>{handleNotifCount(unread)}</BadgeNumber>
+                  )}
+                </>
+              )
+          )}
+        </FriendContainer>
         {/* <UserMenu username={username} setUsername={setUsername} /> */}
       </ConditionalNav>
     </>
