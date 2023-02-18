@@ -59,18 +59,25 @@ const User = styled.p`
     margin: auto;
   }
   @media only screen and ${device.sm} {
-    font-size: small;
+    font-size: x-small;
     margin-left: 0;
     margin: auto;
   }
   @media only screen and ${device.md} {
+    font-size: x-small;
+    margin: auto;
+  }
+
+  @media only screen and ${device.lg} {
     font-size: small;
+    margin-left: 0.5em;
     margin: auto;
   }
 
   @media only screen and ${device.xlg} {
     font-size: medium;
     margin-left: 0.5em;
+    margin: auto;
   }
 `
 

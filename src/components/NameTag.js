@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { device } from '../worker/breakpoints'
 
@@ -12,18 +12,36 @@ const Avatar = styled.img`
   width: 4em;
   height: 4em;
 `
+
+const handleUserWidth = (props) => {
+  if (props.width > 119) {
+    return (props) => props.width - 3;
+  } else {
+    return 200;
+  }
+}
+
+const handleUserHeight = (props) => {
+  if (props.width > 119) {
+    return 2;
+  } else {
+    return 1
+  }
+}
+
+
 const User = styled.h1`
   position: absolute;
-  margin-right: auto;
-  margin-left: auto;
+  // margin-right: auto;
+  // margin-left: auto;
   font-style: normal;
   font-weight: 600;
-  font-size: 200%;
   display: flex;
   color: #ffffff;
-  font-size: 200%;
-    top: 1vh;
-    right: 15px;
+  font-size: ${handleUserWidth}%;
+  top: ${handleUserHeight}vh;
+  // margin-top: 0;
+  right: 15px;
   &:hover {
     cursor: context-menu;
   }
@@ -75,12 +93,19 @@ const Nametag = styled.div`
   }
 `
 
-const NameTag = ({ username, setUsername }) => {
+const NameTag = ({ username }) => {
+  const nameTagRef = useRef()
+  const [nameWidth, setWidth] = useState(0)
+  useEffect(() => {
+    setWidth(nameTagRef.current.offsetWidth)
+  }, [username])
   return (
     <>
       <Nametag draggable={true}>
         <Avatar src="https://static.tvtropes.org/pmwiki/pub/images/abcb6534_7913_4eb1_a7a5_62b081ebc628.png" />
-        <User>{username}</User>
+        <User ref={nameTagRef} width={nameWidth}>
+          {username}
+        </User>
       </Nametag>
     </>
   )

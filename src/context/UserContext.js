@@ -1,4 +1,5 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useState, useRef } from 'react'
+import useLocalStorageState from 'use-local-storage-state'
 const UserContext = createContext({
   username: '',
   createUser: () => {},
@@ -6,7 +7,9 @@ const UserContext = createContext({
 })
 
 export function UserProvider({ children }) {
-  const [username, setUsername] = useState('Michael')
+  const [username, setUsername] = useLocalStorageState('userName', {
+    defaultValue: '',
+  })
 
   const createUser = (userName) => {
     if (username === userName) {

@@ -5,11 +5,8 @@ import '../App.css'
 import { UserContext } from '../context/UserContext'
 import NameTag from '../components/NameTag'
 import { device } from '../worker/breakpoints'
-import UserMenu from '../components/UserMenu'
 import MainFeed from '../components/MainFeed'
 import ConditionalNavBar from '../components/ConditionalNavBar'
-import { ChatContext } from '../context/ChatContext'
-import FriendModal from '../components/FriendModal'
 
 const Header = styled.h1`
   position: absolute;
@@ -73,13 +70,9 @@ const ConditionalNav = styled.div`
   @media only screen and ${device.xlg} {
   }
 `
-// const DashboardContainer = styled.div`
-//   display: flex;
-//   flex-direction: row;
-// `
+
 const Dashboard = () => {
   const { username, setUsername } = useContext(UserContext)
-  const { openMiniModal } = useContext(ChatContext)
   return (
     <DashLayoutComponent>
       <Header>Messages</Header>
