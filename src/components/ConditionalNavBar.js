@@ -150,12 +150,9 @@ const Inbox = styled.h1`
 `
 const HeaderDiv = styled.div`
   display: flex;
-  // position: relative;
   margin-left: -125%;
   margin-top: -125%; 
   width: 500%;
-  // border: outset 1px dimgrey;
-  border-bottom: groove 1px dimgrey;
   background-color: DimGrey;
   padding-top: 0vh;
   padding 5em;
@@ -167,21 +164,17 @@ const HeaderDiv = styled.div`
 `
 
 const FriendContainer = styled.div`
-  // margin-top: 4em;
   display: flex;
   flex-direction: column;
   width: 500%;
-  // position: fixed;
   // background: #696969;
+  background-opacity: 20%;
   padding: 4em;
   max-width: 10em;
   padding-bottom: 4.4em;
-  // max-width: 4em;
   padding-right: 0;
   margin-left: -125%;
-  // padding-right: 0;
   border-radius: 5px;
-  // border-top: groove 1px dimgrey;
 `
 function handleProps(props) {
   return props.open === true ? `flex` : `none`
