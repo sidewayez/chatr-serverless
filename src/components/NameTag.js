@@ -15,24 +15,22 @@ const Avatar = styled.img`
 
 const handleUserWidth = (props) => {
   if (props.width > 119) {
-    return (props) => props.width - 3;
+    return (props) => props.width - 3
   } else {
-    return 200;
+    return 200
   }
 }
 
 const handleUserHeight = (props) => {
   if (props.width > 119) {
-    return 2;
+    return 2
   } else {
     return 1
   }
 }
 
-
 const User = styled.h1`
   position: absolute;
-  // margin-right: auto;
   margin-left: auto;
   font-style: normal;
   font-weight: 600;
@@ -40,11 +38,7 @@ const User = styled.h1`
   color: #ffffff;
   font-size: ${handleUserWidth}%;
   top: ${handleUserHeight}vh;
-  // margin-top: 0;
   right: 15px;
-  &:hover {
-    cursor: context-menu;
-  }
 `
 const Nametag = styled.div`
   border: solid 3px #505050;

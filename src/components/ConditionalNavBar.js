@@ -181,9 +181,7 @@ const FriendContainer = styled.div`
 const FriendCell = styled.div`
   width: 16.4vw;
   position: relative;
-  // left: -5vw;
   padding-top: 1em;
-  // top: -1vh;
   border-bottom: solid 1px #696969;
   padding-left: 1em;
   margin: 0 auto;
@@ -225,34 +223,34 @@ const ConditionalNavBar = () => {
     setNav,
     nav,
   } = useContext(ChatContext)
-  const {
-    setFriendName,
-    setAvatar,
-    setOffsetLeft,
-    setOffsetTop,
-    getUnread,
-    unreadMessages,
-    handleNotifCount,
-  } = useContext(FriendContext)
+  // const {
+  //   setFriendName,
+  //   setAvatar,
+  //   setOffsetLeft,
+  //   setOffsetTop,
+  //   getUnread,
+  //   unreadMessages,
+  //   handleNotifCount,
+  // } = useContext(FriendContext)
 
-  function handleMouseOver(id, name, avatar, i) {
-    setNav('conditional')
-    getUnread(id, Friends)
-    setOpenMini(true)
-    setFriendName(name)
-    setAvatar(avatar)
-    setOffsetLeft(friendRefs.current[i].offsetLeft)
-    setOffsetTop(friendRefs.current[i].offsetTop)
-  }
+  // function handleMouseOver(id, name, avatar, i) {
+  //   setNav('conditional')
+  //   getUnread(id, Friends)
+  //   setOpenMini(true)
+  //   setFriendName(name)
+  //   setAvatar(avatar)
+  //   setOffsetLeft(friendRefs.current[i].offsetLeft)
+  //   setOffsetTop(friendRefs.current[i].offsetTop)
+  // }
 
-  const handleMouseOut = () => {
-    setOpenMini(false)
-    setOpenMini(false)
-    setFriendName('')
-    setAvatar('')
-    setOffsetLeft(0)
-    setOffsetTop(0)
-  }
+  // const handleMouseOut = () => {
+  //   setOpenMini(false)
+  //   setOpenMini(false)
+  //   setFriendName('')
+  //   setAvatar('')
+  //   setOffsetLeft(0)
+  //   setOffsetTop(0)
+  // }
 
   const friendRefs = useRef([])
 

@@ -51,9 +51,6 @@ const User = styled.p`
   font-style: normal;
   font-weight: 600;
   margin-left: 0.5em;
-  &:hover {
-    cursor: context-menu;
-  }
   @media only screen and ${device.xs} {
     font-size: x-small;
     margin: auto;
@@ -104,44 +101,6 @@ const LogoutButton = styled.button`
     width: 3em;
   }
 `
-
-//  const Logout = styled.button`
-//   height: 2em;
-//   width: 8em;
-//   position: absolute;
-//   top: 10vh;
-//   right: 3vw;
-//   background: #1a8cff;
-//   border: none;
-//   color: white;
-//   border-radius: 8px;
-//   :not(:disabled) {
-//     cursor: pointer;
-//   }
-//   &:hover {
-//     box-shadow: 0px 2px 7px #1a8cff;
-//   }
-//   @media only screen and ${device.xs} {
-//     height: 1em;
-//     width: 5em;
-//     right: 1vw;
-//     top: 6vh;
-//   }
-//   @media only screen and ${device.sm} {
-//     height: 2em;
-//     width: 8em;
-//     top: 10vh;
-//   }
-//   @media only screen and ${device.md} {
-//     display: none;
-//   }
-//   @media only screen and ${device.lg} {
-//     display: none;
-//   }
-//   @media only screen and ${device.xlg} {
-//     display: none;
-//   }
-// `
 
 const UserMenu = ({ username, setUsername }) => {
   const navigate = useNavigate()

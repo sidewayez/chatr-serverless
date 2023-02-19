@@ -16,7 +16,7 @@ const User = styled.h1`
   right: 0;
   color: #ffffff;
   &:hover {
-    cursor: context-menu;
+    cursor: pointer;
   }
   font-size: 180%;
 `
@@ -50,22 +50,7 @@ const Messages = styled.p`
   top: -1vh;
   margin-left: 1em;
   font-size: 100%;
-  &:hover {
-    cursor: context-menu;
-  }
   margin-right: 1em;
-  @media only screen and ${device.xs} {
-    font-size: 100%;
-  }
-  @media only screen and ${device.sm} {
-    font-size: 100%;
-  }
-  @media only screen and ${device.md} {
-    font-size: 100%;
-  }
-  @media only screen and ${device.lg} {
-    font-size: 100%;
-  }
 `
 const Timestamp = styled.p`
   color: #ffffff;
