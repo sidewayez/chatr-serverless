@@ -168,20 +168,27 @@ const SideNav = () => {
   const friendRefs = useRef([])
   const { username, setUsername } = useContext(UserContext)
   const { handleChatStateChange, setOpenMini, setNav } = useContext(ChatContext)
-  const { setFriendName, setAvatar, setOffsetLeft, setOffsetTop, getUnread } =
-    useContext(FriendContext)
+  const {
+    setFriendName,
+    setAvatar,
+    setOffsetLeft,
+    setOffsetTop,
+    getUnread,
+    setBio,
+  } = useContext(FriendContext)
   /*
     handleMouseOver and handleMouseOut funtsions handle the
     hover events for displaying the modal and 
     setting required data for modal.
    */
 
-  function handleMouseOver(id, name, avatar, i) {
+  function handleMouseOver(id, name, avatar, bio, i) {
     setNav('side')
     getUnread(id, Friends)
     setOpenMini(true)
     setFriendName(name)
     setAvatar(avatar)
+    setBio(bio)
     setOffsetLeft(friendRefs.current[i].offsetLeft)
     setOffsetTop(friendRefs.current[i].offsetTop)
   }
@@ -191,6 +198,7 @@ const SideNav = () => {
     setOpenMini(false)
     setFriendName('')
     setAvatar('')
+    setBio('')
     setOffsetLeft(0)
     setOffsetTop(0)
   }
@@ -219,7 +227,7 @@ const SideNav = () => {
       <NavbarLinkContainer>
         <NavString>Online</NavString>
         {Friends.map(
-          ({ name, id, avatar, unread, online }, i) =>
+          ({ name, id, avatar, unread, online, bio }, i) =>
             online === '1' && (
               <>
                 <NavbarLink
@@ -227,7 +235,7 @@ const SideNav = () => {
                     friendRefs.current[i] = ref
                   }}
                   key={id}
-                  onMouseOver={() => handleMouseOver(id, name, avatar, i)}
+                  onMouseOver={() => handleMouseOver(id, name, avatar, bio, i)}
                   onMouseOut={handleMouseOut}
                   onClick={handleChatStateChange}
                 >

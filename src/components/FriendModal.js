@@ -79,7 +79,7 @@ export default function FriendModal({ nav }) {
   const [defaultMessage, setDefault] = useState(
     "That's alot of messages! Might want to reach out..."
   )
-  const { friendName, avatar, unreadMessages, offsetLeft, offsetTop } =
+  const { friendName, avatar, unreadMessages, bio, offsetLeft, offsetTop } =
     useContext(FriendContext)
   return (
     <Modal draggable left={offsetLeft} top={offsetTop} nav={nav}>
@@ -91,11 +91,7 @@ export default function FriendModal({ nav }) {
         }
       />
       <Username>{friendName}</Username>
-      {unreadMessages.length < 10 ? (
-        <Messages>{unreadMessages[unreadMessages.length - 1]}</Messages>
-      ) : (
-        <Messages>{defaultMessage}</Messages>
-      )}
+      <Messages>{bio}</Messages>
     </Modal>
   )
 }

@@ -16,6 +16,8 @@ const FriendContext = createContext({
   getMessages: () => {},
   messages: [],
   setMessages: () => {},
+  bio: '',
+  setBio: () => {},
 })
 
 export function FriendProvider({ children }) {
@@ -25,6 +27,7 @@ export function FriendProvider({ children }) {
   const [offsetLeft, setOffsetLeft] = useState(0)
   const [offsetTop, setOffsetTop] = useState(0)
   const [messages, setMessages] = useState([])
+  const [friendBio, setBio] = useState('')
 
   const getUnread = (id, friends) => {
     const friend = friends.find((friend) => friend.id === id)
@@ -63,6 +66,8 @@ export function FriendProvider({ children }) {
     getMessages,
     messages: messages,
     setMessages,
+    bio: friendBio,
+    setBio,
   }
   return (
     <FriendContext.Provider value={contextValue}>

@@ -475,6 +475,7 @@ const updatedFriendsList = (friends) => {
       message.timestamp = getRandomTime(i)
     })
     friend.online = '1'
+    friend.bio = `Hi, my name is ${friend.name}! Isn't Chatr great!`
   })
   return friends
 }
