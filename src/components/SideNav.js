@@ -230,21 +230,37 @@ const SideNav = () => {
           ({ name, id, avatar, unread, online, bio }, i) =>
             online === '1' && (
               <>
-                <NavbarLink
-                  ref={(ref) => {
-                    friendRefs.current[i] = ref
-                  }}
-                  key={id}
-                  onMouseOver={() => handleMouseOver(id, name, avatar, bio, i)}
-                  onMouseOut={handleMouseOut}
-                  onClick={handleChatStateChange}
-                >
-                  {unread > 0 && <Badge />}
-                  {name}
-                </NavbarLink>
-                {/* {unread > 0 && (
-                  <BadgeNumber>{handleNotifCount(unread)}</BadgeNumber>
-                )} */}
+                {unread > 0 ? (
+                  <NavbarLink
+                    ref={(ref) => {
+                      friendRefs.current[i] = ref
+                    }}
+                    key={id}
+                    onMouseOver={() =>
+                      handleMouseOver(id, name, avatar, bio, i)
+                    }
+                    onMouseOut={handleMouseOut}
+                    onClick={handleChatStateChange}
+                  >
+                    {unread > 0 && <Badge />}
+                    {name}
+                  </NavbarLink>
+                ) : (
+                  <NavbarLink
+                    ref={(ref) => {
+                      friendRefs.current[i] = ref
+                    }}
+                    key={id}
+                    onMouseOver={() =>
+                      handleMouseOver(id, name, avatar, bio, i)
+                    }
+                    onMouseOut={handleMouseOut}
+                    onClick={() => {}}
+                  >
+                    {unread > 0 && <Badge />}
+                    {name}
+                  </NavbarLink>
+                )}
               </>
             )
         )}
@@ -255,6 +271,9 @@ const SideNav = () => {
           handleMouseOut={handleMouseOut}
           handleNotifCount={handleNotifCount}
         /> */}
+        {/* {unread > 0 && (
+              <BadgeNumber>{handleNotifCount(unread)}</BadgeNumber>
+            )} */}
       </NavbarLinkContainer>
       <UserMenu username={username} setUsername={setUsername} />
     </Navbar>

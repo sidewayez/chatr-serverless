@@ -30,40 +30,57 @@ function handleMarginLeftProps(props) {
 }
 
 const Modal = styled.div`
-  display: grid;
   position: fixed;
   left: ${handleOffsetLeftProps}px;
   top: ${handleOffsetTopProps}px;
-  flex-direction: row;
+  flex-direction: column;
   flex-grow: 1;
   backdrop-filter: grayscale(100%);
-  padding: 2em;
-  margin: auto;
+  padding: 3vw;
   margin-left: ${handleMarginLeftProps}px;
-  min-height: 2em;
+  min-height: 1em;
   max-height: 5em;
   height: auto;
-  max-width: 3em;
-  text-overflow: ellipsis;
+  width: auto;
+  max-width: 5em;
   background-color: #909090;
   border-radius: 5px;
   border: solid 1px #505050;
-  text-overflow: ellipsis;
+  // text-overflow: ellipsis;
   overflow: hidden;
 `
 const Username = styled.p`
   color: #ffffff;
   position: absolute;
-  top: 10%;
-  left: 40%;
+  top: 8%;
+  left: 30%;
   padding: 0;
   margin: 0;
-  font-size: large;
+  font-size: x-large;
 `
-
-const Messages = styled.p`
+const BioTray = styled.div`
+  position: relative;
+  padding: auto;
+  flex-grow: 1;
+  // left: -2vw;
+  min-width: 5vw;
+  max-width: 25vw;
+  padding-right: 2vw;
+  // padding-left; 2vw;
+  width: 5vw;
+  margin-left: -2vw;
+  border: solid 1px #ffffff;
+  border-radius: 6px;
+  overflowX: hidden;
+`
+const Bio = styled.p`
   color: #ffffff;
-  font-size: x-small;
+  font-size: small;
+  display: flex;
+  position: relative;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 `
 
 const Avatar = styled.img`
@@ -75,6 +92,17 @@ const Avatar = styled.img`
   height: 2em;
   padding-bottom: 0;
 `
+
+const UnreadAvatar = styled.img`
+  border-radius: 50%;
+  position: fixed;
+  top: 5%;
+  left: 4%;
+  width: 2em;
+  height: 2em;
+  padding-bottom: 0;
+  border: 2px solid #1a8cff;
+`
 export default function FriendModal({ nav }) {
   const [defaultMessage, setDefault] = useState(
     "That's alot of messages! Might want to reach out..."
@@ -83,15 +111,27 @@ export default function FriendModal({ nav }) {
     useContext(FriendContext)
   return (
     <Modal draggable left={offsetLeft} top={offsetTop} nav={nav}>
-      <Avatar
-        src={
-          avatar?.length
-            ? avatar
-            : 'https://static.tvtropes.org/pmwiki/pub/images/abcb6534_7913_4eb1_a7a5_62b081ebc628.png'
-        }
-      />
+      {unreadMessages.length > 0 ? (
+        <UnreadAvatar
+          src={
+            avatar?.length
+              ? avatar
+              : 'https://static.tvtropes.org/pmwiki/pub/images/abcb6534_7913_4eb1_a7a5_62b081ebc628.png'
+          }
+        />
+      ) : (
+        <Avatar
+          src={
+            avatar?.length
+              ? avatar
+              : 'https://static.tvtropes.org/pmwiki/pub/images/abcb6534_7913_4eb1_a7a5_62b081ebc628.png'
+          }
+        />
+      )}
       <Username>{friendName}</Username>
-      <Messages>{bio}</Messages>
+      {/* <BioTray> */}
+        <Bio>{bio}</Bio>
+      {/* </BioTray> */}
     </Modal>
   )
 }
