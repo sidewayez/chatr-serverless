@@ -60,7 +60,7 @@ const friends = [
       },
       {
         id: 'mfmfhnfgif',
-        message: 'Lorem ipsum pueoa potreop nutromger retom yerid.',
+        message: 'Lorem ipsum pueoa potreop nutromger retom yerid. Hop flop de nop sop. Hitchie witchie banda wah, eaux sluh.',
         status: 'unread',
       },
     ],

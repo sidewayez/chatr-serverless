@@ -103,14 +103,14 @@ const FriendCell = styled.div`
   }
   @media only screen and ${device.md} {
     font-size: x-large;
-    width: 50vw;
+    width: 48vw;
     margin-left: 4vw;
     max-width: 50vw;
     margin-right: none;
   }
   @media only screen and ${device.lg} {
     font-size: x-large;
-    width: 50vw;
+    width: 49vw;
     margin-left: 4vw;
     max-width: 50vw;
     margin-right: none;
@@ -136,8 +136,8 @@ const MainFeed = () => {
                 <Avatar src={avatar} />
               )}
               <User>{name}</User>
-              <Timestamp>Yesterday {messages[0].timestamp}</Timestamp>
-              <Messages>{messages[0].message}</Messages>
+              <Timestamp>Today {messages[messages.length -1].timestamp}</Timestamp>
+              <Messages>{messages[messages.length -1].message}</Messages>
             </FriendCell>
           </>
         ))}

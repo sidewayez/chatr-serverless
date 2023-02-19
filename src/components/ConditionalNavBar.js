@@ -1,13 +1,11 @@
-import React, { useContext, useRef } from 'react'
+import React, { useContext, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import { ChatContext } from '../context/ChatContext'
 import { FriendContext } from '../context/FriendContext'
 import { device } from '../worker/breakpoints'
 import { Friends } from '../worker/FakeData'
-import { FaTimes } from 'react-icons/fa'
 import { ImCross } from 'react-icons/im'
 import { Link } from 'react-router-dom'
-import UserMenu from './UserMenu'
 import FriendModal from './FriendModal'
 
 const ConditionalNav = styled.section`
@@ -29,25 +27,13 @@ const ConditionalNav = styled.section`
     display: flex;
     width: 4em;
     top: 37vh;
-    right: 4vw;
+    right: 3vw;
   }
   @media only screen and ${device.md} {
     display: ${(props) => handleProps(props)};
     width: 4em;
     top: 37vh;
-    right: 4vw;
-  }
-  @media only screen and ${device.lg} {
-    display: ${(props) => handleProps(props)};
-    width: 4em;
-    top: 37vh;
-    right: 5vw;
-  }
-  @media only screen and ${device.xlg} {
-    display: ${(props) => handleProps(props)};
-    width: 4em;
-    top: 37vh;
-    right: 5vw;
+    right: 3vw;
   }
 `
 
@@ -107,10 +93,11 @@ const Messages = styled.p`
   display: flex;
   color: #ffffff;
   position: relative;
-  top: -4.9vh;
-  // margin-left: 1em;
+  top: -5vh;
+  margin: 0;
+  padding: 0;
   font-size: small;
-  margin-right: 1em;
+  margin-right: 2em;
 `
 
 const Inbox = styled.h1`
@@ -134,19 +121,16 @@ const CloseInbox = styled(ImCross)`
   position: absolute;
   top: 33%;
   right: 5%;
-  font-size: 2vw;
+  font-size: 25px;
   cursor: pointer;
   color: #ffffff;
+  @media only screen and ${device.sm} {
+    display: none;
+  }
+  @media only screen and ${device.md} {
+    display: flex;
+  }
 `
-// const CloseInbox = styled(FaTimes)`
-//   display: flex;
-//   position: absolute;
-//   top: 30%;
-//   right: 10%;
-//   font-size: 2.5vw;
-//   cursor: pointer;
-//   color: #ffffff;
-// `
 
 const HeaderDiv = styled.div`
   display: flex;
@@ -169,8 +153,9 @@ const FriendContainer = styled.div`
   position: relative;
   flex-direction: column;
   margin: 0 auto;
-  max-height: 50vh;
-  max-width: 25vw;
+  max-height: 50em;
+  min-width: 14em;
+  width: 100%;
   margin-left: -125%;
   margin-bottom: -125%;
   border-radius: 5px;
@@ -179,13 +164,14 @@ const FriendContainer = styled.div`
 `
 
 const FriendCell = styled.div`
-  width: 16.4vw;
+  width: 100%;
   position: relative;
   padding-top: 1em;
   border-bottom: solid 1px #696969;
   padding-left: 1em;
   margin: 0 auto;
-  max-height: 15vh;
+  max-height: auto;
+  margin-bottom: 0;
 `
 
 const Avatar = styled.img`
@@ -202,11 +188,13 @@ const Avatar = styled.img`
 
 const Timestamp = styled.p`
   color: #ffffff;
-  position: absolute;
+  position: relative;
   font-style: italic;
-  top: 6vh;
-  font-size: small;
-  left: 1.7vw;
+  margin: 0;
+  padding: 0;
+  top: -5vh;
+  font-size: x-small;
+  left: 0.5vw;
   text-transform: italics;
   opacity: 80%;
 `
@@ -215,44 +203,14 @@ function handleProps(props) {
 }
 
 const ConditionalNavBar = () => {
-  const {
-    handleChatStateChange,
-    openChat,
-    openMiniModal,
-    setOpenMini,
-    setNav,
-    nav,
-  } = useContext(ChatContext)
-  // const {
-  //   setFriendName,
-  //   setAvatar,
-  //   setOffsetLeft,
-  //   setOffsetTop,
-  //   getUnread,
-  //   unreadMessages,
-  //   handleNotifCount,
-  // } = useContext(FriendContext)
-
-  // function handleMouseOver(id, name, avatar, i) {
-  //   setNav('conditional')
-  //   getUnread(id, Friends)
-  //   setOpenMini(true)
-  //   setFriendName(name)
-  //   setAvatar(avatar)
-  //   setOffsetLeft(friendRefs.current[i].offsetLeft)
-  //   setOffsetTop(friendRefs.current[i].offsetTop)
-  // }
-
-  // const handleMouseOut = () => {
-  //   setOpenMini(false)
-  //   setOpenMini(false)
-  //   setFriendName('')
-  //   setAvatar('')
-  //   setOffsetLeft(0)
-  //   setOffsetTop(0)
-  // }
+  const { handleChatStateChange, openChat, openMiniModal, nav } =
+    useContext(ChatContext)
 
   const friendRefs = useRef([])
+
+  useEffect(() => {
+    console.log(friendRefs)
+  }, [friendRefs])
 
   return (
     <>
@@ -272,15 +230,14 @@ const ConditionalNavBar = () => {
                     friendRefs.current[i] = ref
                   }}
                   key={id}
-                  // onClick={handleChatStateChange}
+                  onClick={() => {}}
                 >
                   <Avatar src={avatar} />
-                  <User
-                  >
-                    {name}
-                  </User>
-                  <Timestamp>{messages[0].timestamp}</Timestamp>
-                  <Messages>{messages[0].message}</Messages>
+                  <User>{name}</User>
+                  <Timestamp>
+                    {messages[messages.length - 1].timestamp}
+                  </Timestamp>
+                  <Messages>{messages[messages.length - 1].message}</Messages>
                 </FriendCell>
               )
           )}

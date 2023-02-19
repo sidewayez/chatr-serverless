@@ -7,12 +7,13 @@ import { ChatContext } from '../context/ChatContext'
 import { Friends } from '../worker/FakeData'
 import UserMenu from './UserMenu'
 import { TbMessageCircle2 } from 'react-icons/tb'
+import { AiOutlineAlert } from 'react-icons/ai'
 import { device } from '../worker/breakpoints'
 import NavMapper from './NavMapper'
 
 const Navbar = styled.nav`
   position: sticky;
-  width: 10vw;
+  width: 12vw;
   height: auto;
   background: #404040;
   border-right: solid 1px #505050;
@@ -106,51 +107,56 @@ const NavbarLink = styled(Link)`
   }
 `
 
-const Badge = styled(TbMessageCircle2)`
-  color: #ffffff;
-  margin-top: -1.5em;
-  font-size: 1rem;
-  transform: rotateZ(90deg) rotate(0.5turn);
+const Badge = styled(AiOutlineAlert)`
+  color: #1a8cff;
+  display: block;
+  position: fixed;
+  left: 0.5em;
+  font-size: 0.8rem;
+  // transform: rotateZ(90deg) rotate(0.5turn);
   @media only screen and ${device.xs} {
   }
   @media only screen and ${device.sm} {
   }
   @media only screen and ${device.md} {
     margin-left: 0.1em;
+    font-size: 0.8rem;
   }
   @media only screen and ${device.lg} {
     margin-left: 0.1em;
+    font-size: 0.8rem;
   }
   @media only screen and ${device.xlg} {
-    font-size: 1rem;
-    margin-left: 1em;
+    font-size: 0.8rem;
+    margin-left: 1.3em;
+    // margin-top: -.1em;
   }
 `
 
-const BadgeNumber = styled.p`
-  margin-left: 2.2em;
-  margin-top: -1.6em;
-  font-size: 0.6em;
-  width: 25%;
-  color: #ffffff;
-  text-shadow: #ffffff 0.5px 0 2.5px;
-  @media only screen and ${device.xs} {
-  }
-  @media only screen and ${device.sm} {
-  }
-  @media only screen and ${device.md} {
-    margin-left: 0.8em;
-    font-sze: 2em;
-  }
-  @media only screen and ${device.lg} {
-    margin-left: 0.8em;
-    font-sze: 2em;
-  }
-  @media only screen and ${device.xlg} {
-    margin-left: 2.2em;
-    font-size: 0.6em;
-  }
-`
+// const BadgeNumber = styled.p`
+//   margin-left: 2.2em;
+//   margin-top: -1.6em;
+//   font-size: 0.6em;
+//   width: 25%;
+//   color: #ffffff;
+//   text-shadow: #ffffff 0.5px 0 2.5px;
+//   @media only screen and ${device.xs} {
+//   }
+//   @media only screen and ${device.sm} {
+//   }
+//   @media only screen and ${device.md} {
+//     margin-left: 0.8em;
+//     font-sze: 2em;
+//   }
+//   @media only screen and ${device.lg} {
+//     margin-left: 0.8em;
+//     font-sze: 2em;
+//   }
+//   @media only screen and ${device.xlg} {
+//     margin-left: 2.2em;
+//     font-size: 0.6em;
+//   }
+// `
 const SideNav = () => {
   /*
     friendRefs is an array holding refs to elements in the side navbar.
@@ -171,7 +177,7 @@ const SideNav = () => {
    */
 
   function handleMouseOver(id, name, avatar, i) {
-    setNav('side');
+    setNav('side')
     getUnread(id, Friends)
     setOpenMini(true)
     setFriendName(name)
@@ -181,7 +187,7 @@ const SideNav = () => {
   }
 
   const handleMouseOut = () => {
-    setNav('');
+    setNav('')
     setOpenMini(false)
     setFriendName('')
     setAvatar('')
@@ -214,8 +220,7 @@ const SideNav = () => {
         <NavString>Online</NavString>
         {Friends.map(
           ({ name, id, avatar, unread, online }, i) =>
-            online === '1' &&
-            unread > 0 && (
+            online === '1' && (
               <>
                 <NavbarLink
                   ref={(ref) => {
@@ -226,12 +231,12 @@ const SideNav = () => {
                   onMouseOut={handleMouseOut}
                   onClick={handleChatStateChange}
                 >
+                  {unread > 0 && <Badge />}
                   {name}
                 </NavbarLink>
-                {unread > 0 && <Badge />}
-                {unread > 0 && (
+                {/* {unread > 0 && (
                   <BadgeNumber>{handleNotifCount(unread)}</BadgeNumber>
-                )}
+                )} */}
               </>
             )
         )}

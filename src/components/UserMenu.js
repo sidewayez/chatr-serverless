@@ -8,7 +8,7 @@ const UserMenuContainer = styled.div`
   display: flex;
   position: fixed;
   bottom: 0;
-  width: 10vw;
+  width: 12%;
   flex-direction: row;
   justify-content: space-between;
   border: solid 1px DimGrey;
@@ -61,12 +61,12 @@ const User = styled.p`
     margin: auto;
   }
   @media only screen and ${device.md} {
-    font-size: x-small;
+    font-size: small;
     margin: auto;
   }
 
   @media only screen and ${device.lg} {
-    font-size: small;
+    font-size: medium;
     margin-left: 0.5em;
     margin: auto;
   }

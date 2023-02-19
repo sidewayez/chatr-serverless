@@ -28,12 +28,12 @@ const Header = styled.h1`
   }
   @media only screen and ${device.md} {
     font-size: 300%;
-    margin-left: 15vw;
+    margin-left: 17vw;
     margin-top: 5vh;
   }
   @media only screen and ${device.lg} {
     font-size: 300%;
-    margin-left: 15vw;
+    margin-left: 17vw;
     margin-top: 5vh;
   }
 `

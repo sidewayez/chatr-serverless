@@ -16,7 +16,7 @@ const Wrapper = styled.div`
 const Chatr = styled.p`
   display: flex;
   color: #1a8cff;
-  width: 10vw;
+  width: 12vw;
   border-bottom: solid 1px DimGrey;
   font-style: normal;
   font-weight: 700;

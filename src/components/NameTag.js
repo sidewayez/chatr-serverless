@@ -41,6 +41,7 @@ const User = styled.h1`
   right: 15px;
 `
 const Nametag = styled.div`
+display: flex;
   border: solid 3px #505050;
   background: #696969;
   position: fixed;
@@ -58,35 +59,40 @@ const Nametag = styled.div`
     height: 4em;
     padding: 5em;
     padding-bottom: 0;
-    right: 4vw;
+    right: 3vw;
     display: flex;
   }
-  @media only screen and ${device.md} {
-    width: 4em;
-    height: 4em;
-    padding: 5em;
-    padding-bottom: 0;
-    right: 4vw;
-    display: flex;
-  }
-  @media only screen and ${device.lg} {
-    width: 4em;
-    height: 4em;
-    padding: 5em;
-    padding-bottom: 0;
-    right: 5vw;
-    display: flex;
-  }
-  @media only screen and ${device.xlg} {
-    width: 4em;
-    height: 4em;
-    padding: 5em;
-    padding-bottom: 0;
-    right: 5vw;
-    display: flex;
-  }
+  // @media only screen and ${device.md} {
+  //   width: 4em;
+  //   height: 4em;
+  //   padding: 5em;
+  //   padding-bottom: 0;
+  //   right: 5vw;
+  //   display: flex;
+  // }
+  // @media only screen and ${device.lg} {
+  //   width: 4em;
+  //   height: 4em;
+  //   padding: 5em;
+  //   padding-bottom: 0;
+  //   right: 5vw;
+  //   display: flex;
+  // }
+  // @media only screen and ${device.xlg} {
+  //   width: 4em;
+  //   height: 4em;
+  //   padding: 5em;
+  //   padding-bottom: 0;
+  //   right: 5vw;
+  //   display: flex;
+  // }
 `
-
+const NameTageContainer = styled.div`
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  flex-grow: 1;
+`
 const NameTag = ({ username }) => {
   const nameTagRef = useRef()
   const [nameWidth, setWidth] = useState(0)
@@ -95,12 +101,14 @@ const NameTag = ({ username }) => {
   }, [username])
   return (
     <>
-      <Nametag draggable={true}>
-        <Avatar src="https://static.tvtropes.org/pmwiki/pub/images/abcb6534_7913_4eb1_a7a5_62b081ebc628.png" />
-        <User ref={nameTagRef} width={nameWidth}>
-          {username}
-        </User>
-      </Nametag>
+      <NameTageContainer>
+        <Nametag draggable={true}>
+          <Avatar src="https://static.tvtropes.org/pmwiki/pub/images/abcb6534_7913_4eb1_a7a5_62b081ebc628.png" />
+          <User ref={nameTagRef} width={nameWidth}>
+            {username}
+          </User>
+        </Nametag>
+      </NameTageContainer>
     </>
   )
 }
