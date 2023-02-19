@@ -73,9 +73,7 @@ const Timestamp = styled.p`
   margin-left: 2.3em;
   margin-top: -3vh;
   font-size: small;
-  &:hover {
-    cursor: context-menu;
-  }
+  font-style: italic;
   @media only screen and ${device.xs} {
     margin-left: 1.5em;
   }

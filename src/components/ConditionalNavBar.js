@@ -1,17 +1,14 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useRef } from 'react'
 import styled from 'styled-components'
 import { ChatContext } from '../context/ChatContext'
 import { FriendContext } from '../context/FriendContext'
 import { device } from '../worker/breakpoints'
 import { Friends } from '../worker/FakeData'
-import { TbMessageCircle2, TbDoorExit } from 'react-icons/tb'
 import { FaTimes } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import UserMenu from './UserMenu'
 import FriendModal from './FriendModal'
-// import { Close } from '@styled-icons/zondicons'
-import { Close } from '@styled-icons/material-rounded'
-// @styled-icons/zondicons/Close
+
 const ConditionalNav = styled.section`
   margin: 0;
   border: solid 3px #505050;
@@ -21,7 +18,6 @@ const ConditionalNav = styled.section`
   right: 7vw;
   top: 32vh;
   height: 30vh;
-  // width: 500%;
   padding: 5em;
   border-radius: 8px;
   flex-grow: 1;
@@ -54,41 +50,39 @@ const ConditionalNav = styled.section`
   }
 `
 
-const NavbarLink = styled(Link)`
-  color: #ffffff;
-  display: flex;
-  position: relative;
-  // position: absolute;
-  // left: 1%;
-  left: 1%;
-  font-style: normal;
-  font-weight: 700;
-  margin-left: 0.5em;
-  text-decoration: none;
-  margin-top: 0.5em;
-  margin-bottom: auto;
-  &:hover {
-    text-shadow: #ffffff 0.5px 0 2.5px;
-  }
-  @media only screen and ${device.xs} {
-    font-size: x-small;
-  }
-  @media only screen and ${device.sm} {
-    font-size: small;
-  }
-  @media only screen and ${device.md} {
-    margin-left: 1.2em;
-    font-size: medium;
-  }
-  @media only screen and ${device.lg} {
-    margin-left: 1.2em;
-    font-sze: medium;
-  }
-  @media only screen and ${device.xlg} {
-    font-size: large;
-    margin-left: 2em;
-  }
-`
+// const NavbarLink = styled(Link)`
+//   color: #ffffff;
+//   display: flex;
+//   position: relative;
+//   left: 1%;
+//   font-style: normal;
+//   font-weight: 700;
+//   margin-left: 0.5em;
+//   text-decoration: none;
+//   margin-top: 0.5em;
+//   margin-bottom: auto;
+//   &:hover {
+//     text-shadow: #ffffff 0.5px 0 2.5px;
+//   }
+//   @media only screen and ${device.xs} {
+//     font-size: x-small;
+//   }
+//   @media only screen and ${device.sm} {
+//     font-size: small;
+//   }
+//   @media only screen and ${device.md} {
+//     margin-left: 1.2em;
+//     font-size: medium;
+//   }
+//   @media only screen and ${device.lg} {
+//     margin-left: 1.2em;
+//     font-sze: medium;
+//   }
+//   @media only screen and ${device.xlg} {
+//     font-size: large;
+//     margin-left: 2em;
+//   }
+// `
 
 const User = styled.h1`
   position: relative;
@@ -112,58 +106,10 @@ const Messages = styled.p`
   display: flex;
   color: #ffffff;
   position: relative;
-  top: -1vh;
-  margin-left: 1em;
-  font-size: 100%;
+  top: -4.9vh;
+  // margin-left: 1em;
+  font-size: small;
   margin-right: 1em;
-`
-
-const Badge = styled(TbMessageCircle2)`
-  display: flex;
-  color: #ffffff;
-  margin-top: -1.5em;
-  font-size: 1rem;
-  transform: rotateZ(90deg) rotate(0.5turn);
-  @media only screen and ${device.xs} {
-  }
-  @media only screen and ${device.sm} {
-  }
-  @media only screen and ${device.md} {
-    margin-left: 0.1em;
-  }
-  @media only screen and ${device.lg} {
-    margin-left: 0.1em;
-  }
-  @media only screen and ${device.xlg} {
-    font-size: 1rem;
-    margin-left: 1em;
-  }
-`
-
-const BadgeNumber = styled.p`
-  dislay: flex;
-  margin-left: 2.2em;
-  margin-top: -1.6em;
-  font-size: 0.6em;
-  width: 25%;
-  color: #ffffff;
-  text-shadow: #ffffff 0.5px 0 2.5px;
-  @media only screen and ${device.xs} {
-  }
-  @media only screen and ${device.sm} {
-  }
-  @media only screen and ${device.md} {
-    margin-left: 0.8em;
-    font-sze: 2em;
-  }
-  @media only screen and ${device.lg} {
-    margin-left: 0.8em;
-    font-sze: 2em;
-  }
-  @media only screen and ${device.xlg} {
-    margin-left: 2.2em;
-    font-size: 0.6em;
-  }
 `
 
 const Inbox = styled.h1`
@@ -181,7 +127,6 @@ const Inbox = styled.h1`
   margin-top: 0;
   margin-bottom: 0;
   color: #ffffff;
-  // cursor: context-menu;
 `
 const CloseInbox = styled(FaTimes)`
   display: flex;
@@ -189,11 +134,8 @@ const CloseInbox = styled(FaTimes)`
   top: 30%;
   right: 10%;
   font-size: 2.5vw;
-  // color: #ffffff;
   cursor: pointer;
   color: #ffffff;
-  // background-color: #ffffff;
-
 `
 
 const HeaderDiv = styled.div`
@@ -236,7 +178,7 @@ const FriendCell = styled.div`
   border-bottom: solid 1px #696969;
   padding-left: 1em;
   margin: 0 auto;
-  max-height: 10vh;
+  max-height: 15vh;
 `
 
 const Avatar = styled.img`
@@ -254,26 +196,12 @@ const Avatar = styled.img`
 const Timestamp = styled.p`
   color: #ffffff;
   position: absolute;
+  font-style: italic;
   top: 6vh;
-  // border: 1px solid red;
-  // margin-left: 2.3em;
-  // margin-top: -3vh;
   font-size: small;
-  // &:hover {
-  //   cursor: context-menu;
-  // }
-  // @media only screen and ${device.xs} {
-  //   margin-left: 1.5em;
-  // }
-  // @media only screen and ${device.sm} {
-  //   margin-left: 1.5em;
-  // }
-  // @media only screen and ${device.md} {
-  //   margin-left: 2.3em;
-  // }
-  // @media only screen and ${device.lg} {
-  //   margin-left: 2.3em;
-  // }
+  left: 1.7vw;
+  text-transform: italics;
+  opacity: 80%;
 `
 function handleProps(props) {
   return props.open === true ? `flex` : `none`
@@ -350,6 +278,7 @@ const ConditionalNavBar = () => {
                       {name}
                     </User>
                     <Timestamp>{messages[0].timestamp}</Timestamp>
+                    <Messages>{messages[0].message}</Messages>
                   </FriendCell>
                 </>
               )
