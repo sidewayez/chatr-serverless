@@ -9,9 +9,11 @@ const User = styled.h1`
   font-weight: 600;
   font-size: 200%;
   margin-left: 2.1em;
-  display: flex;
+  display: block;
   top: -2.5%;
-  margin-top: 0;
+  margin-top: -5vh;
+  // margin-top: 0;
+  padding-top: 0;
   padding: 0;
   right: 0;
   color: #ffffff;
@@ -23,24 +25,29 @@ const User = styled.h1`
 
 const Avatar = styled.img`
   display: block;
+  // margin-top: -5vh;
   border-radius: 50%;
   position: relative;
   left: 1.3em;
-  top: 2em;
+  top: .7em;
   width: 2em;
   height: 2em;
   margin-top: 0;
+  padding-top: 0;
 `
 const UnreadAvatar = styled.img`
-  display: block;
-  border-radius: 50%;
-  position: relative;
-  left: 1.3em;
-  top: 2em;
-  width: 2em;
-  height: 2em;
-  margin-top: 0;
+display: block;
+// margin-top: -5vh;
+border-radius: 50%;
+position: relative;
+left: 1.3em;
+top: .7em;
+width: 2em;
+height: 2em;
+margin-top: 0;
+padding-top: 0;
   border: 2px solid #1a8cff;
+  // padding-top: 0;
 `
 
 const Messages = styled.p`
@@ -85,9 +92,12 @@ const Wrapper = styled.div`
 const FriendCell = styled.div`
   border: solid 3px #505050;
   background: DimGrey;
-  min-height: 7em;
+  // min-height: 6em;
+  height: auto;
   top: 3%;
   border-radius: 8px;
+  margin-top: 1vh;
+  padding-top: 0;
   @media only screen and ${device.xs} {
     max-width: 80vw;
     width: 80vw;
@@ -136,8 +146,10 @@ const MainFeed = () => {
                 <Avatar src={avatar} />
               )}
               <User>{name}</User>
-              <Timestamp>Today {messages[messages.length -1].timestamp}</Timestamp>
-              <Messages>{messages[messages.length -1].message}</Messages>
+              <Timestamp>
+                Today {messages[messages.length - 1].timestamp}
+              </Timestamp>
+              <Messages>{messages[messages.length - 1].message}</Messages>
             </FriendCell>
           </>
         ))}
