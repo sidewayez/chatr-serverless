@@ -4,11 +4,14 @@ import { ChatContext } from '../context/ChatContext'
 import { FriendContext } from '../context/FriendContext'
 import { device } from '../worker/breakpoints'
 import { Friends } from '../worker/FakeData'
-import { TbMessageCircle2 } from 'react-icons/tb'
+import { TbMessageCircle2, TbDoorExit } from 'react-icons/tb'
+import { FaTimes } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import UserMenu from './UserMenu'
 import FriendModal from './FriendModal'
-
+// import { Close } from '@styled-icons/zondicons'
+import { Close } from '@styled-icons/material-rounded'
+// @styled-icons/zondicons/Close
 const ConditionalNav = styled.section`
   margin: 0;
   border: solid 3px #505050;
@@ -112,22 +115,7 @@ const Messages = styled.p`
   top: -1vh;
   margin-left: 1em;
   font-size: 100%;
-  &:hover {
-    cursor: context-menu;
-  }
   margin-right: 1em;
-  // @media only screen and ${device.xs} {
-  //   font-size: 100%;
-  // }
-  // @media only screen and ${device.sm} {
-  //   font-size: 100%;
-  // }
-  // @media only screen and ${device.md} {
-  //   font-size: 100%;
-  // }
-  // @media only screen and ${device.lg} {
-  //   font-size: 100%;
-  // }
 `
 
 const Badge = styled(TbMessageCircle2)`
@@ -195,6 +183,19 @@ const Inbox = styled.h1`
   color: #ffffff;
   // cursor: context-menu;
 `
+const CloseInbox = styled(FaTimes)`
+  display: flex;
+  position: absolute;
+  top: 30%;
+  right: 10%;
+  font-size: 2.5vw;
+  // color: #ffffff;
+  cursor: pointer;
+  color: #ffffff;
+  // background-color: #ffffff;
+
+`
+
 const HeaderDiv = styled.div`
   display: flex;
   position: sticky;
@@ -324,6 +325,7 @@ const ConditionalNavBar = () => {
       <ConditionalNav open={openChat}>
         <HeaderDiv>
           <Inbox>Inbox</Inbox>
+          <CloseInbox onClick={handleChatStateChange} />
         </HeaderDiv>
         <FriendContainer>
           {Friends.map(
