@@ -5,6 +5,7 @@ import { FriendContext } from '../context/FriendContext'
 import { device } from '../worker/breakpoints'
 import { Friends } from '../worker/FakeData'
 import { FaTimes } from 'react-icons/fa'
+import { ImCross } from 'react-icons/im'
 import { Link } from 'react-router-dom'
 import UserMenu from './UserMenu'
 import FriendModal from './FriendModal'
@@ -128,15 +129,24 @@ const Inbox = styled.h1`
   margin-bottom: 0;
   color: #ffffff;
 `
-const CloseInbox = styled(FaTimes)`
+const CloseInbox = styled(ImCross)`
   display: flex;
   position: absolute;
-  top: 30%;
-  right: 10%;
-  font-size: 2.5vw;
+  top: 33%;
+  right: 5%;
+  font-size: 2vw;
   cursor: pointer;
   color: #ffffff;
 `
+// const CloseInbox = styled(FaTimes)`
+//   display: flex;
+//   position: absolute;
+//   top: 30%;
+//   right: 10%;
+//   font-size: 2.5vw;
+//   cursor: pointer;
+//   color: #ffffff;
+// `
 
 const HeaderDiv = styled.div`
   display: flex;
@@ -156,12 +166,11 @@ const HeaderDiv = styled.div`
 
 const FriendContainer = styled.div`
   display: flex;
+  position: relative;
   flex-direction: column;
   margin: 0 auto;
-  background-opacity: 20%;
-  max-height: 23vh;
-  padding: 4em;
-  max-width: 6em;
+  max-height: 50vh;
+  max-width: 25vw;
   margin-left: -125%;
   margin-bottom: -125%;
   border-radius: 5px;
@@ -172,9 +181,9 @@ const FriendContainer = styled.div`
 const FriendCell = styled.div`
   width: 16.4vw;
   position: relative;
-  left: -5vw;
+  // left: -5vw;
   padding-top: 1em;
-  top: -10vh;
+  // top: -1vh;
   border-bottom: solid 1px #696969;
   padding-left: 1em;
   margin: 0 auto;
@@ -260,27 +269,21 @@ const ConditionalNavBar = () => {
             ({ name, id, avatar, unread, messages, online, timestamp }, i) =>
               online === '1' &&
               unread > 0 && (
-                <>
-                  <FriendCell
-                    ref={(ref) => {
-                      friendRefs.current[i] = ref
-                    }}
-                    key={id}
-                    // onClick={handleChatStateChange}
+                <FriendCell
+                  ref={(ref) => {
+                    friendRefs.current[i] = ref
+                  }}
+                  key={id}
+                  // onClick={handleChatStateChange}
+                >
+                  <Avatar src={avatar} />
+                  <User
                   >
-                    <Avatar src={avatar} />
-                    <User
-
-                    // onMouseOver={() => handleMouseOver(id, name, avatar, i)}
-                    // onMouseOut={handleMouseOut}
-                    // onClick={handleChatStateChange}
-                    >
-                      {name}
-                    </User>
-                    <Timestamp>{messages[0].timestamp}</Timestamp>
-                    <Messages>{messages[0].message}</Messages>
-                  </FriendCell>
-                </>
+                    {name}
+                  </User>
+                  <Timestamp>{messages[0].timestamp}</Timestamp>
+                  <Messages>{messages[0].message}</Messages>
+                </FriendCell>
               )
           )}
         </FriendContainer>
