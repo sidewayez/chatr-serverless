@@ -74,6 +74,7 @@ const Timestamp = styled.p`
   margin-top: -3vh;
   font-size: small;
   font-style: italic;
+  opacity: 80%;
   @media only screen and ${device.xs} {
     margin-left: 1.5em;
   }
