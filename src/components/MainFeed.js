@@ -143,7 +143,7 @@ const MainFeed = () => {
   return (
     <>
       <Wrapper>
-        {Friends.map(({ avatar, name, messages, unread }) => (
+        {Friends.map(({ avatar, name, messages, unread, timestamp }) => (
           <>
             <FriendCell>
               {unread > 0 ? (
@@ -152,7 +152,7 @@ const MainFeed = () => {
                 <Avatar src={avatar} />
               )}
               <User>{name}</User>
-              <Timestamp>Today 5:12pm</Timestamp>
+              <Timestamp>Yesterday {messages[0].timestamp}</Timestamp>
               <Messages>{messages[0].message}</Messages>
             </FriendCell>
           </>

@@ -33,7 +33,7 @@ const handleUserHeight = (props) => {
 const User = styled.h1`
   position: absolute;
   // margin-right: auto;
-  // margin-left: auto;
+  margin-left: auto;
   font-style: normal;
   font-weight: 600;
   display: flex;

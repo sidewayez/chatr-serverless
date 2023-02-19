@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-import { HiOutlineLogout } from 'react-icons/hi'
+import { TbLogout } from 'react-icons/tb'
 import { device } from '../worker/breakpoints'
 
 const UserMenuContainer = styled.div`
@@ -156,7 +156,7 @@ const UserMenu = ({ username, setUsername }) => {
       <UserMenuContainer>
         <User>{username}</User>
         <LogoutButton>
-          <HiOutlineLogout onClick={handleLogout} />
+          <TbLogout onClick={handleLogout} />
         </LogoutButton>
       </UserMenuContainer>
     </>

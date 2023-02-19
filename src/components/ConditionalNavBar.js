@@ -21,6 +21,7 @@ const ConditionalNav = styled.section`
   // width: 500%;
   padding: 5em;
   border-radius: 8px;
+  flex-grow: 1;
   @media only screen and ${device.xs} {
     display: none;
   }
@@ -53,6 +54,10 @@ const ConditionalNav = styled.section`
 const NavbarLink = styled(Link)`
   color: #ffffff;
   display: flex;
+  position: relative;
+  // position: absolute;
+  // left: 1%;
+  left: 1%;
   font-style: normal;
   font-weight: 700;
   margin-left: 0.5em;
@@ -80,6 +85,49 @@ const NavbarLink = styled(Link)`
     font-size: large;
     margin-left: 2em;
   }
+`
+
+const User = styled.h1`
+  position: relative;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 200%;
+  margin-left: 1.5em;
+  margin-top: -5em;
+  display: flex;
+  top: -5vh;
+  margin-top: 0;
+  padding: 0;
+  right: 0;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 180%;
+  margin-bottom: 0;
+`
+
+const Messages = styled.p`
+  display: flex;
+  color: #ffffff;
+  position: relative;
+  top: -1vh;
+  margin-left: 1em;
+  font-size: 100%;
+  &:hover {
+    cursor: context-menu;
+  }
+  margin-right: 1em;
+  // @media only screen and ${device.xs} {
+  //   font-size: 100%;
+  // }
+  // @media only screen and ${device.sm} {
+  //   font-size: 100%;
+  // }
+  // @media only screen and ${device.md} {
+  //   font-size: 100%;
+  // }
+  // @media only screen and ${device.lg} {
+  //   font-size: 100%;
+  // }
 `
 
 const Badge = styled(TbMessageCircle2)`
@@ -133,10 +181,10 @@ const BadgeNumber = styled.p`
 const Inbox = styled.h1`
   display: flex;
   position: absolute;
-  margin-top: 0;
+  margin-top: 1vh;
   padding: 0;
   margin: 0;
-  top: 5%;
+  top: 25%;
   left: 5%;
   font-size: 200%;
   width: 100%;
@@ -144,12 +192,12 @@ const Inbox = styled.h1`
   padding-top: 0px;
   margin-top: 0;
   margin-bottom: 0;
-  // border-bottom: solid 1px dimgrey;
   color: #ffffff;
-  cursor: context-menu;
+  // cursor: context-menu;
 `
 const HeaderDiv = styled.div`
   display: flex;
+  position: sticky;
   margin-left: -125%;
   margin-top: -125%; 
   width: 500%;
@@ -166,22 +214,71 @@ const HeaderDiv = styled.div`
 const FriendContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 500%;
-  // background: #696969;
+  margin: 0 auto;
   background-opacity: 20%;
+  max-height: 23vh;
   padding: 4em;
-  max-width: 10em;
-  padding-bottom: 4.4em;
-  padding-right: 0;
+  max-width: 6em;
   margin-left: -125%;
+  margin-bottom: -125%;
   border-radius: 5px;
+  overflow: scroll;
+  scroll-behavior: smooth;
+`
+
+const FriendCell = styled.div`
+  width: 16.4vw;
+  position: relative;
+  left: -5vw;
+  padding-top: 1em;
+  top: -10vh;
+  border-bottom: solid 1px #696969;
+  padding-left: 1em;
+  margin: 0 auto;
+  max-height: 10vh;
+`
+
+const Avatar = styled.img`
+  display: block;
+  border-radius: 50%;
+  position: relative;
+  left: 0.1em;
+  width: 2em;
+  height: 2em;
+  margin-top: 0;
+  margin-bottom: 0;
+  cursor: pointer;
+`
+
+const Timestamp = styled.p`
+  color: #ffffff;
+  position: absolute;
+  top: 6vh;
+  // border: 1px solid red;
+  // margin-left: 2.3em;
+  // margin-top: -3vh;
+  font-size: small;
+  // &:hover {
+  //   cursor: context-menu;
+  // }
+  // @media only screen and ${device.xs} {
+  //   margin-left: 1.5em;
+  // }
+  // @media only screen and ${device.sm} {
+  //   margin-left: 1.5em;
+  // }
+  // @media only screen and ${device.md} {
+  //   margin-left: 2.3em;
+  // }
+  // @media only screen and ${device.lg} {
+  //   margin-left: 2.3em;
+  // }
 `
 function handleProps(props) {
   return props.open === true ? `flex` : `none`
 }
 
 const ConditionalNavBar = () => {
-  const { handleNotifCount } = useContext(FriendContext)
   const {
     handleChatStateChange,
     openChat,
@@ -190,8 +287,15 @@ const ConditionalNavBar = () => {
     setNav,
     nav,
   } = useContext(ChatContext)
-  const { setFriendName, setAvatar, setOffsetLeft, setOffsetTop, getUnread } =
-    useContext(FriendContext)
+  const {
+    setFriendName,
+    setAvatar,
+    setOffsetLeft,
+    setOffsetTop,
+    getUnread,
+    unreadMessages,
+    handleNotifCount,
+  } = useContext(FriendContext)
 
   function handleMouseOver(id, name, avatar, i) {
     setNav('conditional')
@@ -223,25 +327,28 @@ const ConditionalNavBar = () => {
         </HeaderDiv>
         <FriendContainer>
           {Friends.map(
-            ({ name, id, avatar, unread, online }, i) =>
+            ({ name, id, avatar, unread, messages, online, timestamp }, i) =>
               online === '1' &&
               unread > 0 && (
                 <>
-                  <NavbarLink
+                  <FriendCell
                     ref={(ref) => {
                       friendRefs.current[i] = ref
                     }}
                     key={id}
-                    onMouseOver={() => handleMouseOver(id, name, avatar, i)}
-                    onMouseOut={handleMouseOut}
-                    onClick={handleChatStateChange}
+                    // onClick={handleChatStateChange}
                   >
-                    {name}
-                  </NavbarLink>
-                  {unread > 0 && <Badge />}
-                  {unread > 0 && (
-                    <BadgeNumber>{handleNotifCount(unread)}</BadgeNumber>
-                  )}
+                    <Avatar src={avatar} />
+                    <User
+
+                    // onMouseOver={() => handleMouseOver(id, name, avatar, i)}
+                    // onMouseOut={handleMouseOut}
+                    // onClick={handleChatStateChange}
+                    >
+                      {name}
+                    </User>
+                    <Timestamp>{messages[0].timestamp}</Timestamp>
+                  </FriendCell>
                 </>
               )
           )}
