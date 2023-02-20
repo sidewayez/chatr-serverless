@@ -13,7 +13,7 @@ const Avatar = styled.img`
   height: 4em;
 `
 
-const handleUserWidth = (props) => {
+const handleUserFont = (props) => {
   if (props.width > 119) {
     return 150
   } else if (props.width > 135) {
@@ -24,23 +24,33 @@ const handleUserWidth = (props) => {
 }
 
 const handleUserHeight = (props) => {
-  if (props.width > 119) {
+  if (props.width > 130) {
     return 2
-  } else if (props.width > 135) {
+  } else if (props.width > 119) {
     return 1
   } else {
-    return 0
+    return 2.5
+  }
+}
+const handleUserWidth = (props) => {
+  if (props.width > 130) {
+    return 2
+  } else if (props.width > 119) {
+    return 1
+  } else {
+    return 2
   }
 }
 
 const User = styled.h1`
+  margin: 0 auto;
   position: absolute;
-  margin-left: 1.5vw;
+  margin-left: ${handleUserWidth}vw;
   font-style: normal;
   font-weight: 600;
-  display: flex;
+  // display: ;
   color: #ffffff;
-  font-size: ${handleUserWidth}%;
+  font-size: ${handleUserFont}%;
   top: ${handleUserHeight}vh;
   // right: 15px;
 `
@@ -103,6 +113,7 @@ const NameTag = ({ username }) => {
   const [nameWidth, setWidth] = useState(0)
   useEffect(() => {
     setWidth(nameTagRef.current.offsetWidth)
+    console.log(nameTagRef)
   }, [username])
   return (
     <>
