@@ -10,10 +10,8 @@ const User = styled.h1`
   font-size: 200%;
   margin-left: 2.1em;
   display: block;
-  top: -2.5%;
-  margin-top: -5vh;
-  // margin-top: 0;
-  padding-top: 0;
+  margin-top: -4vh;
+  // padding-top: 0;
   padding: 0;
   right: 0;
   color: #ffffff;
@@ -21,6 +19,15 @@ const User = styled.h1`
     cursor: pointer;
   }
   font-size: 180%;
+  @media only screen and ${device.xs} {
+    margin-top: -3vh;
+  }
+  @media only screen and ${device.sm} {
+    margin-top: -3vh;
+  }
+  @media only screen and ${device.md} {
+    margin-top: -4vh;
+  }
 `
 
 const Avatar = styled.img`
@@ -29,7 +36,7 @@ const Avatar = styled.img`
   border-radius: 50%;
   position: relative;
   left: 1.3em;
-  top: .7em;
+  top: 1em;
   width: 2em;
   height: 2em;
   margin-top: 0;
@@ -41,7 +48,7 @@ display: block;
 border-radius: 50%;
 position: relative;
 left: 1.3em;
-top: .7em;
+top: 1em;
 width: 2em;
 height: 2em;
 margin-top: 0;
@@ -96,11 +103,11 @@ const FriendCell = styled.div`
   height: auto;
   top: 3%;
   border-radius: 8px;
-  margin-top: 1vh;
+  // margin-top: .2vh;
   padding-top: 0;
   @media only screen and ${device.xs} {
-    max-width: 80vw;
-    width: 80vw;
+    max-width: 100vw;
+    width: 85%;
     margin-left: auto;
     margin-right: auto;
   }

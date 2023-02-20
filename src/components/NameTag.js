@@ -14,10 +14,12 @@ const Avatar = styled.img`
 `
 
 const handleUserFont = (props) => {
-  if (props.width > 119) {
+  if (props.width > 130) {
     return 150
-  } else if (props.width > 135) {
-    return 150
+  } else if (props.width > 122) {
+    return 160
+  } else if (props.width >= 119) {
+    return 180
   } else {
     return 250
   }
@@ -25,20 +27,25 @@ const handleUserFont = (props) => {
 
 const handleUserHeight = (props) => {
   if (props.width > 130) {
+    return 4
+  }
+   else if (props.width > 120) {
+    return 3
+  } 
+   else if (props.width > 119) {
     return 2
-  } else if (props.width > 119) {
-    return 1
-  } else {
+  } 
+  else {
     return 2.5
   }
 }
 const handleUserWidth = (props) => {
   if (props.width > 130) {
-    return 2
-  } else if (props.width > 119) {
     return 1
+  } else if (props.width >= 119) {
+    return 4
   } else {
-    return 2
+    return 2.5
   }
 }
 

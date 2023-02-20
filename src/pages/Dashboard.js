@@ -17,8 +17,8 @@ const Header = styled.h1`
   margin-top: 5vh;
   color: #ff6b00;
   @media only screen and ${device.xs} {
-    margin-left: 11vw;
-    margin-top: 6.5vh;
+    margin-left: 9vw;
+    margin-top: 6.3vh;
     font-size: 250%;
   }
   @media only screen and ${device.sm} {
