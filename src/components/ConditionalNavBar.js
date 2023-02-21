@@ -223,6 +223,8 @@ const Timestamp = styled.p`
 `
 
 const ConditionalNavBar = () => {
+  const [dimensions, setDimensions] = useState(+device.md.slice(0, 3))
+  const [innerWidth, setInnerWidth] = useState(Window.innerWidth)
   const {
     handleChatStateChange,
     openChat,
@@ -236,7 +238,8 @@ const ConditionalNavBar = () => {
 
   useEffect(() => {
     console.log(friendRefs)
-  }, [friendRefs])
+    innerWidth < dimensions ? setInboxView(false) : console.log('!')
+  }, [friendRefs, innerWidth, dimensions])
 
   const handleClose = () => {
     setInboxView(false)
@@ -257,7 +260,7 @@ const ConditionalNavBar = () => {
           <BackArrow onClick={handleBackArrow} />
         </HeaderDiv>
         <FriendContainer>
-          {inboxView ? (
+          {inboxView &&
             Friends.map(
               ({ name, id, avatar, unread, messages, online, timestamp }, i) =>
                 online === '1' &&
@@ -277,9 +280,8 @@ const ConditionalNavBar = () => {
                     <Messages>{messages[messages.length - 1].message}</Messages>
                   </FriendCell>
                 )
-            )
-          ) : (
-            //null
+            )}
+          {!inboxView && (
             <NavMapper friends={Friends} friendRefs={friendRefs} />
           )}
         </FriendContainer>

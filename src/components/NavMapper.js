@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
 import { device } from '../worker/breakpoints'
-import { AiOutlineAlert} from 'react-icons/ai'
+import { AiOutlineAlert } from 'react-icons/ai'
+import { ChatContext } from '../context/ChatContext'
 
 const NavbarLink = styled(Link)`
   color: #ffffff;
@@ -86,8 +87,8 @@ const Badge = styled(AiOutlineAlert)`
   color: #1a8cff;
   display: block;
   position: fixed;
-  left: 0.5em;
-  font-size: 0.8rem;
+  right: 28em;
+  font-size: 0.5rem;
   // transform: rotateZ(90deg) rotate(0.5turn);
   @media only screen and ${device.xs} {
   }
@@ -115,27 +116,44 @@ const NavMapper = ({
   handleMouseOut,
   handleNotifCount,
 }) => {
+  const { handleChatStateChange, setInboxView } = useContext(ChatContext)
 
-  // const handleClick = 
-
+  const handleClick = () => {
+    setInboxView(true)
+    handleChatStateChange()
+  }
 
   return friends.map(
-    ({ name, id, avatar, unread, online }, i) =>
-      online === '1' &&
-      unread > 0 && (
+    ({ name, id, avatar, unread, online, bio }, i) =>
+      online === '1' && (
         <>
-          <NavbarLink
-            ref={(ref) => {
-              friendRefs.current[i] = ref
-            }}
-            key={id}
-            // onMouseOver={() => handleMouseOver(id, name, avatar, i)}
-            // onMouseOut={handleMouseOut}
-          >
-            {unread > 0 && <Badge />}
-            {name}
-          </NavbarLink>
-          {/* {unread > 0 && <BadgeNumber>{}</BadgeNumber>} */}
+          {unread > 0 ? (
+            <NavbarLink
+              ref={(ref) => {
+                friendRefs.current[i] = ref
+              }}
+              key={id}
+              // onMouseOver={() => handleMouseOver(id, name, avatar, bio, i)}
+              // onMouseOut={handleMouseOut}
+              onClick={handleClick}
+            >
+              {unread > 0 && <Badge />}
+              {name}
+            </NavbarLink>
+          ) : (
+            <NavbarLink
+              ref={(ref) => {
+                friendRefs.current[i] = ref
+              }}
+              key={id}
+              // onMouseOver={() => handleMouseOver(id, name, avatar, bio, i)}
+              // onMouseOut={handleMouseOut}
+              onClick={() => {}}
+            >
+              {unread > 0 && <Badge />}
+              {name}
+            </NavbarLink>
+          )}
         </>
       )
   )
