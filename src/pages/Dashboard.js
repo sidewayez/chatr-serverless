@@ -5,7 +5,6 @@ import '../App.css'
 import { UserContext } from '../context/UserContext'
 import NameTag from '../components/NameTag'
 import { device } from '../worker/breakpoints'
-import UserMenu from '../components/UserMenu'
 import MainFeed from '../components/MainFeed'
 import ConditionalNavBar from '../components/ConditionalNavBar'
 
@@ -17,12 +16,9 @@ const Header = styled.h1`
   margin-left: 15vw;
   margin-top: 5vh;
   color: #ff6b00;
-  &:hover {
-    cursor: context-menu;
-  }
   @media only screen and ${device.xs} {
-    margin-left: 11vw;
-    margin-top: 6.5vh;
+    margin-left: 9vw;
+    margin-top: 6.3vh;
     font-size: 250%;
   }
   @media only screen and ${device.sm} {
@@ -32,49 +28,16 @@ const Header = styled.h1`
   }
   @media only screen and ${device.md} {
     font-size: 300%;
-    margin-left: 15vw;
+    margin-left: 17vw;
     margin-top: 5vh;
   }
   @media only screen and ${device.lg} {
     font-size: 300%;
-    margin-left: 15vw;
+    margin-left: 17vw;
     margin-top: 5vh;
   }
 `
 
-const ConditionalNav = styled.div`
-  border: solid 3px #505050;
-  background: SlateGray;
-  position: fixed;
-  right: 7vw;
-  top: 60vh;
-  margin-left: auto;
-  margin-right: auto;
-  width: 5vw;
-  height: 10vh;
-  padding: 5em;
-  border-radius: 8px;
-  @media only screen and ${device.xs} {
-    display: flex;
-    right: 6vw;
-    width: 0.3em;
-  }
-  @media only screen and ${device.sm} {
-    display: flex;
-    width: 4em;
-  }
-  @media only screen and ${device.md} {
-    display: none;
-  }
-  @media only screen and ${device.lg} {
-  }
-  @media only screen and ${device.xlg} {
-  }
-`
-// const DashboardContainer = styled.div`
-//   display: flex;
-//   flex-direction: row;
-// `
 const Dashboard = () => {
   const { username, setUsername } = useContext(UserContext)
   return (

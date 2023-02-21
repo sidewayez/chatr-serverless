@@ -1,14 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 import { useNavigate } from 'react-router-dom'
-import { HiOutlineLogout } from 'react-icons/hi'
+import { TbLogout } from 'react-icons/tb'
 import { device } from '../worker/breakpoints'
 
 const UserMenuContainer = styled.div`
   display: flex;
   position: fixed;
   bottom: 0;
-  width: 10vw;
+  width: 12%;
   flex-direction: row;
   justify-content: space-between;
   border: solid 1px DimGrey;
@@ -51,15 +51,12 @@ const User = styled.p`
   font-style: normal;
   font-weight: 600;
   margin-left: 0.5em;
-  &:hover {
-    cursor: context-menu;
-  }
   @media only screen and ${device.xs} {
     font-size: x-small;
     margin: auto;
   }
   @media only screen and ${device.sm} {
-    font-size: small;
+    font-size: x-small;
     margin-left: 0;
     margin: auto;
   }
@@ -68,9 +65,16 @@ const User = styled.p`
     margin: auto;
   }
 
+  @media only screen and ${device.lg} {
+    font-size: medium;
+    margin-left: 0.5em;
+    margin: auto;
+  }
+
   @media only screen and ${device.xlg} {
     font-size: medium;
     margin-left: 0.5em;
+    margin: auto;
   }
 `
 
@@ -98,44 +102,6 @@ const LogoutButton = styled.button`
   }
 `
 
-//  const Logout = styled.button`
-//   height: 2em;
-//   width: 8em;
-//   position: absolute;
-//   top: 10vh;
-//   right: 3vw;
-//   background: #1a8cff;
-//   border: none;
-//   color: white;
-//   border-radius: 8px;
-//   :not(:disabled) {
-//     cursor: pointer;
-//   }
-//   &:hover {
-//     box-shadow: 0px 2px 7px #1a8cff;
-//   }
-//   @media only screen and ${device.xs} {
-//     height: 1em;
-//     width: 5em;
-//     right: 1vw;
-//     top: 6vh;
-//   }
-//   @media only screen and ${device.sm} {
-//     height: 2em;
-//     width: 8em;
-//     top: 10vh;
-//   }
-//   @media only screen and ${device.md} {
-//     display: none;
-//   }
-//   @media only screen and ${device.lg} {
-//     display: none;
-//   }
-//   @media only screen and ${device.xlg} {
-//     display: none;
-//   }
-// `
-
 const UserMenu = ({ username, setUsername }) => {
   const navigate = useNavigate()
 
@@ -149,7 +115,7 @@ const UserMenu = ({ username, setUsername }) => {
       <UserMenuContainer>
         <User>{username}</User>
         <LogoutButton>
-          <HiOutlineLogout onClick={handleLogout} />
+          <TbLogout onClick={handleLogout} />
         </LogoutButton>
       </UserMenuContainer>
     </>

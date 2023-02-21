@@ -7,12 +7,13 @@ import { ChatContext } from '../context/ChatContext'
 import { Friends } from '../worker/FakeData'
 import UserMenu from './UserMenu'
 import { TbMessageCircle2 } from 'react-icons/tb'
+import { AiOutlineAlert } from 'react-icons/ai'
 import { device } from '../worker/breakpoints'
 import NavMapper from './NavMapper'
 
 const Navbar = styled.nav`
   position: sticky;
-  width: 10vw;
+  width: 12vw;
   height: auto;
   background: #404040;
   border-right: solid 1px #505050;
@@ -38,8 +39,11 @@ const NavString = styled.p`
   margin-bottom: 0;
   margin-left: 1em;
   margin-top: 0.3em;
+  :not(:disabled) {
+    cursor: pointer;
+  }
   &:hover {
-    cursor: context-menu;
+    text-shadow: #ffffff 0.5px 0 2.5px;
   }
   @media only screen and ${device.xs} {
     font-size: x-small;
@@ -68,7 +72,7 @@ const ChatterContainer = styled.div`
   position: fixed;
 `
 const NavbarLinkContainer = styled.div`
-  margin-top: 4em;
+  margin-top: 5em;
   display: flex;
   flex-direction: column;
   width: 3em;
@@ -83,6 +87,7 @@ const NavbarLink = styled(Link)`
   text-decoration: none;
   margin-top: 0.5em;
   margin-bottom: auto;
+  cursor: pointer;
   &:hover {
     text-shadow: #ffffff 0.5px 0 2.5px;
   }
@@ -106,52 +111,57 @@ const NavbarLink = styled(Link)`
   }
 `
 
-const Badge = styled(TbMessageCircle2)`
-  color: #ffffff;
-  margin-top: -1.5em;
-  font-size: 1rem;
-  transform: rotateZ(90deg) rotate(0.5turn);
+const Badge = styled(AiOutlineAlert)`
+  color: #1a8cff;
+  display: block;
+  position: fixed;
+  left: 0.5em;
+  font-size: 0.8rem;
+  // transform: rotateZ(90deg) rotate(0.5turn);
   @media only screen and ${device.xs} {
   }
   @media only screen and ${device.sm} {
   }
   @media only screen and ${device.md} {
     margin-left: 0.1em;
+    font-size: 0.8rem;
   }
   @media only screen and ${device.lg} {
     margin-left: 0.1em;
+    font-size: 0.8rem;
   }
   @media only screen and ${device.xlg} {
-    font-size: 1rem;
-    margin-left: 1em;
+    font-size: 0.8rem;
+    margin-left: 1.3em;
+    // margin-top: -.1em;
   }
 `
 
-const BadgeNumber = styled.p`
-  margin-left: 2.2em;
-  margin-top: -1.6em;
-  font-size: 0.6em;
-  width: 25%;
-  color: #ffffff;
-  text-shadow: #ffffff 0.5px 0 2.5px;
-  @media only screen and ${device.xs} {
-  }
-  @media only screen and ${device.sm} {
-  }
-  @media only screen and ${device.md} {
-    margin-left: 0.8em;
-    font-sze: 2em;
-  }
-  @media only screen and ${device.lg} {
-    margin-left: 0.8em;
-    font-sze: 2em;
-  }
-  @media only screen and ${device.xlg} {
-    margin-left: 2.2em;
-    font-size: 0.6em;
-  }
-`
-const SideNav = ({ open, setOpen }) => {
+// const BadgeNumber = styled.p`
+//   margin-left: 2.2em;
+//   margin-top: -1.6em;
+//   font-size: 0.6em;
+//   width: 25%;
+//   color: #ffffff;
+//   text-shadow: #ffffff 0.5px 0 2.5px;
+//   @media only screen and ${device.xs} {
+//   }
+//   @media only screen and ${device.sm} {
+//   }
+//   @media only screen and ${device.md} {
+//     margin-left: 0.8em;
+//     font-sze: 2em;
+//   }
+//   @media only screen and ${device.lg} {
+//     margin-left: 0.8em;
+//     font-sze: 2em;
+//   }
+//   @media only screen and ${device.xlg} {
+//     margin-left: 2.2em;
+//     font-size: 0.6em;
+//   }
+// `
+const SideNav = () => {
   /*
     friendRefs is an array holding refs to elements in the side navbar.
     I use the setOffsetLeft and setOffsetTop context functions to 
@@ -161,28 +171,39 @@ const SideNav = ({ open, setOpen }) => {
   */
   const friendRefs = useRef([])
   const { username, setUsername } = useContext(UserContext)
-  const { handleChatStateChange, openChat } = useContext(ChatContext)
-  const { setFriendName, setAvatar, setOffsetLeft, setOffsetTop, getUnread } =
-    useContext(FriendContext)
+  const { handleChatStateChange, setOpenMini, setNav, setInboxView } =
+    useContext(ChatContext)
+  const {
+    setFriendName,
+    setAvatar,
+    setOffsetLeft,
+    setOffsetTop,
+    getUnread,
+    setBio,
+  } = useContext(FriendContext)
   /*
     handleMouseOver and handleMouseOut funtsions handle the
     hover events for displaying the modal and 
     setting required data for modal.
    */
 
-  function handleMouseOver(id, name, avatar, i) {
+  function handleMouseOver(id, name, avatar, bio, i) {
+    setNav('side')
     getUnread(id, Friends)
-    setOpen(true)
+    setOpenMini(true)
     setFriendName(name)
     setAvatar(avatar)
+    setBio(bio)
     setOffsetLeft(friendRefs.current[i].offsetLeft)
     setOffsetTop(friendRefs.current[i].offsetTop)
   }
 
   const handleMouseOut = () => {
-    setOpen(false)
+    setNav('')
+    setOpenMini(false)
     setFriendName('')
     setAvatar('')
+    setBio('')
     setOffsetLeft(0)
     setOffsetTop(0)
   }
@@ -191,6 +212,10 @@ const SideNav = ({ open, setOpen }) => {
     return unread < 10 ? unread : '+'
   }
 
+  const handleClick = () => {
+    setInboxView(true)
+    handleChatStateChange()
+  }
   /*
     NavbarLink components have hoverable capabalities.
     onMouseOver and onMouseOut handle the dom events for us.  
@@ -207,28 +232,44 @@ const SideNav = ({ open, setOpen }) => {
     <Navbar>
       <ChatterContainer>
         <NavString>Friends</NavString>
+        <NavString onClick={handleClick}>Inbox</NavString>
       </ChatterContainer>
       <NavbarLinkContainer>
-        <NavString>Online</NavString>
+        <NavString disabled>Online</NavString>
         {Friends.map(
-          ({ name, id, avatar, unread, online }, i) =>
-            online === '1' &&
-            unread > 0 && (
+          ({ name, id, avatar, unread, online, bio }, i) =>
+            online === '1' && (
               <>
-                <NavbarLink
-                  ref={(ref) => {
-                    friendRefs.current[i] = ref
-                  }}
-                  key={id}
-                  onMouseOver={() => handleMouseOver(id, name, avatar, i)}
-                  onMouseOut={handleMouseOut}
-                  onClick={handleChatStateChange}
-                >
-                  {name}
-                </NavbarLink>
-                {unread > 0 && <Badge />}
-                {unread > 0 && (
-                  <BadgeNumber>{handleNotifCount(unread)}</BadgeNumber>
+                {unread > 0 ? (
+                  <NavbarLink
+                    ref={(ref) => {
+                      friendRefs.current[i] = ref
+                    }}
+                    key={id}
+                    onMouseOver={() =>
+                      handleMouseOver(id, name, avatar, bio, i)
+                    }
+                    onMouseOut={handleMouseOut}
+                    onClick={handleClick}
+                  >
+                    {unread > 0 && <Badge />}
+                    {name}
+                  </NavbarLink>
+                ) : (
+                  <NavbarLink
+                    ref={(ref) => {
+                      friendRefs.current[i] = ref
+                    }}
+                    key={id}
+                    onMouseOver={() =>
+                      handleMouseOver(id, name, avatar, bio, i)
+                    }
+                    onMouseOut={handleMouseOut}
+                    onClick={() => {}}
+                  >
+                    {unread > 0 && <Badge />}
+                    {name}
+                  </NavbarLink>
                 )}
               </>
             )
@@ -240,6 +281,9 @@ const SideNav = ({ open, setOpen }) => {
           handleMouseOut={handleMouseOut}
           handleNotifCount={handleNotifCount}
         /> */}
+        {/* {unread > 0 && (
+              <BadgeNumber>{handleNotifCount(unread)}</BadgeNumber>
+            )} */}
       </NavbarLinkContainer>
       <UserMenu username={username} setUsername={setUsername} />
     </Navbar>

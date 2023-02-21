@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import SideNav from './SideNav'
 import styled from 'styled-components'
 import FriendModal from './FriendModal'
 import { device } from '../worker/breakpoints'
+import { ChatContext } from '../context/ChatContext'
+
 const Wrapper = styled.div`
   width: 100%;
   background-color: #474747;
@@ -14,7 +16,7 @@ const Wrapper = styled.div`
 const Chatr = styled.p`
   display: flex;
   color: #1a8cff;
-  width: 10vw;
+  width: 12vw;
   border-bottom: solid 1px DimGrey;
   font-style: normal;
   font-weight: 700;
@@ -26,31 +28,32 @@ const Chatr = styled.p`
   }
   position: fixed;
   border-radius: 2px;
-  @media only screen and ${device.xs}{
+  @media only screen and ${device.xs} {
     display: none;
   }
-  @media only screen and ${device.sm}{
+  @media only screen and ${device.sm} {
     display: none;
   }
-  @media only screen and ${device.md}{
+  @media only screen and ${device.md} {
     display: flex;
   }
-  @media only screen and ${device.lg}{
+  @media only screen and ${device.lg} {
     display: flex;
   }
-  @media only screen and ${device.xlg}{
+  @media only screen and ${device.xlg} {
     display: flex;
   }
 `
 
 const DashLayoutComponent = ({ children }) => {
-  const [open, setOpen] = useState(false)
+  const { openMiniModal, setOpenMini } = useContext(ChatContext)
+  const { nav } = useContext(ChatContext)
   return (
     <>
       <Wrapper>
-        <SideNav open={open} setOpen={setOpen} />
+        <SideNav open={openMiniModal} setOpen={setOpenMini} />
         <Chatr>chatr</Chatr>
-        {open && <FriendModal />}
+        {openMiniModal && <FriendModal nav={nav} />}
         {children}
       </Wrapper>
     </>

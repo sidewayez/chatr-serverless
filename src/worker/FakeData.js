@@ -1,3 +1,5 @@
+import { timeSwitch } from './timeSwitch'
+
 const friends = [
   {
     id: 'XUIASGASD99091',
@@ -58,7 +60,7 @@ const friends = [
       },
       {
         id: 'mfmfhnfgif',
-        message: 'Lorem ipsum pueoa potreop nutromger retom yerid.',
+        message: 'Lorem ipsum pueoa potreop nutromger retom yerid. Hop flop de nop sop. Hitchie witchie banda wah, eaux sluh.',
         status: 'unread',
       },
     ],
@@ -455,16 +457,28 @@ const friends = [
   },
 ]
 
-export const updatedFriendsList = (friends) => {
+function getRandomTime(i) {
+  const hour = i === 0 ? timeSwitch(i) : i > 12 ? timeSwitch(i) : i
+  const meridiem = i > 12 ? 'pm' : 'am'
+  const minute = Math.floor(Math.random() * 60)
+  return minute.toString().length < 2
+    ? `${hour}:0${minute} ${meridiem}`
+    : `${hour}:${minute} ${meridiem}`
+}
+
+const updatedFriendsList = (friends) => {
   friends.forEach((friend) => {
-    friend.messages.forEach((message) => {
+    friend.messages.forEach((message, i) => {
       if (message.status !== 'read') {
         friend.unread++
       }
+      message.timestamp = getRandomTime(i)
     })
     friend.online = '1'
+    friend.bio = `Hi, my name is ${friend.name}! Isn't Chatr great!`
   })
   return friends
 }
 
+console.log(updatedFriendsList(friends))
 export const Friends = updatedFriendsList(friends)
