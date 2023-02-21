@@ -1,12 +1,14 @@
-import React, { useContext, useEffect, useRef } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { ChatContext } from '../context/ChatContext'
 import { FriendContext } from '../context/FriendContext'
 import { device } from '../worker/breakpoints'
 import { Friends } from '../worker/FakeData'
 import { ImCross } from 'react-icons/im'
+import { FaArrowLeft } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import FriendModal from './FriendModal'
+import NavMapper from './NavMapper'
 
 const ConditionalNav = styled.section`
   margin: 0;
@@ -37,6 +39,9 @@ const ConditionalNav = styled.section`
   }
 `
 
+function handleProps(props) {
+  return props.open === true ? `flex` : `none`
+}
 // const NavbarLink = styled(Link)`
 //   color: #ffffff;
 //   display: flex;
@@ -116,6 +121,21 @@ const Inbox = styled.h1`
   margin-bottom: 0;
   color: #ffffff;
 `
+const BackArrow = styled(FaArrowLeft)`
+  display: flex;
+  position: absolute;
+  top: 33%;
+  right: 5%;
+  font-size: 25px;
+  cursor: pointer;
+  color: #ffffff;
+  @media only screen and ${device.sm} {
+    display: flex;
+  }
+  @media only screen and ${device.md} {
+    display: none;
+  }
+`
 const CloseInbox = styled(ImCross)`
   display: flex;
   position: absolute;
@@ -128,6 +148,9 @@ const CloseInbox = styled(ImCross)`
     display: none;
   }
   @media only screen and ${device.md} {
+    display: flex;
+  }
+  @media only screen and ${device.lg} {
     display: flex;
   }
 `
@@ -198,13 +221,16 @@ const Timestamp = styled.p`
   text-transform: italics;
   opacity: 80%;
 `
-function handleProps(props) {
-  return props.open === true ? `flex` : `none`
-}
 
 const ConditionalNavBar = () => {
-  const { handleChatStateChange, openChat, openMiniModal, nav } =
-    useContext(ChatContext)
+  const {
+    handleChatStateChange,
+    openChat,
+    openMiniModal,
+    nav,
+    inboxView,
+    setInboxView,
+  } = useContext(ChatContext)
 
   const friendRefs = useRef([])
 
@@ -212,34 +238,49 @@ const ConditionalNavBar = () => {
     console.log(friendRefs)
   }, [friendRefs])
 
+  const handleClose = () => {
+    setInboxView(false)
+    handleChatStateChange()
+  }
+
+  const handleBackArrow = () => {
+    setInboxView(false)
+  }
+
   return (
     <>
       {openMiniModal && <FriendModal nav={nav} />}
       <ConditionalNav open={openChat}>
         <HeaderDiv>
           <Inbox>Inbox</Inbox>
-          <CloseInbox onClick={handleChatStateChange} />
+          <CloseInbox onClick={handleClose} />
+          <BackArrow onClick={handleBackArrow} />
         </HeaderDiv>
         <FriendContainer>
-          {Friends.map(
-            ({ name, id, avatar, unread, messages, online, timestamp }, i) =>
-              online === '1' &&
-              unread > 0 && (
-                <FriendCell
-                  ref={(ref) => {
-                    friendRefs.current[i] = ref
-                  }}
-                  key={id}
-                  onClick={() => {}}
-                >
-                  <Avatar src={avatar} />
-                  <User>{name}</User>
-                  <Timestamp>
-                    {messages[messages.length - 1].timestamp}
-                  </Timestamp>
-                  <Messages>{messages[messages.length - 1].message}</Messages>
-                </FriendCell>
-              )
+          {inboxView ? (
+            Friends.map(
+              ({ name, id, avatar, unread, messages, online, timestamp }, i) =>
+                online === '1' &&
+                unread > 0 && (
+                  <FriendCell
+                    ref={(ref) => {
+                      friendRefs.current[i] = ref
+                    }}
+                    key={id}
+                    onClick={() => {}}
+                  >
+                    <Avatar src={avatar} />
+                    <User>{name}</User>
+                    <Timestamp>
+                      {messages[messages.length - 1].timestamp}
+                    </Timestamp>
+                    <Messages>{messages[messages.length - 1].message}</Messages>
+                  </FriendCell>
+                )
+            )
+          ) : (
+            //null
+            <NavMapper friends={Friends} friendRefs={friendRefs} />
           )}
         </FriendContainer>
         {/* <UserMenu username={username} setUsername={setUsername} /> */}

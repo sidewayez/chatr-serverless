@@ -39,8 +39,11 @@ const NavString = styled.p`
   margin-bottom: 0;
   margin-left: 1em;
   margin-top: 0.3em;
+  :not(:disabled) {
+    cursor: pointer;
+  }
   &:hover {
-    cursor: context-menu;
+    text-shadow: #ffffff 0.5px 0 2.5px;
   }
   @media only screen and ${device.xs} {
     font-size: x-small;
@@ -69,7 +72,7 @@ const ChatterContainer = styled.div`
   position: fixed;
 `
 const NavbarLinkContainer = styled.div`
-  margin-top: 4em;
+  margin-top: 5em;
   display: flex;
   flex-direction: column;
   width: 3em;
@@ -84,6 +87,7 @@ const NavbarLink = styled(Link)`
   text-decoration: none;
   margin-top: 0.5em;
   margin-bottom: auto;
+  cursor: pointer;
   &:hover {
     text-shadow: #ffffff 0.5px 0 2.5px;
   }
@@ -167,7 +171,8 @@ const SideNav = () => {
   */
   const friendRefs = useRef([])
   const { username, setUsername } = useContext(UserContext)
-  const { handleChatStateChange, setOpenMini, setNav } = useContext(ChatContext)
+  const { handleChatStateChange, setOpenMini, setNav, setInboxView } =
+    useContext(ChatContext)
   const {
     setFriendName,
     setAvatar,
@@ -207,6 +212,10 @@ const SideNav = () => {
     return unread < 10 ? unread : '+'
   }
 
+  const handleClick = () => {
+    setInboxView(true)
+    handleChatStateChange()
+  }
   /*
     NavbarLink components have hoverable capabalities.
     onMouseOver and onMouseOut handle the dom events for us.  
@@ -223,9 +232,10 @@ const SideNav = () => {
     <Navbar>
       <ChatterContainer>
         <NavString>Friends</NavString>
+        <NavString onClick={handleClick}>Inbox</NavString>
       </ChatterContainer>
       <NavbarLinkContainer>
-        <NavString>Online</NavString>
+        <NavString disabled>Online</NavString>
         {Friends.map(
           ({ name, id, avatar, unread, online, bio }, i) =>
             online === '1' && (
@@ -240,7 +250,7 @@ const SideNav = () => {
                       handleMouseOver(id, name, avatar, bio, i)
                     }
                     onMouseOut={handleMouseOut}
-                    onClick={handleChatStateChange}
+                    onClick={handleClick}
                   >
                     {unread > 0 && <Badge />}
                     {name}
