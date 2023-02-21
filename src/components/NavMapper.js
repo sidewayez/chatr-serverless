@@ -5,37 +5,6 @@ import { device } from '../worker/breakpoints'
 import { AiOutlineAlert } from 'react-icons/ai'
 import { ChatContext } from '../context/ChatContext'
 
-const NavbarLink = styled(Link)`
-  color: #ffffff;
-  font-style: normal;
-  font-weight: 700;
-  margin-left: 2em;
-  text-decoration: none;
-  margin-top: 0.5em;
-  margin-bottom: auto;
-  &:hover {
-    text-shadow: #ffffff 0.5px 0 2.5px;
-  }
-  @media only screen and ${device.xs} {
-    font-size: x-small;
-  }
-  @media only screen and ${device.sm} {
-    font-size: small;
-  }
-  @media only screen and ${device.md} {
-    margin-left: 1.2em;
-    font-size: medium;
-  }
-  @media only screen and ${device.lg} {
-    margin-left: 1.2em;
-    font-sze: medium;
-  }
-  @media only screen and ${device.xlg} {
-    font-size: large;
-    margin-left: 2em;
-  }
-`
-
 // const Badge = styled(TbMessageCircle2)`
 //   margin-left: 1em;
 //   color: #ffffff;
@@ -82,31 +51,27 @@ const NavbarLink = styled(Link)`
 //     font-size: 0.6em;
 //   }
 // `
+const NavbarLink = styled(Link)`
+  color: #ffffff;
+  font-style: normal;
+  font-weight: 700;
+  text-decoration: none;
+  margin-top: 0.5em;
+  margin-bottom: auto;
+  font-size: large;
+  margin-left: 2em;
+  &:hover {
+    text-shadow: #ffffff 0.5px 0 2.5px;
+  }
+`
 
 const Badge = styled(AiOutlineAlert)`
   color: #1a8cff;
   display: block;
   position: fixed;
-  right: 28em;
-  font-size: 0.5rem;
-  // transform: rotateZ(90deg) rotate(0.5turn);
-  @media only screen and ${device.xs} {
-  }
-  @media only screen and ${device.sm} {
-  }
-  @media only screen and ${device.md} {
-    margin-left: 0.1em;
-    font-size: 0.8rem;
-  }
-  @media only screen and ${device.lg} {
-    margin-left: 0.1em;
-    font-size: 0.8rem;
-  }
-  @media only screen and ${device.xlg} {
-    font-size: 0.8rem;
-    margin-left: 1.3em;
-    // margin-top: -.1em;
-  }
+  font-size: 0.8rem;
+  margin-left: 2em;
+  right: 213px;
 `
 
 const NavMapper = ({

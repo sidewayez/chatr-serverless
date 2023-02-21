@@ -105,7 +105,7 @@ const Messages = styled.p`
   margin-right: 2em;
 `
 
-const Inbox = styled.h1`
+const Header = styled.h1`
   display: flex;
   position: absolute;
   margin-top: 1vh;
@@ -238,7 +238,8 @@ const ConditionalNavBar = () => {
 
   useEffect(() => {
     console.log(friendRefs)
-    innerWidth < dimensions ? setInboxView(false) : console.log('!')
+    // innerWidth < dimensions ? handleChatStateChange() : console.log('!')
+    // innerWidth > dimensions ? handleChatStateChange() : setInboxView(false)
   }, [friendRefs, innerWidth, dimensions])
 
   const handleClose = () => {
@@ -247,7 +248,8 @@ const ConditionalNavBar = () => {
   }
 
   const handleBackArrow = () => {
-    setInboxView(false)
+    setInboxView(!inboxView)
+    handleChatStateChange()
   }
 
   return (
@@ -255,7 +257,7 @@ const ConditionalNavBar = () => {
       {openMiniModal && <FriendModal nav={nav} />}
       <ConditionalNav open={openChat}>
         <HeaderDiv>
-          <Inbox>Inbox</Inbox>
+          {inboxView ? <Header>Inbox</Header> : <Header>Friends</Header>}
           <CloseInbox onClick={handleClose} />
           <BackArrow onClick={handleBackArrow} />
         </HeaderDiv>
