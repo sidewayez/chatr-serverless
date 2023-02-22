@@ -7,8 +7,10 @@ const ChatContext = createContext({
   setOpenMini: () => {},
   nav: '',
   setNav: () => {},
-  inboxView: true,
+  inboxView: false,
   setInboxView: () => {},
+  quickChatView: false,
+  setQuickChatView: () => {},
 })
 
 export function ChatProvider({ children }) {
@@ -16,8 +18,9 @@ export function ChatProvider({ children }) {
   const [openChat, setOpenChat] = useState(false)
   const [openMiniModal, setOpenMini] = useState(false)
   const [inboxView, setInboxView] = useState(false)
+  const [quickChatView, setQuickChatView] = useState(false);
 
-  function handleChatStateChange(id, friends) {
+  function handleChatStateChange() {
     setOpenChat(!openChat)
   }
 
@@ -31,6 +34,8 @@ export function ChatProvider({ children }) {
     setNav,
     inboxView: inboxView,
     setInboxView,
+    quickChatView: quickChatView, 
+    setQuickChatView
   }
 
   return (

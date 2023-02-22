@@ -47,13 +47,11 @@ const Chatr = styled.p`
 
 const DashLayoutComponent = ({ children }) => {
   const { openMiniModal, setOpenMini } = useContext(ChatContext)
-  const { nav } = useContext(ChatContext)
   return (
     <>
       <Wrapper>
         <SideNav open={openMiniModal} setOpen={setOpenMini} />
         <Chatr>chatr</Chatr>
-        {openMiniModal && <FriendModal nav={nav} />}
         {children}
       </Wrapper>
     </>

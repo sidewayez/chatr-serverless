@@ -171,8 +171,15 @@ const SideNav = () => {
   */
   const friendRefs = useRef([])
   const { username, setUsername } = useContext(UserContext)
-  const { handleChatStateChange, setOpenMini, setNav, setInboxView } =
-    useContext(ChatContext)
+  const {
+    handleChatStateChange,
+    setOpenMini,
+    setNav,
+    setInboxView,
+    inboxView,
+    setQuickChatView,
+    quickChatView,
+  } = useContext(ChatContext)
   const {
     setFriendName,
     setAvatar,
@@ -180,6 +187,9 @@ const SideNav = () => {
     setOffsetTop,
     getUnread,
     setBio,
+    findFriend,
+    quickChatFriend,
+    setChatFriend
   } = useContext(FriendContext)
   /*
     handleMouseOver and handleMouseOut funtsions handle the
@@ -187,17 +197,18 @@ const SideNav = () => {
     setting required data for modal.
    */
 
-  function handleMouseOver(id, name, avatar, bio, i) {
+  function handleMouseOver(id, name, avatar, bio, i, friends) {
     setNav('side')
-    getUnread(id, Friends)
+    getUnread(id, friends)
     setOpenMini(true)
     setFriendName(name)
     setAvatar(avatar)
     setBio(bio)
     setOffsetLeft(friendRefs.current[i].offsetLeft)
     setOffsetTop(friendRefs.current[i].offsetTop)
+    console.log(quickChatFriend)
   }
-
+  
   const handleMouseOut = () => {
     setNav('')
     setOpenMini(false)
@@ -211,9 +222,18 @@ const SideNav = () => {
   const handleNotifCount = (unread) => {
     return unread < 10 ? unread : '+'
   }
+  
+  const handleClick = (id, friends) => {
+    findFriend(id, friends)
+    setQuickChatView(!quickChatView)
+    setInboxView(false)
+    handleChatStateChange()
+    // console.log(quickChatFriend)
+  }
 
-  const handleClick = () => {
-    setInboxView(true)
+  const handleInbox = () => {
+    setInboxView(!inboxView)
+    setQuickChatView(false)
     handleChatStateChange()
   }
   /*
@@ -232,7 +252,7 @@ const SideNav = () => {
     <Navbar>
       <ChatterContainer>
         <NavString>Friends</NavString>
-        <NavString onClick={handleClick}>Inbox</NavString>
+        <NavString onClick={handleInbox}>Inbox</NavString>
       </ChatterContainer>
       <NavbarLinkContainer>
         <NavString disabled>Online</NavString>
@@ -247,10 +267,10 @@ const SideNav = () => {
                     }}
                     key={id}
                     onMouseOver={() =>
-                      handleMouseOver(id, name, avatar, bio, i)
+                      handleMouseOver(id, name, avatar, bio, i, Friends)
                     }
                     onMouseOut={handleMouseOut}
-                    onClick={handleClick}
+                    onClick={() => handleClick(id, Friends)}
                   >
                     {unread > 0 && <Badge />}
                     {name}

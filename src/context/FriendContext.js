@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react'
+import { Friends } from '../worker/FakeData'
 
 const FriendContext = createContext({
   friendName: '',
@@ -18,6 +19,11 @@ const FriendContext = createContext({
   setMessages: () => {},
   bio: '',
   setBio: () => {},
+  quickChatFriend: {},
+  setChatFriend: () => {},
+  findFriend: () => {},
+  // friends: [],
+  // setFriends: () => {},
 })
 
 export function FriendProvider({ children }) {
@@ -28,6 +34,8 @@ export function FriendProvider({ children }) {
   const [offsetTop, setOffsetTop] = useState(0)
   const [messages, setMessages] = useState([])
   const [friendBio, setBio] = useState('')
+  const [quickChatFriend, setChatFriend] = useState({})
+  // const [friends, setFriends] = useState(Friends)
 
   const getUnread = (id, friends) => {
     const friend = friends.find((friend) => friend.id === id)
@@ -41,6 +49,10 @@ export function FriendProvider({ children }) {
     )
   }
 
+  const findFriend = (id, friends) => {
+    const found = friends.find((friend) => friend.id === id)
+    setChatFriend(found)
+  }
   const handleNotifCount = (unread) => {
     return unread < 10 ? unread : '+'
   }
@@ -68,6 +80,11 @@ export function FriendProvider({ children }) {
     setMessages,
     bio: friendBio,
     setBio,
+    quickChatFriend: quickChatFriend,
+    setChatFriend,
+    findFriend,
+    // friends: friends,
+    // setFriends,
   }
   return (
     <FriendContext.Provider value={contextValue}>

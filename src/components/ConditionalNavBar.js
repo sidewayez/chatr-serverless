@@ -1,14 +1,14 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useContext, useRef } from 'react'
 import styled from 'styled-components'
 import { ChatContext } from '../context/ChatContext'
-import { FriendContext } from '../context/FriendContext'
 import { device } from '../worker/breakpoints'
 import { Friends } from '../worker/FakeData'
 import { ImCross } from 'react-icons/im'
 import { FaArrowLeft } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
 import FriendModal from './FriendModal'
 import NavMapper from './NavMapper'
+import QuickChat from './QuickChat'
+import { FriendContext } from '../context/FriendContext'
 
 const ConditionalNav = styled.section`
   margin: 0;
@@ -42,39 +42,6 @@ const ConditionalNav = styled.section`
 function handleProps(props) {
   return props.open === true ? `flex` : `none`
 }
-// const NavbarLink = styled(Link)`
-//   color: #ffffff;
-//   display: flex;
-//   position: relative;
-//   left: 1%;
-//   font-style: normal;
-//   font-weight: 700;
-//   margin-left: 0.5em;
-//   text-decoration: none;
-//   margin-top: 0.5em;
-//   margin-bottom: auto;
-//   &:hover {
-//     text-shadow: #ffffff 0.5px 0 2.5px;
-//   }
-//   @media only screen and ${device.xs} {
-//     font-size: x-small;
-//   }
-//   @media only screen and ${device.sm} {
-//     font-size: small;
-//   }
-//   @media only screen and ${device.md} {
-//     margin-left: 1.2em;
-//     font-size: medium;
-//   }
-//   @media only screen and ${device.lg} {
-//     margin-left: 1.2em;
-//     font-sze: medium;
-//   }
-//   @media only screen and ${device.xlg} {
-//     font-size: large;
-//     margin-left: 2em;
-//   }
-// `
 
 const User = styled.h1`
   position: relative;
@@ -148,9 +115,6 @@ const CloseInbox = styled(ImCross)`
     display: none;
   }
   @media only screen and ${device.md} {
-    display: flex;
-  }
-  @media only screen and ${device.lg} {
     display: flex;
   }
 `
@@ -230,21 +194,23 @@ const ConditionalNavBar = () => {
     nav,
     inboxView,
     setInboxView,
+    quickChatView,
+    setQuickChatView,
   } = useContext(ChatContext)
+
+  const { quickChatFriend } = useContext(FriendContext)
 
   const friendRefs = useRef([])
 
-  useEffect(() => {
-    console.log(friendRefs)
-  }, [friendRefs])
-
   const handleClose = () => {
     setInboxView(false)
+    setQuickChatView(false)
     handleChatStateChange()
   }
 
   const handleBackArrow = () => {
     setInboxView(!inboxView)
+    setQuickChatView(false)
     handleChatStateChange()
   }
 
@@ -253,12 +219,21 @@ const ConditionalNavBar = () => {
       {openMiniModal && <FriendModal nav={nav} />}
       <ConditionalNav open={openChat}>
         <HeaderDiv>
-          {inboxView ? <Header>Inbox</Header> : <Header>Friends</Header>}
+          {quickChatView ? (
+            <Header>Chat</Header>
+          ) : inboxView ? (
+            <Header>Inbox</Header>
+          ) : (
+            <Header>Friends</Header>
+          )}
           <CloseInbox onClick={handleClose} />
           <BackArrow onClick={handleBackArrow} />
         </HeaderDiv>
         <FriendContainer>
-          {inboxView &&
+          {quickChatView ? (
+            <QuickChat />
+          ) : (
+            inboxView &&
             Friends.map(
               ({ name, id, avatar, unread, messages, online }, i) =>
                 online === '1' &&
@@ -278,8 +253,10 @@ const ConditionalNavBar = () => {
                     <Messages>{messages[messages.length - 1].message}</Messages>
                   </FriendCell>
                 )
-            )}
-          {!inboxView && (
+            )
+          )}
+          // : (
+          {!inboxView && !quickChatView && (
             <NavMapper friends={Friends} friendRefs={friendRefs} />
           )}
         </FriendContainer>

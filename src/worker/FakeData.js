@@ -60,7 +60,8 @@ const friends = [
       },
       {
         id: 'mfmfhnfgif',
-        message: 'Lorem ipsum pueoa potreop nutromger retom yerid. Hop flop de nop sop. Hitchie witchie banda wah, eaux sluh.',
+        message:
+          'Lorem ipsum pueoa potreop nutromger retom yerid. Hop flop de nop sop. Hitchie witchie banda wah, eaux sluh.',
         status: 'unread',
       },
     ],
@@ -480,5 +481,4 @@ const updatedFriendsList = (friends) => {
   return friends
 }
 
-console.log(updatedFriendsList(friends))
 export const Friends = updatedFriendsList(friends)

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import styled from 'styled-components'
 import DashLayoutComponent from '../components/DashLayoutComponent'
 import '../App.css'
@@ -7,6 +7,8 @@ import NameTag from '../components/NameTag'
 import { device } from '../worker/breakpoints'
 import MainFeed from '../components/MainFeed'
 import ConditionalNavBar from '../components/ConditionalNavBar'
+import { FriendContext } from '../context/FriendContext'
+import { Friends } from '../worker/FakeData'
 
 const Header = styled.h1`
   position: absolute;
@@ -40,6 +42,11 @@ const Header = styled.h1`
 
 const Dashboard = () => {
   const { username, setUsername } = useContext(UserContext)
+  const { setFriends } = useContext(FriendContext)
+
+  // useEffect(() => {
+  //   setFriends(Friends);
+  // }, [])
   return (
     <DashLayoutComponent>
       <Header>Messages</Header>
