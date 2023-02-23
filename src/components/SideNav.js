@@ -176,9 +176,11 @@ const SideNav = () => {
     setOpenMini,
     setNav,
     setInboxView,
-    inboxView,
     setQuickChatView,
+    setFriendView,
+    inboxView,
     quickChatView,
+    friendView,
   } = useContext(ChatContext)
   const {
     setFriendName,
@@ -188,8 +190,8 @@ const SideNav = () => {
     getUnread,
     setBio,
     findFriend,
+    setChatFriend,
     quickChatFriend,
-    setChatFriend
   } = useContext(FriendContext)
   /*
     handleMouseOver and handleMouseOut funtsions handle the
@@ -208,7 +210,7 @@ const SideNav = () => {
     setOffsetTop(friendRefs.current[i].offsetTop)
     console.log(quickChatFriend)
   }
-  
+
   const handleMouseOut = () => {
     setNav('')
     setOpenMini(false)
@@ -222,18 +224,19 @@ const SideNav = () => {
   const handleNotifCount = (unread) => {
     return unread < 10 ? unread : '+'
   }
-  
+
   const handleClick = (id, friends) => {
     findFriend(id, friends)
     setQuickChatView(!quickChatView)
     setInboxView(false)
+    setFriendView(false)
     handleChatStateChange()
-    // console.log(quickChatFriend)
   }
 
   const handleInbox = () => {
     setInboxView(!inboxView)
     setQuickChatView(false)
+    setFriendView(false)
     handleChatStateChange()
   }
   /*

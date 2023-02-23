@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { device } from '../worker/breakpoints'
 import { AiOutlineAlert } from 'react-icons/ai'
 import { ChatContext } from '../context/ChatContext'
+import { FriendContext } from '../context/FriendContext'
 
 const NavbarLink = styled(Link)`
   color: #ffffff;
@@ -35,11 +36,16 @@ const NavMapper = ({
   handleMouseOut,
   handleNotifCount,
 }) => {
-  const { handleChatStateChange, setInboxView } = useContext(ChatContext)
+  const { handleChatStateChange, setInboxView, setQuickChatView } =
+    useContext(ChatContext)
 
-  const handleClick = () => {
-    setInboxView(true)
-    handleChatStateChange()
+  const { quickChatFriend, findFriend } = useContext(FriendContext)
+
+
+  const handleFriendClick = (id, friends) => {
+    findFriend(id, friends)
+    setInboxView(false)
+    setQuickChatView(true)
   }
 
   return friends.map(
@@ -54,7 +60,8 @@ const NavMapper = ({
               key={id}
               // onMouseOver={() => handleMouseOver(id, name, avatar, bio, i)}
               // onMouseOut={handleMouseOut}
-              onClick={handleClick}
+              onClick={() => handleFriendClick(id, friends)}
+
             >
               {unread > 0 && <Badge />}
               {name}

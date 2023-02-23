@@ -17,9 +17,9 @@ const QuickChat = () => {
   const { quickChatFriend, setChatFriend } = useContext(FriendContext)
   return (
     <QuickChatContainer>
-      <Name>{quickChatFriend.name}</Name>
-      {quickChatFriend.messages.map((message) => (
-        <Messages>{message.message}</Messages>
+      <Name>{quickChatFriend?.name}</Name>
+      {quickChatFriend?.messages.map((message) => (
+        <Messages>{message?.message}</Messages>
       ))}
     </QuickChatContainer>
   )

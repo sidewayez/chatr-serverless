@@ -188,30 +188,42 @@ const Timestamp = styled.p`
 
 const ConditionalNavBar = () => {
   const {
-    handleChatStateChange,
-    openChat,
-    openMiniModal,
     nav,
+    openChat,
     inboxView,
-    setInboxView,
+    friendView,
     quickChatView,
+    openMiniModal,
+    setInboxView,
+    setFriendView,
     setQuickChatView,
+    handleChatStateChange,
   } = useContext(ChatContext)
 
-  const { quickChatFriend } = useContext(FriendContext)
+  const { quickChatFriend, findFriend } = useContext(FriendContext)
 
   const friendRefs = useRef([])
 
   const handleClose = () => {
     setInboxView(false)
     setQuickChatView(false)
+    setFriendView(true)
     handleChatStateChange()
   }
 
   const handleBackArrow = () => {
     setInboxView(!inboxView)
+    setFriendView(!friendView)
     setQuickChatView(false)
     handleChatStateChange()
+  }
+
+  const handleFriendClick = (id, friends) => {
+    findFriend(id, friends)
+    setQuickChatView(true)
+    setInboxView(false)
+    setFriendView(!friendView)
+    // handleChatStateChange()
   }
 
   return (
@@ -230,10 +242,9 @@ const ConditionalNavBar = () => {
           <BackArrow onClick={handleBackArrow} />
         </HeaderDiv>
         <FriendContainer>
-          {quickChatView ? (
-            <QuickChat />
-          ) : (
-            inboxView &&
+          {quickChatView && <QuickChat />}
+          {/* :  */}
+          {inboxView &&
             Friends.map(
               ({ name, id, avatar, unread, messages, online }, i) =>
                 online === '1' &&
@@ -243,7 +254,7 @@ const ConditionalNavBar = () => {
                       friendRefs.current[i] = ref
                     }}
                     key={id}
-                    onClick={() => {}}
+                    onClick={() => handleFriendClick(id, Friends)}
                   >
                     <Avatar src={avatar} />
                     <User>{name}</User>
@@ -253,10 +264,10 @@ const ConditionalNavBar = () => {
                     <Messages>{messages[messages.length - 1].message}</Messages>
                   </FriendCell>
                 )
-            )
-          )}
-          // : (
-          {!inboxView && !quickChatView && (
+            )}
+          {/* ) : ( */}
+          {/* /*!inboxView && !quickChatView &&*/}
+          {friendView && (
             <NavMapper friends={Friends} friendRefs={friendRefs} />
           )}
         </FriendContainer>
