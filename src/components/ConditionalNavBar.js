@@ -103,6 +103,21 @@ const BackArrow = styled(FaArrowLeft)`
     display: none;
   }
 `
+const ChatBackArrow = styled(FaArrowLeft)`
+  display: flex;
+  position: absolute;
+  top: 33%;
+  right: 20%;
+  font-size: 25px;
+  cursor: pointer;
+  color: #ffffff;
+  @media only screen and ${device.sm} {
+    display: none;
+  }
+  @media only screen and ${device.md} {
+    display: flex;
+  }
+`
 const CloseInbox = styled(ImCross)`
   display: flex;
   position: absolute;
@@ -223,7 +238,11 @@ const ConditionalNavBar = () => {
     setQuickChatView(true)
     setInboxView(false)
     setFriendView(!friendView)
-    // handleChatStateChange()
+  }
+
+  const handleChatBackArrow = () => {
+    setQuickChatView(false)
+    setInboxView(true)
   }
 
   return (
@@ -232,18 +251,18 @@ const ConditionalNavBar = () => {
       <ConditionalNav open={openChat}>
         <HeaderDiv>
           {quickChatView ? (
-            <Header>Chat</Header>
+            <Header>{quickChatFriend.name}</Header>
           ) : inboxView ? (
             <Header>Inbox</Header>
           ) : (
             <Header>Friends</Header>
           )}
+          {quickChatView && <ChatBackArrow onClick={handleChatBackArrow} />}
           <CloseInbox onClick={handleClose} />
           <BackArrow onClick={handleBackArrow} />
         </HeaderDiv>
         <FriendContainer>
           {quickChatView && <QuickChat />}
-          {/* :  */}
           {inboxView &&
             Friends.map(
               ({ name, id, avatar, unread, messages, online }, i) =>
@@ -265,8 +284,6 @@ const ConditionalNavBar = () => {
                   </FriendCell>
                 )
             )}
-          {/* ) : ( */}
-          {/* /*!inboxView && !quickChatView &&*/}
           {friendView && (
             <NavMapper friends={Friends} friendRefs={friendRefs} />
           )}
