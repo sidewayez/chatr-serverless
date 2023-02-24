@@ -36,7 +36,7 @@ const NavMapper = ({
   handleMouseOut,
   handleNotifCount,
 }) => {
-  const { handleChatStateChange, setInboxView, setQuickChatView } =
+  const { handleChatStateChange, setInboxView, setQuickChatView, setFriendView, friendView } =
     useContext(ChatContext)
 
   const { quickChatFriend, findFriend } = useContext(FriendContext)
@@ -46,6 +46,8 @@ const NavMapper = ({
     findFriend(id, friends)
     setInboxView(false)
     setQuickChatView(true)
+    setFriendView(!friendView)
+
   }
 
   return friends.map(

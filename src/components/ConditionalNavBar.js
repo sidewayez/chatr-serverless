@@ -112,10 +112,12 @@ const ChatBackArrow = styled(FaArrowLeft)`
   cursor: pointer;
   color: #ffffff;
   @media only screen and ${device.sm} {
-    display: none;
+    display: flex;
+    right: 5%
   }
   @media only screen and ${device.md} {
     display: flex;
+    right: 20%;
   }
 `
 const CloseInbox = styled(ImCross)`
@@ -227,8 +229,8 @@ const ConditionalNavBar = () => {
   }
 
   const handleBackArrow = () => {
-    setInboxView(!inboxView)
     setFriendView(!friendView)
+    setInboxView(!inboxView)
     setQuickChatView(false)
     handleChatStateChange()
   }
@@ -237,7 +239,7 @@ const ConditionalNavBar = () => {
     findFriend(id, friends)
     setQuickChatView(true)
     setInboxView(false)
-    setFriendView(!friendView)
+    setFriendView(false)
   }
 
   const handleChatBackArrow = () => {
@@ -259,7 +261,7 @@ const ConditionalNavBar = () => {
           )}
           {quickChatView && <ChatBackArrow onClick={handleChatBackArrow} />}
           <CloseInbox onClick={handleClose} />
-          <BackArrow onClick={handleBackArrow} />
+          {!quickChatView && <BackArrow onClick={handleBackArrow} />}
         </HeaderDiv>
         <FriendContainer>
           {quickChatView && <QuickChat />}
