@@ -481,4 +481,16 @@ const updatedFriendsList = (friends) => {
   return friends
 }
 
+export const randomMessages = [
+  "HAHA, yeah right! That's crazy!",
+  'I heard that on a podcast the other day.',
+  'Have you ever tried microdosing on mushrooms?',
+  'Stimmy Steve back at it again. What a rascal, he he.',
+  "I went down to the store to get a two liter of coc' cola.",
+  'Aaaaahhhh hundred percent.',
+  "And then I told him about the time I rode in an elevator with Tom Cruise.",
+  'No can do, I gotta go to work in the morning.',
+  "So this kid was walking down my street, and hes got one of those JBL speakers you can walk around with. Well lets just say, fatty loved him some Nickelback.",
+  "You're so smart, you must be a brain engineer. Give this kid a medal.",
+]
 export const Friends = updatedFriendsList(friends)

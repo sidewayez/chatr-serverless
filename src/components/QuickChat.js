@@ -9,32 +9,60 @@ const QuickChatContainer = styled.div`
   margin: 0 auto;
 `
 
-const Messages = styled.p`
+const FriendMessages = styled.p`
   color: #ffffff;
   font-size: x-small;
+  display: flex;
+  margin: auto;
+  padding: auto;
+  // margin-bottom: 0;
+  // padding-bottom: 0;
+  // margin-bottom: -1em;
 `
 
 const ChatBubble = styled.div`
-  display: block;
+  display: flex;
+  flex-direction: row;
   padding: 1em;
+  padding-left: 2em;
   margin: auto;
-  max-width: 5em;
+  max-width: 9em;
   width: auto;
   margin-left: auto;
   margin-right: auto;
   background: darkslategray;
-  margin-right: 4em;
-//   margin-top: 2em;
+  // margin-right: 4em;
   margin-bottom: 2em;
-//   margin-left: 5em;
-//   padding-left: 1em;
-//   padding-top: 1em;
-//   padding-bottom: 1em;
-//   padding-right: 1em;
-  border-radius: 25%;
-//   text-align: right;
+  border-radius: 10px 40px 40px 10px;
 `
+const Timestamp = styled.p`
+  display: block;
+  font-size: 60%;
+  color: #ffffff;
+  max-width: 1em;
+  width: 100%;
 
+  // opacity: 70%;
+  // margin: 0 auto;
+  // padding: 0;
+  // margin-top: -1.2em;
+  margin: auto;
+  padding: auto;
+  margin-left: -1vw;
+  position: relative;
+  left: 0vw;
+  // left: 3.5vw;
+  // margin-top: 3vh;
+  // margin-right: 1vw;
+  // padding-left: 1vw;
+  // margin-left: 1vw;
+  // margin-right: 2vw;
+  // position: absolute;
+  // padding-top: 0em;
+  // padding: 0;
+  // position: absolute;
+  // margin-top: 1vh;
+`
 const Name = styled.h1``
 const QuickChat = () => {
   const { quickChatFriend, setChatFriend } = useContext(FriendContext)
@@ -42,9 +70,12 @@ const QuickChat = () => {
     <QuickChatContainer>
       {/* <Name>{quickChatFriend?.name}</Name> */}
       {quickChatFriend?.messages.map((message) => (
-        <ChatBubble>
-          <Messages>{message?.message}</Messages>
-        </ChatBubble>
+        <>
+          <ChatBubble>
+            <Timestamp>{message.timestamp}</Timestamp>
+            <FriendMessages>{message?.message}</FriendMessages>
+          </ChatBubble>
+        </>
       ))}
     </QuickChatContainer>
   )

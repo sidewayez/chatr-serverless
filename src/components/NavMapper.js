@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { device } from '../worker/breakpoints'
 import { AiOutlineAlert } from 'react-icons/ai'
 import { ChatContext } from '../context/ChatContext'
 import { FriendContext } from '../context/FriendContext'
@@ -36,18 +35,21 @@ const NavMapper = ({
   handleMouseOut,
   handleNotifCount,
 }) => {
-  const { handleChatStateChange, setInboxView, setQuickChatView, setFriendView, friendView } =
-    useContext(ChatContext)
+  const {
+    handleChatStateChange,
+    setInboxView,
+    setQuickChatView,
+    setFriendView,
+    friendView,
+  } = useContext(ChatContext)
 
   const { quickChatFriend, findFriend } = useContext(FriendContext)
-
 
   const handleFriendClick = (id, friends) => {
     findFriend(id, friends)
     setInboxView(false)
     setQuickChatView(true)
     setFriendView(!friendView)
-
   }
 
   return friends.map(
@@ -60,10 +62,7 @@ const NavMapper = ({
                 friendRefs.current[i] = ref
               }}
               key={id}
-              // onMouseOver={() => handleMouseOver(id, name, avatar, bio, i)}
-              // onMouseOut={handleMouseOut}
               onClick={() => handleFriendClick(id, friends)}
-
             >
               {unread > 0 && <Badge />}
               {name}
@@ -74,8 +73,6 @@ const NavMapper = ({
                 friendRefs.current[i] = ref
               }}
               key={id}
-              // onMouseOver={() => handleMouseOver(id, name, avatar, bio, i)}
-              // onMouseOut={handleMouseOut}
               onClick={() => {}}
             >
               {unread > 0 && <Badge />}
