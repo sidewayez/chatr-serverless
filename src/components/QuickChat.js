@@ -46,7 +46,7 @@ const UserChatBubble = styled.div`
   margin-left: auto;
   margin-right: auto;
   background: DodgerBlue;
-  margin-bottom: 2em;
+  margin-bottom: .5vh;
   border-radius: 10px 40px 40px;
 `
 const Timestamp = styled.p`
