@@ -474,6 +474,7 @@ const updatedFriendsList = (friends) => {
         friend.unread++
       }
       message.timestamp = getRandomTime(i)
+      message.user = friend.id;
     })
     friend.online = '1'
     friend.bio = `Hi, my name is ${friend.name}! Isn't Chatr great!`
@@ -481,16 +482,36 @@ const updatedFriendsList = (friends) => {
   return friends
 }
 
-export const randomMessages = [
-  "HAHA, yeah right! That's crazy!",
-  'I heard that on a podcast the other day.',
-  'Have you ever tried microdosing on mushrooms?',
-  'Stimmy Steve back at it again. What a rascal, he he.',
-  "I went down to the store to get a two liter of coc' cola.",
-  'Aaaaahhhh hundred percent.',
-  "And then I told him about the time I rode in an elevator with Tom Cruise.",
-  'No can do, I gotta go to work in the morning.',
-  "So this kid was walking down my street, and hes got one of those JBL speakers you can walk around with. Well lets just say, fatty loved him some Nickelback.",
-  "You're so smart, you must be a brain engineer. Give this kid a medal.",
+const randomMessages = [
+  { message: "HAHA, yeah right! That's crazy!" },
+  { message: 'I heard that on a podcast the other day.' },
+  { message: 'Have you ever tried microdosing on mushrooms?' },
+  { message: 'Stimmy Steve back at it again. What a rascal, he he.' },
+  { message: "I went down to the store to get a two liter of coc' cola." },
+  { message: 'Aaaaahhhh hundred percent.' },
+  {
+    message:
+      'And then I told him about the time I rode in an elevator with Tom Cruise.',
+  },
+  { message: 'No can do, I gotta go to work in the morning.' },
+  {
+    message:
+      'So this kid was walking down my street, and hes got one of those JBL speakers you can walk around with. Well lets just say, fatty loved him some Nickelback.',
+  },
+  {
+    message:
+      "You're so smart, you must be a brain engineer. Give this kid a medal.",
+  },
 ]
+
+function updaterandomMessages(messages){
+  messages.forEach((message, i) => {
+    message.timestamp = getRandomTime(i)
+    message.user = 'testUser1';
+  })
+  return messages;
+}
+
+export const RandomMessages = updaterandomMessages(randomMessages);
+
 export const Friends = updatedFriendsList(friends)

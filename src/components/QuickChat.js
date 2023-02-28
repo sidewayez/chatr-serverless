@@ -1,12 +1,16 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import styled from 'styled-components'
 import { FriendContext } from '../context/FriendContext'
+import { RandomMessages } from '../worker/FakeData'
 
 const QuickChatContainer = styled.div`
   padding: 0;
   display: flex;
   flex-direction: column;
   margin: 0 auto;
+  padding-top: 2vh;
+  // max-height: 20vh;
+  height: auto;
 `
 
 const FriendMessages = styled.p`
@@ -15,12 +19,9 @@ const FriendMessages = styled.p`
   display: flex;
   margin: auto;
   padding: auto;
-  // margin-bottom: 0;
-  // padding-bottom: 0;
-  // margin-bottom: -1em;
 `
 
-const ChatBubble = styled.div`
+const FriendChatBubble = styled.div`
   display: flex;
   flex-direction: row;
   padding: 1em;
@@ -30,10 +31,23 @@ const ChatBubble = styled.div`
   width: auto;
   margin-left: auto;
   margin-right: auto;
-  background: darkslategray;
-  // margin-right: 4em;
+  background: Gray;
+  margin-bottom: 0.5vh;
+  border-radius: 10px 40px 40px;
+`
+const UserChatBubble = styled.div`
+  display: flex;
+  flex-direction: row;
+  padding: 1em;
+  padding-left: 2em;
+  margin: auto;
+  max-width: 9em;
+  width: auto;
+  margin-left: auto;
+  margin-right: auto;
+  background: DodgerBlue;
   margin-bottom: 2em;
-  border-radius: 10px 40px 40px 10px;
+  border-radius: 10px 40px 40px;
 `
 const Timestamp = styled.p`
   display: block;
@@ -41,42 +55,60 @@ const Timestamp = styled.p`
   color: #ffffff;
   max-width: 1em;
   width: 100%;
-
-  // opacity: 70%;
-  // margin: 0 auto;
-  // padding: 0;
-  // margin-top: -1.2em;
   margin: auto;
   padding: auto;
-  margin-left: -1vw;
+  margin-left: -1.5vw;
   position: relative;
   left: 0vw;
-  // left: 3.5vw;
-  // margin-top: 3vh;
-  // margin-right: 1vw;
-  // padding-left: 1vw;
-  // margin-left: 1vw;
-  // margin-right: 2vw;
-  // position: absolute;
-  // padding-top: 0em;
-  // padding: 0;
-  // position: absolute;
-  // margin-top: 1vh;
+  margin-right: 1.5vw;
 `
 const Name = styled.h1``
+
 const QuickChat = () => {
   const { quickChatFriend, setChatFriend } = useContext(FriendContext)
+  const [chat, setChat] = useState([])
+
+  function setChatContainer() {
+    const container = []
+    quickChatFriend.messages.forEach((message) => {
+      container.push(message)
+    })
+    RandomMessages.forEach((message) => {
+      container.push(message)
+    })
+
+    setChat(
+      container.sort((a, b) => {
+        const space = ' '
+        return a.timestamp.slice(0, space) < b.timestamp.slice(0, space) ? 0 : 1
+      })
+    )
+  }
+
+  useEffect(() => {
+    setChatContainer()
+  }, [RandomMessages, quickChatFriend])
+
   return (
     <QuickChatContainer>
       {/* <Name>{quickChatFriend?.name}</Name> */}
-      {quickChatFriend?.messages.map((message) => (
-        <>
-          <ChatBubble>
-            <Timestamp>{message.timestamp}</Timestamp>
-            <FriendMessages>{message?.message}</FriendMessages>
-          </ChatBubble>
-        </>
-      ))}
+      {chat.map((message) =>
+        message.user !== 'testUser1' ? (
+          <>
+            <FriendChatBubble>
+              <Timestamp>{message.timestamp}</Timestamp>
+              <FriendMessages>{message?.message}</FriendMessages>
+            </FriendChatBubble>
+          </>
+        ) : (
+          <>
+            <UserChatBubble>
+              <Timestamp>{message.timestamp}</Timestamp>
+              <FriendMessages>{message?.message}</FriendMessages>
+            </UserChatBubble>
+          </>
+        )
+      )}
     </QuickChatContainer>
   )
 }
