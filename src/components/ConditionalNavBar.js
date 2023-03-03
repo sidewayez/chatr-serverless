@@ -1,4 +1,4 @@
-import React, { useContext, useRef } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import styled from 'styled-components'
 import { ChatContext } from '../context/ChatContext'
 import { device } from '../worker/breakpoints'
@@ -113,7 +113,7 @@ const ChatBackArrow = styled(FaArrowLeft)`
   color: #ffffff;
   @media only screen and ${device.sm} {
     display: flex;
-    right: 5%
+    right: 5%;
   }
   @media only screen and ${device.md} {
     display: flex;
@@ -165,7 +165,17 @@ const FriendContainer = styled.div`
   border-radius: 5px;
   overflow: scroll;
   scroll-behavior: smooth;
+  scroll-top: ${(props) => handleScrollTop(props)}
 `
+
+function handleScrollTop(props) {
+  if(props.top === true) {
+    return '0';
+  }
+}
+
+    // display: ${(props) => handleProps(props)};
+
 
 const FriendCell = styled.div`
   width: 100%;
@@ -204,6 +214,8 @@ const Timestamp = styled.p`
 `
 
 const ConditionalNavBar = () => {
+  const [reset, setReset] = useState(false);
+
   const {
     nav,
     openChat,
@@ -245,6 +257,7 @@ const ConditionalNavBar = () => {
   const handleChatBackArrow = () => {
     setQuickChatView(false)
     setInboxView(true)
+    setReset(true)
   }
 
   return (
@@ -263,7 +276,7 @@ const ConditionalNavBar = () => {
           <CloseInbox onClick={handleClose} />
           {!quickChatView && <BackArrow onClick={handleBackArrow} />}
         </HeaderDiv>
-        <FriendContainer>
+        <FriendContainer top={reset}>
           {quickChatView && <QuickChat />}
           {inboxView &&
             Friends.map(
